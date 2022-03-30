@@ -6,7 +6,7 @@
 /*   By: vrogiste <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:40:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/03/29 10:48:58 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/03/30 17:54:00 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@
 
 # include "utils.h"
 # include "parsing.h"
+# include "main.h"
 
 #endif
