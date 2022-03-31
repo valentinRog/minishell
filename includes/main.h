@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:52:29 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/03/30 18:58:59 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/03/31 10:00:40 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAIN_H
 # define MAIN_H
+
+# include "minishell.h"
 
 # define PROMPT "minishell>"
 

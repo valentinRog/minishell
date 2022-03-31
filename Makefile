@@ -18,7 +18,7 @@ $(RM) = rm -rf
 	$(CC) $(CFLAGS) -I $(INCLUDES) -c -o $@ $<
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(LIB) $(OBJ) -o $@
+	$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIB)
 
 all: $(NAME)
 

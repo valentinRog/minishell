@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/03/30 19:00:38 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/03/31 09:14:18 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 int	main(void)
 {
 	char	*line;
+	t_list	*lst;
 
 	while (true)
 	{
 		line = readline(PROMPT);
+		parse(&lst, line);
 		printf("%s\n", line);
 		free(line);
 	}
