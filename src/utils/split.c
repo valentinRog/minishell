@@ -6,70 +6,28 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:42:16 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/03/31 14:58:10 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/01 01:00:53 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	count_words(char const *s, char c)
+static int	count_words(char const *s, char *charset)
 {
 	int	wc;
 
 	wc = 0;
-	if (*s && *s != c)
+	if (*s && !is_in_str(*s, charset))
 		wc++;
 	if (*s)
 		s++;
 	while (*s)
 	{
-		if (*(s - 1) == c && *s != c)
+		if (is_in_str(*(s - 1), charset) && !is_in_str(*s, charset))
 			wc++;
 		s++;
 	}
 	return (wc);
-}
-
-static char	const	*get_word_ptr(char const *s, char c, int n)
-{
-	int	wc;
-
-	wc = 0;
-	while (*s)
-	{
-		while (*s == c)
-			s++;
-		if (wc == n)
-			return (s);
-		while (*s != c)
-			s++;
-		wc++;
-	}
-	return (NULL);
-}
-
-static char	*get_word(char const *s, char c, int n)
-{
-	int			len;
-	const char	*ptr;
-	char		*dst;
-	int			i;
-
-	len = 0;
-	ptr = get_word_ptr(s, c, n);
-	while (ptr[len] && ptr[len] != c)
-		len++;
-	dst = malloc(len + 1);
-	if (!dst)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		dst[i] = ptr[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (dst);
 }
 
 void	free_split(char **arr)
@@ -85,28 +43,30 @@ void	free_split(char **arr)
 	free(arr);
 }
 
-char	**split(char const *s, char c)
+char	**ft_split(char const *s, char *charset)
 {
 	char	**dst;
 	int		wc;
 	int		i;
+	char	*ptr;
 
 	if (!s)
 		return (NULL);
-	wc = count_words(s, c) + 1;
+	wc = count_words(s, charset) + 1;
 	dst = malloc(wc * sizeof(char *));
 	if (!dst)
 		return (NULL);
-	i = 0;
-	while (i < wc - 1)
+	i = -1;
+	ptr = (char *)s;
+	while (++i < wc - 1)
 	{
-		dst[i] = get_word(s, c, i);
+		dst[i] = get_next_word(ptr, charset);
 		if (!dst[i])
 		{
 			free_split(dst);
 			return (NULL);
 		}
-		i++;
+		skip_next_word(&ptr, charset);
 	}
 	dst[i] = NULL;
 	return (dst);

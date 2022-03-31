@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/01 00:37:19 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/01 00:53:39 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ void	skip_next_word(char	**ptr, char *charset);
 
 /*split*/
 void	free_split(char **arr);
-char	**split(char const *s, char c);
+char	**ft_split(char const *s, char *charset);
 
 #endif

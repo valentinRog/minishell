@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 22:21:22 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/01 00:01:42 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/01 01:02:04 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	while (i < dst_len)
 	{
 		dst[i] = s[start + i];
-		i++; 
+		i++;
 	}
 	dst[i] = '\0';
 	return (dst);

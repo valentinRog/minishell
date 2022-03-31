@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/03/31 17:42:12 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/01 00:59:22 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(void)
 {
 	char	*line;
 	t_list	*lst;
+
 	while (true)
 	{
 		line = readline(PROMPT);
