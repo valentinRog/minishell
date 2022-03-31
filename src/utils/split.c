@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:42:16 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/03/29 10:13:20 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/03/31 10:10:36 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ static char	*get_word(char const *s, char c, int n)
 	dst = malloc(len + 1);
 	if (!dst)
 		return (NULL);
-	i = -1;
-	while (++i < len)
-		dst[i] = ptr[i];
+	i = 0;
+	while (+i < len)
+		dst[i] = ptr[i++];
 	dst[i] = '\0';
 	return (dst);
 }
@@ -74,12 +74,15 @@ void	free_split(char **arr)
 	int	i;
 
 	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
+	if (arr)
+	{
+		while (arr[i])
+			free(arr[i++]);
+		free(arr);
+	}
 }
 
-char	**ft_split(char const *s, char c)
+char	**split(char const *s, char c)
 {
 	char	**dst;
 	int		wc;
@@ -91,8 +94,8 @@ char	**ft_split(char const *s, char c)
 	dst = malloc(wc * sizeof(char *));
 	if (!dst)
 		return (NULL);
-	i = -1;
-	while (++i < wc - 1)
+	i = 0;
+	while (i < wc - 1)
 	{
 		dst[i] = get_word(s, c, i);
 		if (!dst[i])
@@ -100,6 +103,7 @@ char	**ft_split(char const *s, char c)
 			free_split(dst);
 			return (NULL);
 		}
+		i++;
 	}
 	dst[i] = NULL;
 	return (dst);

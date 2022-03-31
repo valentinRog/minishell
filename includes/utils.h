@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/03/28 19:09:37 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/03/31 10:08:19 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	lst_clear(t_list **lst, void (*del)(void*));
 char	*get_next_line(int fd);
 
 /*split*/
-char	**ft_split(char const *s, char c);
+void	free_split(char **arr);
+char	**split(char const *s, char c);
 
 #endif
