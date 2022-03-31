@@ -6,12 +6,14 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/03/31 10:08:19 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/03/31 11:14:35 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
+
+# include "minishell.h"
 
 typedef struct s_list
 {
