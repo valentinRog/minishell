@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/03/31 14:51:33 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/03/31 15:27:45 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 t_list	*parse(char *line)
 {
+	printf("%s\n", line);
 	return (false);
 }

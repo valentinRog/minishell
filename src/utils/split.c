@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:42:16 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/03/31 14:57:03 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/03/31 14:58:10 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,12 @@ void	free_split(char **arr)
 	int	i;
 
 	i = 0;
-	if (arr)
+	while (arr && arr[i])
 	{
-		while (arr[i])
-		{
-			free(arr[i]);
-			i++;
-		}
-		free(arr);
+		free(arr[i]);
+		i++;
 	}
+	free(arr);
 }
 
 char	**split(char const *s, char c)
