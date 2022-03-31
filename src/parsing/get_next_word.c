@@ -1,29 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   get_next_word.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/01 00:16:08 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/03/31 23:40:36 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/04/01 00:17:41 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*parse(const char *line)
+char	*get_next_word(const char *str)
 {
 	char	*ptr;
-	t_list	*lst;
+	size_t	len;
 	char	*word;
 
-	lst = NULL;
-	ptr = (char *)line;
-	while ((word = get_next_word(ptr)))
+	ptr = (char *)str;
+	while (*ptr == ' ')
+		ptr++;
+	len = 0;
+	while (ptr[len] && ptr[len] != ' ')
+		len++;
+	word = ft_substr(str, ptr - str, len);
+	if (!word)
+		return (NULL);
+	if (!*word)
 	{
-		printf("%s\n", word);
-		skip_next_word(&ptr);
+		free(word);
+		return (NULL);
 	}
-	return (lst);
+	return (word);
+}
+
+void	skip_next_word(char	**ptr)
+{
+	if (ptr && *ptr)
+	{
+		while (**ptr == ' ')
+			(*ptr)++;
+		while (**ptr && **ptr != ' ')
+			(*ptr)++;
+	}
 }

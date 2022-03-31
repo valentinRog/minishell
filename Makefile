@@ -1,6 +1,8 @@
 NAME = minishell
 
-SRC = $(wildcard src/*/*.c)
+SRC = $(wildcard src/main/*.c)\
+      $(wildcard src/parsing/*.c)\
+      $(wildcard src/utils/*.c)
 
 INCLUDES = includes
 

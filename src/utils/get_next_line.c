@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:21:23 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/03/28 19:04:10 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/03/31 17:22:59 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ static char	*lst_to_str(t_list *lst)
 	i = 0;
 	while (node)
 	{
-		dst[i++] = *(char *)node->content;
+		dst[i] = *(char *)node->content;
 		node = node->prev;
+		i++;
 	}
 	dst[i] = 0;
 	return (dst);

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:40:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/03/31 08:52:49 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/01 00:14:36 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,8 @@
 # include "utils.h"
 # include "parsing.h"
 # include "main.h"
+
+//TO REMOVE
+# include <ctype.h>
 
 #endif
