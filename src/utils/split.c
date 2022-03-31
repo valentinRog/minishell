@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:42:16 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/03/31 10:10:36 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/03/31 14:57:03 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,11 @@ static char	*get_word(char const *s, char c, int n)
 	if (!dst)
 		return (NULL);
 	i = 0;
-	while (+i < len)
-		dst[i] = ptr[i++];
+	while (i < len)
+	{
+		dst[i] = ptr[i];
+		i++;
+	}
 	dst[i] = '\0';
 	return (dst);
 }
@@ -77,7 +80,10 @@ void	free_split(char **arr)
 	if (arr)
 	{
 		while (arr[i])
-			free(arr[i++]);
+		{
+			free(arr[i]);
+			i++;
+		}
 		free(arr);
 	}
 }

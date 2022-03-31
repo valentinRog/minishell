@@ -6,13 +6,13 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/03/31 10:03:24 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/03/31 14:51:33 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	parse(t_list **alst, char *line)
+t_list	*parse(char *line)
 {
 	return (false);
 }
