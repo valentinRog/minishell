@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/03/31 10:03:59 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/03/31 10:52:55 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 
 # include "minishell.h"
 
+enum
+{
+	PIPE,
+	AND,
+	OR,
+	END,
+};
+
 typedef struct s_cmd
 {
 	char	**exec_args;
@@ -22,7 +30,7 @@ typedef struct s_cmd
 	char	*outfile;
 	bool	append;
 	char	*limiter;
-	bool	pipe;
+	int		connector;
 }	t_cmd;
 
 /*parsing*/
