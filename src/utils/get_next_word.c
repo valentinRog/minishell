@@ -6,23 +6,23 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 23:40:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/01 00:17:41 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/01 00:44:31 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_next_word(const char *str)
+char	*get_next_word(const char *str, char *charset)
 {
 	char	*ptr;
 	size_t	len;
 	char	*word;
 
 	ptr = (char *)str;
-	while (*ptr == ' ')
+	while (is_in_str(*ptr, charset))
 		ptr++;
 	len = 0;
-	while (ptr[len] && ptr[len] != ' ')
+	while (ptr[len] && !is_in_str(ptr[len], charset))
 		len++;
 	word = ft_substr(str, ptr - str, len);
 	if (!word)
@@ -35,13 +35,13 @@ char	*get_next_word(const char *str)
 	return (word);
 }
 
-void	skip_next_word(char	**ptr)
+void	skip_next_word(char	**ptr, char *charset)
 {
-	if (ptr && *ptr)
+	if (ptr && *ptr && charset)
 	{
-		while (**ptr == ' ')
+		while (**ptr && is_in_str(**ptr, charset))
 			(*ptr)++;
-		while (**ptr && **ptr != ' ')
+		while (**ptr && !is_in_str(**ptr, charset))
 			(*ptr)++;
 	}
 }

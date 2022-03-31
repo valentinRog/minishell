@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/01 00:13:17 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/01 00:36:40 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,5 @@ t_list	*parse(const char *line);
 t_cmd	*new_cmd(void);
 void	init_cmd(t_cmd *cmd);
 
-/*get_next_word*/
-char	*get_next_word(const char *str);
-void	skip_next_word(char	**ptr);
 
 #endif
