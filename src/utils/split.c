@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:42:16 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/01 01:00:53 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 00:01:38 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,16 @@ void	free_split(char **arr)
 	free(arr);
 }
 
-char	**ft_split(char const *s, char *charset)
+static void	skip_word(char **ptr, char *word)
+{
+	while (**ptr && *word && **ptr == *word)
+	{
+		(*ptr)++;
+		word++;
+	}
+}
+
+char	**ft_split(char const *s, char *charset, char *quotes)
 {
 	char	**dst;
 	int		wc;
@@ -60,13 +69,13 @@ char	**ft_split(char const *s, char *charset)
 	ptr = (char *)s;
 	while (++i < wc - 1)
 	{
-		dst[i] = get_next_word(ptr, charset);
+		dst[i] = get_next_word(ptr, charset, NULL);
 		if (!dst[i])
 		{
 			free_split(dst);
 			return (NULL);
 		}
-		skip_next_word(&ptr, charset);
+		skip_next_word(&ptr, charset, quotes);
 	}
 	dst[i] = NULL;
 	return (dst);

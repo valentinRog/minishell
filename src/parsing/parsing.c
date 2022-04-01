@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/01 05:13:07 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 00:09:18 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_cmd	*parse_cmd(char *str)
 	error = false;
 	cmd = malloc(sizeof(t_cmd));
 	init_cmd(cmd);
-	cmd->exec_args = ft_split(str, WHITESPACE);
 	if (!cmd->exec_args)
 		error = true;
 	if (error)
