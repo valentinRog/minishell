@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 22:21:22 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/01 01:02:04 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/01 02:28:16 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_strndup(const char *str, size_t n)
 		i++;
 	}
 	dst[i] = '\0';
-	return (0);
+	return (dst);
 }
 
 bool	is_in_str(char c, const char *str)

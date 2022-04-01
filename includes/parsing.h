@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/01 00:36:40 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/01 02:34:04 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ enum
 	END,
 };
 
+# define CONNECTORS "|&"
+
 typedef struct s_cmd
 {
 	char	**exec_args;
@@ -31,10 +33,11 @@ typedef struct s_cmd
 	bool	append;
 	char	*limiter;
 	int		connector;
+	int		z_index;
 }	t_cmd;
 
 /*parsing*/
-t_list	*parse(const char *line);
+bool	parse(t_list **alst, const char *line);
 
 /*new_cmd*/
 t_cmd	*new_cmd(void);
