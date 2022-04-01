@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/01 02:34:04 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/01 04:29:06 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ enum
 };
 
 # define CONNECTORS "|&"
+# define WHITESPACE " "
 
 typedef struct s_cmd
 {
@@ -40,8 +41,7 @@ typedef struct s_cmd
 bool	parse(t_list **alst, const char *line);
 
 /*new_cmd*/
-t_cmd	*new_cmd(void);
 void	init_cmd(t_cmd *cmd);
-
+void	del_cmd(void *);
 
 #endif

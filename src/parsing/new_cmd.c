@@ -6,21 +6,11 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 09:57:45 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/01 01:47:08 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/01 04:58:18 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_cmd	*new_cmd(void)
-{
-	t_cmd	*content;
-
-	content = malloc(sizeof(t_cmd));
-	if (!content)
-		return (NULL);
-	return (content);
-}
 
 void	init_cmd(t_cmd *cmd)
 {
@@ -33,5 +23,24 @@ void	init_cmd(t_cmd *cmd)
 		cmd->limiter = NULL;
 		cmd->connector = END;
 		cmd->z_index = 0;
+	}
+}
+
+void	del_cmd(void *args)
+{
+	t_cmd	*cmd;
+
+	cmd = (t_cmd *) args;
+	if (cmd)
+	{
+		if (cmd->exec_args)
+			free_split(cmd->exec_args);
+		if (cmd->infile)
+			free(cmd->infile);
+		if (cmd->outfile)
+			free(cmd->outfile);
+		if (cmd->limiter)
+			free(cmd->limiter);
+		free(cmd);
 	}
 }
