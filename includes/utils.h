@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 16:38:19 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 19:16:13 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ size_t	ft_strlen(const char *str);
 char	*ft_strndup(const char *str, size_t n);
 bool	is_in_str(char c, const char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+void	str_append_buff(char **astr, char *buff, size_t size);
 
 /*strstr*/
 char	*ft_strstr(const char *haystack, const char *needle, char *quotes);
@@ -45,9 +46,10 @@ void	lst_clear(t_list **lst, void (*del)(void*));
 char	*get_next_line(int fd);
 
 /*get_next_word*/
-char	*get_next_word(const char *str, char *charset, char *quotes);
+void	skip_white_space(char **ptr, char *charset, char *quotes);
 void	skip_next_word(char **ptr, char *charset, char *quotes);
-void	delete_next_word(char *str, char *charset, char *quotes);
+void	delete_next_word(const char *str, char *charset, char *quotes);
+char	*get_next_word(const char *str, char *charset, char *quotes);
 
 /*split*/
 void	free_split(char **arr);

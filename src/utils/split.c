@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:42:16 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 14:07:49 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 20:09:25 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ static size_t	count_words(char const *s, char *charset, char *quotes)
 
 	i = 0;
 	ptr = (char *)s;
+	skip_white_space(&ptr, charset, quotes);
 	while (*ptr)
 	{
 		skip_next_word(&ptr, charset, quotes);
+		skip_white_space(&ptr, charset, quotes);
 		i++;
 	}
 	return (i);

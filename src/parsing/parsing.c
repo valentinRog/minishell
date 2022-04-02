@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 17:07:33 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 20:09:42 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ bool	parse(t_list **alst, const char *line)
 
 	ptr = (char *)line;
 	skip_next_word(&ptr, CONNECTORS, QUOTES);
+	skip_white_space(&ptr, CONNECTORS, QUOTES);
+	printf("%s\n", ptr);
 	cmd_str = ft_strndup(line, ptr - line);
 	if (!cmd_str)
 		return (true);

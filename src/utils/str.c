@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 22:21:22 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 16:35:09 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 18:21:39 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,35 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	dst[i] = '\0';
 	return (dst);
+}
+
+void	str_append_buff(char **astr, char *buff, size_t size)
+{
+	char	*dst;
+	size_t	i;
+	size_t	j;
+
+	if (!astr || !buff || !*buff || !size)
+		return ;
+	if (!*astr)
+		*astr = strdup("");
+	dst = malloc((ft_strlen(*astr) + size + 1) * sizeof(char));
+	if (dst)
+	{
+		i = 0;
+		while ((*astr)[i])
+		{
+			dst[i] = (*astr)[i];	
+			i++;
+		}
+		j = 0;
+		while (j < size)
+		{
+			dst[i + j] = buff[j];
+			j++;
+		}
+		dst[i + j] = '\0';
+	}
+	free(*astr);
+	*astr = dst;
 }
