@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 14:17:05 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 15:56:54 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ enum
 # define CONNECTORS "|&"
 # define WHITESPACES " "
 # define QUOTES "\"\'"
+# define RESERVED "<>&|"
 
 typedef struct s_cmd
 {

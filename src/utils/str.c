@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 22:21:22 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/01 02:28:16 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 16:27:01 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,40 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	dst[i] = '\0';
 	return (dst);
+}
+
+char	*ft_strstr(const char *haystack, const char *needle, char *quotes)
+{
+	size_t	i;
+	char	*ptr;
+	char	quote;
+
+	if (!haystack || !needle || !quotes)
+		return (NULL);
+	ptr = (char *)haystack;
+	if (*needle == '\0')
+		return (ptr);
+	while (*ptr)
+	{
+		if (is_in_str(*ptr, quotes))
+		{
+			ptr++;
+			while (*ptr)
+			{
+				if (is_in_str(*ptr, quotes))
+				{
+					ptr++;
+					break ;
+				}
+				ptr++;
+			}
+		}
+		i = 0;
+		while (ptr[i] == needle[i] && ptr[i] && needle[i])
+			i++;
+		if (i == ft_strlen(needle))
+			return (ptr);
+		ptr++;
+	}
+	return (NULL);
 }

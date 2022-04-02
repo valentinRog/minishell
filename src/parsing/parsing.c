@@ -6,13 +6,13 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 14:36:56 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 16:16:40 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	parse_args(t_cmd *cmd, char *str)
+static bool	parse_args(t_cmd *cmd, char *str)
 {
 	static int	z_index;
 
@@ -25,7 +25,7 @@ bool	parse_args(t_cmd *cmd, char *str)
 	return (false);
 }
 
-t_cmd	*parse_cmd(char *str)
+static t_cmd	*parse_cmd(char *str)
 {
 	bool		error;
 	t_cmd		*cmd;

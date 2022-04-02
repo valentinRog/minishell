@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 14:16:16 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 14:21:08 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 16:25:20 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ bool	get_limiter(t_cmd *cmd, char *str)
 {
 	char	*ptr;
 
-	ptr = strstr(str, "<<");
+	ptr = ft_strstr(str, "<<", QUOTES);
 	if (ptr)
 	{
 		*ptr = ' ';
 		*(ptr + 1) = ' ';
-		cmd->limiter = get_next_word(ptr, WHITESPACES, QUOTES);
+		cmd->limiter = get_next_word(ptr, WHITESPACES RESERVED, QUOTES);
 		if (!cmd->limiter)
 			return (true);
-		delete_next_word(ptr, WHITESPACES, QUOTES);
+		delete_next_word(ptr, WHITESPACES RESERVED, QUOTES);
 	}
 	return (false);
 }
@@ -33,14 +33,14 @@ static bool	get_in(t_cmd *cmd, char *str)
 {
 	char	*ptr;
 
-	ptr = strstr(str, "<");
+	ptr = ft_strstr(str, "<", QUOTES);
 	if (ptr)
 	{
 		*ptr = ' ';
-		cmd->infile = get_next_word(ptr, WHITESPACES, QUOTES);
+		cmd->infile = get_next_word(ptr, WHITESPACES RESERVED, QUOTES);
 		if (!cmd->infile)
 			return (true);
-		delete_next_word(ptr, WHITESPACES, QUOTES);
+		delete_next_word(ptr, WHITESPACES RESERVED, QUOTES);
 	}
 	return (false);
 }
@@ -51,7 +51,7 @@ bool	get_in_out(t_cmd *cmd, char *str)
 
 	if (get_in(cmd, str))
 		return (true);
-	ptr = strstr(str, ">");
+	ptr = ft_strstr(str, ">", QUOTES);
 	if (ptr)
 	{
 		*ptr = ' ';
@@ -60,10 +60,10 @@ bool	get_in_out(t_cmd *cmd, char *str)
 			*(ptr + 1) = ' ';
 			cmd->append = true;
 		}
-		cmd->outfile = get_next_word(ptr, WHITESPACES, QUOTES);
+		cmd->outfile = get_next_word(ptr, WHITESPACES RESERVED, QUOTES);
 		if (!cmd->outfile)
 			return (true);
-		delete_next_word(ptr, WHITESPACES, QUOTES);
+		delete_next_word(ptr, WHITESPACES RESERVED, QUOTES);
 	}
 	return (false);
 }

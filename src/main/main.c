@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 10:59:33 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 16:29:31 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	main(void)
 		if (parse(&lst, line))
 		{
 			lst_clear(&lst, del_cmd);
-			clear_history();
-			free(line);
-			exit (EXIT_FAILURE);
+			//clear_history();
+			//exit (EXIT_FAILURE);
+			printf("parsing error\n");
 		}
 		print_lst(lst);
 		free(line);

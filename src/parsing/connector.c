@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 14:11:11 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 14:14:34 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 16:12:02 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static bool	get_connector_and(t_cmd *cmd, char *str)
 {
 	char	*ptr;
 
-	ptr = strstr(str, "&&");
+	ptr = ft_strstr(str, "&&", QUOTES);
 	if (ptr)
 	{
 		*ptr = ' ';
@@ -33,7 +33,7 @@ bool	get_connector(t_cmd *cmd, char *str)
 {
 	char	*ptr;
 
-	ptr = strstr(str, "|");
+	ptr = ft_strstr(str, "|", QUOTES);
 	if (ptr)
 	{
 		*ptr = ' ';
