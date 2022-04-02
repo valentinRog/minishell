@@ -6,28 +6,25 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:42:16 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 00:01:38 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 09:13:33 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	count_words(char const *s, char *charset)
+static size_t	count_words(char const *s, char *charset, char *quotes)
 {
-	int	wc;
+	size_t	i;
+	char	*ptr;
 
-	wc = 0;
-	if (*s && !is_in_str(*s, charset))
-		wc++;
-	if (*s)
-		s++;
-	while (*s)
+	i = 0;
+	ptr = (char *)s;
+	while (*ptr)
 	{
-		if (is_in_str(*(s - 1), charset) && !is_in_str(*s, charset))
-			wc++;
-		s++;
+		skip_next_word(&ptr, charset, quotes);
+		i++;
 	}
-	return (wc);
+	return (i);
 }
 
 void	free_split(char **arr)
@@ -43,33 +40,24 @@ void	free_split(char **arr)
 	free(arr);
 }
 
-static void	skip_word(char **ptr, char *word)
-{
-	while (**ptr && *word && **ptr == *word)
-	{
-		(*ptr)++;
-		word++;
-	}
-}
-
 char	**ft_split(char const *s, char *charset, char *quotes)
 {
 	char	**dst;
-	int		wc;
-	int		i;
+	size_t	wc;
+	size_t	i;
 	char	*ptr;
 
 	if (!s)
 		return (NULL);
-	wc = count_words(s, charset) + 1;
-	dst = malloc(wc * sizeof(char *));
+	wc = count_words(s, charset, quotes);
+	dst = malloc((wc + 1) * sizeof(char *));
 	if (!dst)
 		return (NULL);
 	i = -1;
 	ptr = (char *)s;
-	while (++i < wc - 1)
+	while (++i < wc)
 	{
-		dst[i] = get_next_word(ptr, charset, NULL);
+		dst[i] = get_next_word(ptr, charset, quotes);
 		if (!dst[i])
 		{
 			free_split(dst);
