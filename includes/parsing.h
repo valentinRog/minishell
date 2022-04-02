@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 15:56:54 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 21:27:43 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ bool	get_in_out(t_cmd *cmd, char *str);
 /*new_cmd*/
 void	init_cmd(t_cmd *cmd);
 void	del_cmd(void *cmd);
-
-
+//TEST TO REMOVE
 void	print_lst(t_list *lst);
+
 #endif

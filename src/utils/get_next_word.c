@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 23:40:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 21:03:46 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 21:26:36 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,17 @@ char	*get_next_word(const char *str, char *charset, char *quotes)
 	ptr = (char *)str;
 	skip_white_space(&ptr, charset, quotes);
 	quote = '\0';
-	if (!*ptr)
-		return (NULL);
-	word = strdup("");
+	word = NULL;
 	while (*ptr)
 	{
 		if (!quote && is_in_str(*ptr, quotes))
 			quote = *ptr;
 		else if (*ptr == quote)
+		{
+			if (!word && str_append_buff(&word, "", 1))
+				return (NULL);
 			quote = '\0';
+		}
 		else if (!quote && is_in_str(*ptr, charset))
 			break ;
 		else

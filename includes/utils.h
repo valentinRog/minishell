@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 19:16:13 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 21:22:53 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ typedef struct s_list
 
 /*str*/
 size_t	ft_strlen(const char *str);
-char	*ft_strndup(const char *str, size_t n);
 bool	is_in_str(char c, const char *str);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-void	str_append_buff(char **astr, char *buff, size_t size);
-
-/*strstr*/
 char	*ft_strstr(const char *haystack, const char *needle, char *quotes);
+
+/*str_alloc*/
+char	*ft_strndup(const char *str, size_t n);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+bool	str_append_buff(char **astr, char *buff, size_t size);
 
 /*lst*/
 int		lst_size(t_list *lst);

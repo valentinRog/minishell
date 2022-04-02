@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 20:35:01 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 21:20:42 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	main(void)
 	t_list	*lst;
 
 	lst = NULL;
-	printf("%p\n", ft_split("\"\"", WHITESPACES, QUOTES));
 	while (true)
 	{
 		line = readline(PROMPT);
