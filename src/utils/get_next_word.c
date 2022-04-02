@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 23:40:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 00:07:34 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 12:39:43 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,10 @@ char	*get_next_word(const char *str, char *charset, char *quotes)
 void	skip_next_word(char **ptr, char *charset, char *quotes)
 {
 	char	quote;
+	char	*word;
 
+	if (!**ptr)
+		return;
 	while (is_in_str(**ptr, charset))
 		(*ptr)++;
 	quote = '\0';
@@ -103,4 +106,35 @@ void	skip_next_word(char **ptr, char *charset, char *quotes)
 			break ;
 		(*ptr)++;
 	}
+	word = get_next_word(*ptr, charset, quotes);
+	if (!word)
+		skip_next_word(ptr, charset, quotes);
+	free(word);
+}
+
+void	delete_next_word(char *str, char *charset, char *quotes)
+{
+	char	quote;
+	char	*word;
+
+	if (!*str)
+		return ;
+	while (is_in_str(*str, charset))
+		str++;
+	quote = '\0';
+	while (*str)
+	{
+		if (*str == quote)
+			quote = '\0';
+		else if (!quote && is_in_str(*str, quotes))
+				quote = *str;
+		else if (!quote && is_in_str(*str, charset))
+			break ;
+		*str = ' ';
+		str++;
+	}
+	word = get_next_word(str, charset, quotes);
+	if (!word)
+		delete_next_word(str, charset, quotes);
+	free(word);
 }
