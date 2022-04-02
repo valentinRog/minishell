@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 14:11:53 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 14:17:05 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ bool	parse(t_list **alst, const char *line);
 
 /*connector*/
 bool	get_connector(t_cmd *cmd, char *str);
+
+/**/
+bool	get_limiter(t_cmd *cmd, char *str);
+bool	get_in_out(t_cmd *cmd, char *str);
 
 /*new_cmd*/
 void	init_cmd(t_cmd *cmd);

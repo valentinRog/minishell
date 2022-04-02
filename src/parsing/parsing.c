@@ -6,58 +6,11 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 14:11:23 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 14:36:56 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-bool	get_limiter(t_cmd *cmd, char *str)
-{
-	char	*ptr;
-
-	ptr = strstr(str, "<<");
-	if (ptr)
-	{
-		*ptr = ' ';
-		*(ptr + 1) = ' ';
-		cmd->limiter = get_next_word(ptr, WHITESPACES, QUOTES);
-		if (!cmd->limiter)
-			return (true);
-		delete_next_word(ptr, WHITESPACES, QUOTES);
-	}
-	return (false);
-}
-
-bool	get_in_out(t_cmd *cmd, char *str)
-{
-	char	*ptr;
-
-	ptr = strstr(str, "<");
-	if (ptr)
-	{
-		*ptr = ' ';
-		cmd->infile = get_next_word(ptr, WHITESPACES, QUOTES);
-		if (!cmd->infile)
-			return (true);
-		delete_next_word(ptr, WHITESPACES, QUOTES);
-	}
-	ptr = strstr(str, ">");
-	if (ptr)
-	{
-		*ptr = ' ';
-		if (*(ptr + 1) == '>')
-		{
-			*(ptr + 1) = ' ';
-			cmd->append = true;
-		}
-		cmd->outfile = get_next_word(ptr, WHITESPACES, QUOTES);
-		if (!cmd->outfile)
-			return (true);
-		delete_next_word(ptr, WHITESPACES, QUOTES);
-	}
-	return (false);
-}
 
 bool	parse_args(t_cmd *cmd, char *str)
 {
@@ -96,6 +49,16 @@ t_cmd	*parse_cmd(char *str)
 	return (cmd);
 }
 
+static bool	check_end(t_list *last_node)
+{
+	t_cmd	*cmd;
+
+	cmd = (t_cmd *)last_node->content;
+	if (cmd->connector != END || cmd->z_index)
+		return (true);
+	return (false);
+}
+
 bool	parse(t_list **alst, const char *line)
 {
 	char	*ptr;
@@ -112,6 +75,7 @@ bool	parse(t_list **alst, const char *line)
 	if (!cmd_str)
 		return (true);
 	content = parse_cmd(cmd_str);
+	free(cmd_str);
 	new_node = lst_new(content);
 	if (!new_node || !content)
 	{
@@ -120,6 +84,6 @@ bool	parse(t_list **alst, const char *line)
 	}
 	lst_add_back(alst, new_node);
 	if (*ptr)
-		return (parse(alst, ptr));	
-	return (false);
+		return (parse(alst, ptr));
+	return (check_end(new_node));
 }
