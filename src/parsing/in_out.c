@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 14:16:16 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 16:25:20 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 16:31:46 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ bool	get_limiter(t_cmd *cmd, char *str)
 			return (true);
 		delete_next_word(ptr, WHITESPACES RESERVED, QUOTES);
 	}
+	if (ft_strstr(str, "<<", QUOTES))
+		return (true);
 	return (false);
 }
 
@@ -42,6 +44,8 @@ static bool	get_in(t_cmd *cmd, char *str)
 			return (true);
 		delete_next_word(ptr, WHITESPACES RESERVED, QUOTES);
 	}
+	if (ft_strstr(str, "<", QUOTES))
+		return (true);
 	return (false);
 }
 
@@ -65,5 +69,7 @@ bool	get_in_out(t_cmd *cmd, char *str)
 			return (true);
 		delete_next_word(ptr, WHITESPACES RESERVED, QUOTES);
 	}
+	if (ft_strstr(str, ">", QUOTES))
+		return (true);
 	return (false);
 }
