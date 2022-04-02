@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 23:40:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 12:39:43 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 16:41:53 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ void	skip_next_word(char **ptr, char *charset, char *quotes)
 	char	quote;
 	char	*word;
 
-	if (!**ptr)
-		return;
+	if (!ptr || !*ptr || !**ptr)
+		return ;
 	while (is_in_str(**ptr, charset))
 		(*ptr)++;
 	quote = '\0';

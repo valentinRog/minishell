@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 16:12:02 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 16:38:19 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ size_t	ft_strlen(const char *str);
 char	*ft_strndup(const char *str, size_t n);
 bool	is_in_str(char c, const char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+
+/*strstr*/
 char	*ft_strstr(const char *haystack, const char *needle, char *quotes);
 
 /*lst*/
