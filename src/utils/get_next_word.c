@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 23:40:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 19:47:39 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 21:03:46 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	skip_next_word(char **ptr, char *charset, char *quotes)
 			break ;
 		str++;
 	}
-	skip_white_space(ptr, charset, quotes);
 	*ptr = str;
+	skip_white_space(ptr, charset, quotes);
 }
 
 void	delete_next_word(const char *str, char *charset, char *quotes)
@@ -71,7 +71,6 @@ char	*get_next_word(const char *str, char *charset, char *quotes)
 	char	*ptr;
 	char	quote;
 
-	word = NULL;
 	ptr = (char *)str;
 	skip_white_space(&ptr, charset, quotes);
 	quote = '\0';

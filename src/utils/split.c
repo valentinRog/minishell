@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:42:16 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 20:09:25 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/02 20:50:54 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static size_t	count_words(char const *s, char *charset, char *quotes)
 	while (*ptr)
 	{
 		skip_next_word(&ptr, charset, quotes);
-		skip_white_space(&ptr, charset, quotes);
 		i++;
 	}
 	return (i);
@@ -42,6 +41,12 @@ void	free_split(char **arr)
 	free(arr);
 }
 
+static char	**split_error(char **arr)
+{
+	free_split(arr);
+	return (NULL);
+}
+
 char	**ft_split(char const *s, char *charset, char *quotes)
 {
 	char	**dst;
@@ -52,6 +57,8 @@ char	**ft_split(char const *s, char *charset, char *quotes)
 	if (!s)
 		return (NULL);
 	wc = count_words(s, charset, quotes);
+	if (!wc)
+		return (NULL);
 	dst = malloc((wc + 1) * sizeof(char *));
 	if (!dst)
 		return (NULL);
@@ -61,10 +68,7 @@ char	**ft_split(char const *s, char *charset, char *quotes)
 	{
 		dst[i] = get_next_word(ptr, charset, quotes);
 		if (!dst[i])
-		{
-			free_split(dst);
-			return (NULL);
-		}
+			return (split_error(dst));
 		skip_next_word(&ptr, charset, quotes);
 	}
 	dst[i] = NULL;
