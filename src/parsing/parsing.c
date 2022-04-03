@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/03 17:48:21 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/03 20:28:16 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,19 @@ static t_cmd	*parse_cmd(char *str)
 static bool	check_end(t_list *last_node)
 {
 	t_cmd	*cmd;
-	int		temp;
 
 	cmd = (t_cmd *)last_node->content;
-	temp = z_index(NONE);
-	z_index(RESET);
-	if (cmd->connector != END || temp)
+	if (z_index(NONE))
+	{
+		z_index(RESET);
+		return (true);
+	}
+	if (cmd->connector != END)
 		return (true);
 	return (false);
 }
 
-bool	parse(t_list **alst, const char *line)
+static bool	parse(t_list **alst, const char *line)
 {
 	char	*ptr;
 	t_list	*new_node;
@@ -90,4 +92,13 @@ bool	parse(t_list **alst, const char *line)
 	if (*ptr)
 		return (parse(alst, ptr));
 	return (check_end(new_node));
+}
+
+t_list	*get_parsed_lst(const char *line)
+{
+	t_list	*lst;
+
+	lst = NULL;
+	parse(&lst, line);
+	return (lst);
 }

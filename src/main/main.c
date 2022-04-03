@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/03 17:39:36 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/03 20:27:30 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	main(void)
 			exit (EXIT_FAILURE);
 		}
 		add_history(line);
-		if (parse(&lst, line))
+		lst = get_parsed_lst(line);
+		if (!lst)
 		{
 			lst_clear(&lst, del_cmd);
 			//clear_history();
