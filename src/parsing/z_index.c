@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 12:19:41 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/03 13:53:14 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/03 17:35:06 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ bool	get_z_index(t_cmd *cmd, char *str)
 			z_index(INCREMENT);
 			*str = ' ';
 		}
+		skip_white_space(&str, WHITESPACES, QUOTES);
 	}
 	if (ft_strstr(str, "(", QUOTES))
 		return (true);

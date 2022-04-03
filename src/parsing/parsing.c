@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/03 13:49:12 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/03 17:33:44 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static bool	parse_args(t_cmd *cmd, char *str)
 	if (get_z_index(cmd, str))
 	{
 		z_index(RESET);
+		printf("yo\n");
 		return (true);
 	}
 	if (get_limiter(cmd, str))
