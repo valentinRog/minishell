@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/03 13:36:22 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/03 13:51:40 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ bool	get_limiter(t_cmd *cmd, char *str);
 bool	get_in_out(t_cmd *cmd, char *str);
 
 /*z_index*/
-int		z_index(int	op);
+int		z_index(int op);
 bool	get_z_index(t_cmd *cmd, char *str);
 
 /*new_cmd*/
