@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 20:09:42 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/03 13:49:12 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 
 static bool	parse_args(t_cmd *cmd, char *str)
 {
-	static int	z_index;
-
+	if (get_connector(cmd, str))
+		return (true);
+	if (get_z_index(cmd, str))
+	{
+		z_index(RESET);
+		return (true);
+	}
 	if (get_limiter(cmd, str))
 		return (true);
 	if (get_in_out(cmd, str))
-		return (true);
-	if (get_connector(cmd, str))
 		return (true);
 	return (false);
 }
@@ -52,9 +55,12 @@ static t_cmd	*parse_cmd(char *str)
 static bool	check_end(t_list *last_node)
 {
 	t_cmd	*cmd;
+	int		temp;
 
 	cmd = (t_cmd *)last_node->content;
-	if (cmd->connector != END || cmd->z_index)
+	temp = z_index(NONE);
+	z_index(RESET);
+	if (cmd->connector != END || temp)
 		return (true);
 	return (false);
 }
@@ -69,7 +75,6 @@ bool	parse(t_list **alst, const char *line)
 	ptr = (char *)line;
 	skip_next_word(&ptr, CONNECTORS, QUOTES);
 	skip_white_space(&ptr, CONNECTORS, QUOTES);
-	printf("%s\n", ptr);
 	cmd_str = ft_strndup(line, ptr - line);
 	if (!cmd_str)
 		return (true);

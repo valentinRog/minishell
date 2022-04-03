@@ -21,7 +21,7 @@ void	print_lst(t_list *lst)
 		printf("\"outfile:\" %s\n", cmd->outfile);
 		printf("\"append:\" %d\n", cmd->append);
 		printf("\"limiter:\" %s\n", cmd->limiter);
-		printf("\"outfile:\" %d\n", cmd->z_index);
+		printf("\"z_index:\" %d\n", cmd->z_index);
 		printf("\"connector:\" %d\n", cmd->connector);
 		node = node->next;
 		printf("-----------------------\n");
