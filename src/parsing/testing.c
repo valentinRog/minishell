@@ -1,29 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   testing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/03 18:18:49 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/04/03 18:25:31 by vrogiste         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	print_lst(t_list *lst)
 {
-	t_list *node = lst;
-
-	while (node)
+	printf("\n########################################\n");
+	for (size_t i = 1; lst; i++)
 	{
-		printf("-----------------------\n");
-		t_cmd *cmd = node->content;
+		printf("----------%zu----------\n", i);
+		t_cmd *cmd = lst->content;
 		printf("\"exec_args\": ");
 		printf("[");
-		for (int i = 0; cmd->exec_args[i]; i++)
+		for (int j = 0; cmd->exec_args[j]; j++)
 		{
-			if (i)
+			if (j)
 				printf(", ");
-			printf("%s", cmd->exec_args[i]);
+			printf("%s", cmd->exec_args[j]);
 		}
 		printf("]\n");
-		printf("\"infile:\" %s\n", cmd->infile);
-		printf("\"outfile:\" %s\n", cmd->outfile);
-		printf("\"append:\" %d\n", cmd->append);
-		printf("\"limiter:\" %s\n", cmd->limiter);
-		printf("\"z_index:\" %d\n", cmd->z_index);
-		printf("\"connector:\" %d\n", cmd->connector);
-		node = node->next;
-		printf("-----------------------\n");
+		printf("\"infile\": %s\n", cmd->infile);
+		printf("\"outfile\": %s\n", cmd->outfile);
+		printf("\"append\": %d\n", cmd->append);
+		printf("\"limiter\": %s\n", cmd->limiter);
+		printf("\"z_index\": %d\n", cmd->z_index);
+		printf("\"connector\": %d\n", cmd->connector);
+		lst = lst->next;
+		printf("--------------------\n");
 	}
 }
