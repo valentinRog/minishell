@@ -6,13 +6,13 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 23:40:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 21:26:36 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/03 17:44:43 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	skip_white_space(char **ptr, char *charset, char *quotes)
+void	skip_charset(char **ptr, char *charset)
 {
 	char	*str;
 
@@ -27,7 +27,7 @@ void	skip_next_word(char **ptr, char *charset, char *quotes)
 	char	*str;
 	char	quote;
 
-	skip_white_space(ptr, charset, quotes);
+	skip_charset(ptr, charset);
 	str = *ptr;
 	quote = '\0';
 	while (*str)
@@ -41,7 +41,7 @@ void	skip_next_word(char **ptr, char *charset, char *quotes)
 		str++;
 	}
 	*ptr = str;
-	skip_white_space(ptr, charset, quotes);
+	skip_charset(ptr, charset);
 }
 
 void	delete_next_word(const char *str, char *charset, char *quotes)
@@ -50,7 +50,7 @@ void	delete_next_word(const char *str, char *charset, char *quotes)
 	char	quote;
 
 	ptr = (char *)str;
-	skip_white_space(&ptr, charset, quotes);
+	skip_charset(&ptr, charset);
 	quote = '\0';
 	while (*ptr)
 	{
@@ -72,7 +72,7 @@ char	*get_next_word(const char *str, char *charset, char *quotes)
 	char	quote;
 
 	ptr = (char *)str;
-	skip_white_space(&ptr, charset, quotes);
+	skip_charset(&ptr, charset);
 	quote = '\0';
 	word = NULL;
 	while (*ptr)

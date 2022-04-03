@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 12:19:41 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/03 17:35:06 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/03 17:43:34 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ int	z_index(int op)
 
 bool	get_z_index(t_cmd *cmd, char *str)
 {
-	skip_white_space(&str, WHITESPACES, QUOTES);
+	skip_charset(&str, WHITESPACES);
 	while (*str == '(')
 	{
-		skip_white_space(&str, WHITESPACES, QUOTES);
+		skip_charset(&str, WHITESPACES);
 		if (*str == '(')
 		{
 			z_index(INCREMENT);
 			*str = ' ';
 		}
-		skip_white_space(&str, WHITESPACES, QUOTES);
+		skip_charset(&str, WHITESPACES);
 	}
 	if (ft_strstr(str, "(", QUOTES))
 		return (true);
@@ -46,7 +46,7 @@ bool	get_z_index(t_cmd *cmd, char *str)
 	{
 		z_index(DECREMENT);
 		*str = ' ';
-		skip_white_space(&str, WHITESPACES, QUOTES);
+		skip_charset(&str, WHITESPACES);
 		if (*str && *str != ')')
 			return (true);
 	}

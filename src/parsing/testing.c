@@ -14,7 +14,7 @@ void	print_lst(t_list *lst)
 		{
 			if (i)
 				printf(", ");
-				printf("%s", cmd->exec_args[i]);
+			printf("%s", cmd->exec_args[i]);
 		}
 		printf("]\n");
 		printf("\"infile:\" %s\n", cmd->infile);

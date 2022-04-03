@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:21:23 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/03/31 17:22:59 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/03 17:45:27 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char	*get_next_line(int fd)
 	t_list	*new_node;
 	char	c;
 	char	*dst;
-	char	*content;
 
 	lst = NULL;
 	c = '\0';

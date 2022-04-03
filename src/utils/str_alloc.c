@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 20:47:01 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 21:20:26 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/03 17:45:11 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ static void	copy_buff(char *dst, char **astr, char *buff, size_t size)
 bool	str_append_buff(char **astr, char *buff, size_t size)
 {
 	char	*dst;
-	size_t	i;
-	size_t	j;
 	bool	error;
 
 	error = false;

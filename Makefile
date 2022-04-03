@@ -8,7 +8,7 @@ INCLUDES = includes
 
 OBJ = $(SRC:.c=.o)
 
-CFLAGS = -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 LIB = -lreadline
 
