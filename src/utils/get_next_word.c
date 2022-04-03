@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 23:40:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/03 20:52:08 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/03 21:40:53 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	delete_next_word(const char *str, char *charset, char *quotes)
 	}
 }
 
-bool	get_next_word(char **dst, const char *str, char *charset, char *quotes)
+char	*get_next_word(const char *str, char *charset, char *quotes)
 {
 	char	*ptr;
 	char	quote;
@@ -82,16 +82,15 @@ bool	get_next_word(char **dst, const char *str, char *charset, char *quotes)
 		else if (*ptr == quote)
 		{
 			if (str_append_buff(&word, "", 1))
-				return (true);
+				return (NULL);
 			quote = '\0';
 		}
 		else if (!quote && is_in_str(*ptr, charset))
 			break ;
 		else
 			if (str_append_buff(&word, ptr, 1))
-				return (true);
+				return (NULL);
 		ptr++;
 	}
-	*dst = word;
-	return (false);
+	return (word);
 }

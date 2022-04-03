@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:42:16 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/03 20:45:17 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/03 21:40:23 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ char	**ft_split(char const *s, char *charset, char *quotes)
 	ptr = (char *)s;
 	while (++i < wc)
 	{
-		if (get_next_word(&dst[i], ptr, charset, quotes))
+		dst[i] = get_next_word(ptr, charset, quotes);
+		if (!dst[i])
 			return (split_error(dst));
 		skip_next_word(&ptr, charset, quotes);
 	}
