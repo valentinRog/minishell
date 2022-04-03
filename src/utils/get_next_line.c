@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:21:23 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/03 17:45:27 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/03 21:00:52 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,31 @@ static char	*lst_to_str(t_list *lst)
 	return (dst);
 }
 
-char	*get_next_line(int fd)
+bool	get_next_line(char **dst, int fd)
 {
 	t_list	*lst;
 	t_list	*new_node;
 	char	c;
-	char	*dst;
 
 	lst = NULL;
 	c = '\0';
+	if (!dst)
+		return (false);
 	while (c != '\n' && read(fd, &c, 1) > 0)
 	{
 		new_node = lst_new(get_content(c));
 		if (!new_node || !new_node->content)
 		{
 			lst_clear(&lst, free);
-			return (NULL);
+			return (true);
 		}
 		lst_add_front(&lst, new_node);
 	}
-	dst = lst_to_str(lst);
-	lst_clear(&lst, free);
-	return (dst);
+	*dst = lst_to_str(lst);
+	if (lst && !*dst)
+	{
+		lst_clear(&lst, free);
+		return (true);
+	}
+	return (false);
 }
