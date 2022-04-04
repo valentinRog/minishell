@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 22:21:22 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/02 21:21:07 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/04 07:18:52 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ char	*ft_strstr(const char *haystack, const char *needle, char *quotes)
 	{
 		skip_quotes(&ptr, quotes);
 		i = 0;
-		while (ptr[i] == needle[i] && ptr[i] && needle[i])
+		while (ptr[i] == needle[i] && ptr[i])
 			i++;
-		if (i == ft_strlen(needle))
+		if (!needle[i])
 			return (ptr);
 		ptr++;
 	}

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/03 20:28:16 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/04 07:26:08 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,15 @@ static bool	parse_args(t_cmd *cmd, char *str)
 		z_index(RESET);
 		return (true);
 	}
-	if (get_limiter(cmd, str))
+	if (get_arg(&cmd->limiter, "<<", str))
 		return (true);
-	if (get_in_out(cmd, str))
+	if (get_arg(&cmd->infile, "<", str))
+		return (true);
+	if (get_arg(&cmd->outfile, ">>", str))
+		return (true);
+	if (cmd->outfile)
+		cmd->append = true;
+	else if (get_arg(&cmd->outfile, ">", str))
 		return (true);
 	return (false);
 }
