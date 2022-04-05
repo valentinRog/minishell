@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 22:21:22 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/05 15:52:08 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/05 16:28:40 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,51 @@ size_t	ft_strlen(const char *str)
 	return (0);
 }
 
-bool	is_in_str(char c, const char *str)
+bool	is_in_str(const char *str, char c)
 {
 	if (str && *str)
 	{
 		if (*str == c)
 			return (true);
-		return (is_in_str(c, str + 1));
+		return (is_in_str(str + 1, c));
 	}
 	return (false);
 }
 
+bool	is_in_quote(char *str, char *quotes, size_t index)
+{
+	char	quote;
+	size_t	i;
+
+	quote = '\0';
+	i = 0;
+	while (i != index)
+	{
+		if (!str[i])
+			return (false);
+		if (!quote && is_in_str(quotes, str[i]))
+			quote = str[i];
+		else if (quote == str[i])
+			quote = '\0';
+		i++;
+	}
+	if (quote)
+		return (true);
+	return (false);
+}
+
+void	ft_strncpy(char *dst, char *src, size_t len)
+{
+	size_t	i;
+
+	i = 0;
+	if (dst && src)
+	{
+		while (src[i] && i < len)
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+}

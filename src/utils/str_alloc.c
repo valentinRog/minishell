@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 20:47:01 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/05 14:37:33 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/05 16:29:00 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,31 +60,17 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (dst);
 }
 
-void	str_insert(char **astr, char *str, size_t index)
+void	str_insert(char **astr, char *str, size_t i)
 {
 	char	*dst;
-	size_t	i;
-	size_t	j;
 
 	dst = malloc((ft_strlen(*astr) + ft_strlen(str) + 1) * sizeof(char));
-	i = 0;
-	while (i < index)
+	if (dst)
 	{
-		dst[i] = (*astr)[i];
-		i++;
+		ft_strncpy(dst, *astr, i);
+		ft_strncpy(dst + i, str, ft_strlen(str));
+		ft_strncpy(dst + i + ft_strlen(str), *astr + i, ft_strlen(*astr));
 	}
-	j = 0;
-	while (str[j])
-	{
-		dst[i + j] = str[j];
-		j++;
-	}
-	while ((*astr)[i])
-	{
-		dst[i + j] = (*astr)[i];
-		i++;
-	}
-	dst[i + j] = '\0';
 	free(*astr);
 	*astr = dst;
 }

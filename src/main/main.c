@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/05 14:34:26 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/05 16:12:16 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(void)
 
 	lst = NULL;
 	char	*str = strdup("bonjour");
-	str_insert(&str, "salut", ft_strlen(str));
+	str_insert(&str, "salut", 3);
 	printf("%s\n", str);
 	/*while (true)
 	{
