@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/05 17:54:23 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/05 18:47:04 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ bool	is_in_quote(char *str, char *quote, size_t index);
 void	str_n_cpy(char *dst, char *src, size_t len);
 
 /*str_alloc*/
-char	*ft_strndup(const char *str, size_t n);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*str_n_dup(char *str, size_t n);
 bool	str_append_buff(char **astr, char *buff, size_t size);
 void	str_n_insert(char **astr, char *str, size_t i, size_t n);
 

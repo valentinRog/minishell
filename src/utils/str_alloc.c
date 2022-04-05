@@ -6,26 +6,22 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 20:47:01 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/05 17:54:23 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/05 18:46:59 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_strndup(const char *str, size_t n)
+char	*str_n_dup(char *str, size_t n)
 {
 	char	*dst;
-	size_t	len;
 	size_t	i;
 
-	len = str_len(str);
-	if (n < len)
-		len = n;
-	dst = malloc((len + 1) * sizeof(char));
+	dst = malloc((min(str_len(str), n) + 1) * sizeof(char));
 	if (!dst)
 		return (NULL);
 	i = 0;
-	while (i < len)
+	while (str[i] && i < n)
 	{
 		dst[i] = str[i];
 		i++;
@@ -34,33 +30,7 @@ char	*ft_strndup(const char *str, size_t n)
 	return (dst);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char	*dst;
-	size_t	dst_len;
-	size_t	i;
-
-	if (!s)
-		return (NULL);
-	if (str_len(s) < start)
-		return (strdup(""));
-	dst_len = str_len(s + start);
-	if (len < dst_len)
-		dst_len = len;
-	dst = malloc((dst_len + 1) * sizeof(char));
-	if (!dst)
-		return (NULL);
-	i = 0;
-	while (i < dst_len)
-	{
-		dst[i] = s[start + i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (dst);
-}
-
-char	*str_dup1(void)
+char	*str_n_dup1(void)
 {
 	char	*dst;
 
