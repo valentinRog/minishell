@@ -6,20 +6,20 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 22:21:22 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/05 17:54:23 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/05 18:56:45 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	str_len(const char *str)
+size_t	str_len(char *str)
 {
 	if (str && *str)
 		return (1 + str_len(str + 1));
 	return (0);
 }
 
-bool	is_in_str(const char *str, char c)
+bool	is_in_str(char *str, char c)
 {
 	if (str && *str)
 	{
