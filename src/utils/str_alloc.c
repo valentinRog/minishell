@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 20:47:01 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/05 16:29:00 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/05 16:49:03 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,16 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		i++;
 	}
 	dst[i] = '\0';
+	return (dst);
+}
+
+char	*str_dup1(void)
+{
+	char	*dst;
+
+	dst = malloc(sizeof(char));
+	if (dst)
+		*dst = '\0';
 	return (dst);
 }
 
