@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 18:18:49 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/03 18:25:31 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/05 10:47:42 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,16 @@ void	print_lst(t_list *lst)
 		t_cmd *cmd = lst->content;
 		printf("\"exec_args\": ");
 		printf("[");
-		for (int j = 0; cmd->exec_args[j]; j++)
+		if (!cmd->exec_args)
+			printf("%p", NULL);
+		else
 		{
-			if (j)
-				printf(", ");
-			printf("%s", cmd->exec_args[j]);
+			for (int j = 0; cmd->exec_args[j]; j++)
+			{
+				if (j)
+					printf(", ");
+				printf("%s", cmd->exec_args[j]);
+			}
 		}
 		printf("]\n");
 		printf("\"infile\": %s\n", cmd->infile);

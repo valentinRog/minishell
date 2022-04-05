@@ -8,7 +8,7 @@ INCLUDES = includes
 
 OBJ = $(SRC:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = #-fsanitize=address
 
 LIB = -lreadline
 
@@ -17,7 +17,8 @@ CC = gcc
 $(RM) = rm -rf
 
 .c.o: $(SRC) $(SRCB)
-	$(CC) $(CFLAGS) -I $(INCLUDES) -c -o $@ $<
+	@printf "%-33.33s\r" $@
+	@$(CC) $(CFLAGS) -I $(INCLUDES) -c -o $@ $<
 
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIB)

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/03 21:03:18 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/05 14:34:26 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int	main(void)
 	t_list	*lst;
 
 	lst = NULL;
-	while (true)
+	char	*str = strdup("bonjour");
+	str_insert(&str, "salut", ft_strlen(str));
+	printf("%s\n", str);
+	/*while (true)
 	{
 		line = readline(PROMPT);
 		if (!line)
@@ -36,11 +39,14 @@ int	main(void)
 			//exit (EXIT_FAILURE);
 			printf("parsing error\n");
 		}
-		print_lst(lst);
-		free(line);
-		lst_clear(&lst, del_cmd);
+		else
+		{
+			print_lst(lst);
+			free(line);
+			lst_clear(&lst, del_cmd);
+		}
 		//execute(lst);
 	}
-	clear_history();
+	clear_history();*/
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 22:21:22 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/04 07:18:52 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/05 15:52:08 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,45 +30,3 @@ bool	is_in_str(char c, const char *str)
 	return (false);
 }
 
-static void	skip_quotes(char **ptr, char *quotes)
-{
-	char	quote;
-
-	if (is_in_str(**ptr, quotes))
-	{
-		quote = **ptr;
-		(*ptr)++;
-		while (**ptr)
-		{
-			if (**ptr == quote)
-			{
-				(*ptr)++;
-				break ;
-			}
-			(*ptr)++;
-		}
-	}
-}
-
-char	*ft_strstr(const char *haystack, const char *needle, char *quotes)
-{
-	size_t	i;
-	char	*ptr;
-
-	if (!haystack || !needle || !quotes)
-		return (NULL);
-	ptr = (char *)haystack;
-	if (*needle == '\0')
-		return (ptr);
-	while (*ptr)
-	{
-		skip_quotes(&ptr, quotes);
-		i = 0;
-		while (ptr[i] == needle[i] && ptr[i])
-			i++;
-		if (!needle[i])
-			return (ptr);
-		ptr++;
-	}
-	return (NULL);
-}

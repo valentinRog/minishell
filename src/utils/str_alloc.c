@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 20:47:01 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/03 17:45:11 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/05 14:37:33 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,42 +60,31 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (dst);
 }
 
-static void	copy_buff(char *dst, char **astr, char *buff, size_t size)
+void	str_insert(char **astr, char *str, size_t index)
 {
+	char	*dst;
 	size_t	i;
 	size_t	j;
 
+	dst = malloc((ft_strlen(*astr) + ft_strlen(str) + 1) * sizeof(char));
 	i = 0;
-	while ((*astr)[i])
+	while (i < index)
 	{
 		dst[i] = (*astr)[i];
 		i++;
 	}
 	j = 0;
-	while (j < size)
+	while (str[j])
 	{
-		dst[i + j] = buff[j];
+		dst[i + j] = str[j];
 		j++;
 	}
+	while ((*astr)[i])
+	{
+		dst[i + j] = (*astr)[i];
+		i++;
+	}
 	dst[i + j] = '\0';
-}
-
-bool	str_append_buff(char **astr, char *buff, size_t size)
-{
-	char	*dst;
-	bool	error;
-
-	error = false;
-	if (!astr || !buff || !size)
-		return (true);
-	if (!*astr)
-		*astr = strdup("");
-	dst = malloc((ft_strlen(*astr) + size + 1) * sizeof(char));
-	if (dst)
-		copy_buff(dst, astr, buff, size);
-	else
-		error = true;
 	free(*astr);
 	*astr = dst;
-	return (error);
 }

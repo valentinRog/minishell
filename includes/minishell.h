@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:40:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/01 00:14:36 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/04 13:34:39 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <time.h>
 
 # include <sys/wait.h>
+
+# include <errno.h>
 
 # include <stdbool.h>
 # include <inttypes.h>
