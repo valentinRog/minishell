@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/05 16:55:43 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/05 17:50:22 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	main(void)
 
 	lst = NULL;
 	char	*str = strdup("bonjour");
-	str_insert(&str, "salut", 3);
+	str_n_insert(&str, "salut", 3, 2);
 	printf("%s\n", str);
-	printf("%d\n", min(40, 5));
+	printf("%"PRId64"\n", min(40, 5));
 	/*while (true)
 	{
 		line = readline(PROMPT);

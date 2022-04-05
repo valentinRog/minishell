@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 20:47:01 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/05 16:49:03 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/05 17:54:23 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strndup(const char *str, size_t n)
 	size_t	len;
 	size_t	i;
 
-	len = ft_strlen(str);
+	len = str_len(str);
 	if (n < len)
 		len = n;
 	dst = malloc((len + 1) * sizeof(char));
@@ -42,9 +42,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
-	if (ft_strlen(s) < start)
+	if (str_len(s) < start)
 		return (strdup(""));
-	dst_len = ft_strlen(s + start);
+	dst_len = str_len(s + start);
 	if (len < dst_len)
 		dst_len = len;
 	dst = malloc((dst_len + 1) * sizeof(char));
@@ -70,16 +70,18 @@ char	*str_dup1(void)
 	return (dst);
 }
 
-void	str_insert(char **astr, char *str, size_t i)
+void	str_n_insert(char **astr, char *str, size_t i, size_t n)
 {
 	char	*dst;
 
-	dst = malloc((ft_strlen(*astr) + ft_strlen(str) + 1) * sizeof(char));
+	if (!astr || !*astr || !str)
+		return ;
+	dst = malloc((str_len(*astr) + str_len(str) + 1) * sizeof(char));
 	if (dst)
 	{
-		ft_strncpy(dst, *astr, i);
-		ft_strncpy(dst + i, str, ft_strlen(str));
-		ft_strncpy(dst + i + ft_strlen(str), *astr + i, ft_strlen(*astr));
+		str_n_cpy(dst, *astr, i);
+		str_n_cpy(dst + i, str, n);
+		str_n_cpy(dst + i + min(str_len(str), n), *astr + i, str_len(*astr));
 	}
 	free(*astr);
 	*astr = dst;
