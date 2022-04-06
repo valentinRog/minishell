@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/06 10:57:35 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/06 12:34:53 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,7 @@ int64_t	max(int64_t a, int64_t b);
 /*str_arr*/
 void	str_arr_add(char ***arr, char *str);
 void	str_arr_free(char **arr);
+
+char	*str_tok(char **astr, char *str, char **charsets, char *quotes);
 
 #endif

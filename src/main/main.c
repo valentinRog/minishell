@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/06 10:18:27 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/06 13:04:52 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,35 @@ int	main(void)
 	t_list	*lst;
 
 	lst = NULL;
-	char	*str = strdup("bonjour");
-	str_n_insert(&str, "salut", 3, 2);
-	printf("%s\n", str);
-	str_n_remove(&str, 4, 3);
-	printf("%s\n", str);
+	char	str[] = "| |  salut \"||\" a \"&& tous||   a \"&&";
+	char	*connectors[4] = {"|", "&&", "||", NULL};
+	char	*connector = str_tok(&line, str, connectors, QUOTES);
+	printf("%s\n", line);
+	printf("%s\n", connector);
+	connector = str_tok(&line, str, connectors, QUOTES);
+	printf("%s\n", line);
+	printf("%s\n", connector);
+	connector = str_tok(&line, str, connectors, QUOTES);
+	printf("%s\n", line);
+	printf("%s\n", connector);
+	connector = str_tok(&line, str, connectors, QUOTES);
+	printf("%s\n", line);
+	printf("%s\n", connector);
+	connector = str_tok(&line, str, connectors, QUOTES);
+	printf("%s\n", line);
+	printf("%s\n", connector);
+	connector = str_tok(&line, str, connectors, QUOTES);
+	printf("%s\n", line);
+	printf("%s\n", connector);
+	connector = str_tok(&line, str, connectors, QUOTES);
+	printf("%s\n", line);
+	printf("%s\n", connector);
+	connector = str_tok(&line, str, connectors, QUOTES);
+	printf("%s\n", line);
+	printf("%s\n", connector);
+	connector = str_tok(&line, str, connectors, QUOTES);
+	printf("%s\n", line);
+	printf("%s\n", connector);
 	/*while (true)
 	{
 		line = readline(PROMPT);
