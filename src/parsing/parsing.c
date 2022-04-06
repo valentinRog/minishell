@@ -6,15 +6,36 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/06 15:59:22 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/06 16:14:38 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	parse_cmd(t_cmd *cmd, char *cmd_line, char *con)
+{
+	printf("%s\n", cmd_line);
+}
+
 void	append_cmd(t_list **alst, char *cmd_line, char *con)
 {
-	
+	t_list	*new_node;
+	t_cmd	*cmd;
+
+	cmd = malloc(sizeof(t_cmd));
+	init_cmd(cmd);
+	parse_cmd(cmd, cmd_line, con);
+	new_node = lst_new(cmd);
+	if (!new_node || !cmd)
+	{
+		del_cmd(cmd);
+		if (new_node)
+			free(new_node);
+		lst_clear(alst, del_cmd);
+		free(con);
+		return ;
+	}
+	lst_add_back(alst, new_node);
 }
 
 static void	clear_parsing(t_list **alst, char **cons, char *con, char *cmd_line)
