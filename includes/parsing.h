@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/06 10:17:59 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/06 13:33:06 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,6 @@ typedef struct s_cmd
 
 /*parsing*/
 t_list	*get_parsed_lst(const char *line);
-
-/*z_index*/
-int		z_index(int op);
 
 /*new_cmd*/
 void	init_cmd(t_cmd *cmd);

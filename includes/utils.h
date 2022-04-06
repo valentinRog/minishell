@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/06 12:34:53 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/06 13:38:02 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,18 @@ void	lst_clear(t_list **lst, void (*del)(void*));
 /*get_next_line*/
 char	*get_next_line(int fd);
 
-/*get_next_word*/
+/*min_max*/
 int64_t	min(int64_t a, int64_t b);
 int64_t	max(int64_t a, int64_t b);
+
+/*split*/
+char	**split(char const *s, char c);
 
 /*str_arr*/
 void	str_arr_add(char ***arr, char *str);
 void	str_arr_free(char **arr);
 
+/*str_tok*/
 char	*str_tok(char **astr, char *str, char **charsets, char *quotes);
 
 #endif
