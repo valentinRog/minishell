@@ -1,39 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   str_manip.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/06 20:24:06 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/04/06 20:15:03 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/04/06 20:23:57 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(void)
+static void	swap(char *c1, char *c2)
 {
-	char	*line;
-	t_list	*lst;
+	char	c_temp;
 
-	lst = NULL;
-	while (true)
+	c_temp = *c1;
+	*c1 = *c2;
+	*c2 = c_temp;
+}
+
+void	str_reverse(char *str)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = str_len(str);
+	while (i < j && j > 0)
 	{
-		line = readline(PROMPT);
-		if (!line)
-		{
-			lst_clear(&lst, del_cmd);
-			clear_history();
-			exit (EXIT_FAILURE);
-		}
-		add_history(line);
-		parse_into_lst(&lst, line);
-		free(line);
-		//print_lst(lst);
-		lst_clear(&lst, del_cmd);
-		//execute(lst);
+		swap(str + i, str + j - 1);
+		i++;
+		j--;
 	}
-	clear_history();
-	return (0);
 }

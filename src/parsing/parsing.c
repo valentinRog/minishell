@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/06 16:18:01 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/06 19:44:49 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	parse_cmd(t_cmd *cmd, char *cmd_line, char *con)
 {
-	printf("%s\n", cmd_line);
+	cmd->connector = con;
 }
 
 void	append_cmd(t_list **alst, char *cmd_line, char *con)
