@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/05 18:56:54 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/06 09:46:41 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ void	str_n_cpy(char *dst, char *src, size_t len);
 
 /*str_alloc*/
 char	*str_n_dup(char *str, size_t n);
-bool	str_append_buff(char **astr, char *buff, size_t size);
+char	*str_n_dup1(void);
 void	str_n_insert(char **astr, char *str, size_t i, size_t n);
+void	str_n_remove(char **astr, size_t i, size_t n);
 
 /*lst*/
 int		lst_size(t_list *lst);
