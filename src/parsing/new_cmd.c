@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 09:57:45 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/01 04:58:18 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/06 10:57:12 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	del_cmd(void *args)
 	if (cmd)
 	{
 		if (cmd->exec_args)
-			free_split(cmd->exec_args);
+			str_arr_free(cmd->exec_args);
 		if (cmd->infile)
 			free(cmd->infile);
 		if (cmd->outfile)
