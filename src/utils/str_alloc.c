@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 20:47:01 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/06 09:59:10 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/06 10:02:51 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,12 @@ void	str_n_remove(char **astr, size_t i, size_t n)
 	size_t	shift;
 
 	shift = min(str_len((*astr) + i), n);
-	printf("shift = %zu\n", shift);
 	dst = malloc(((str_len(*astr) - shift) + 1) * sizeof(char));
-	str_n_cpy(dst, *astr, i);
-	str_n_cpy(dst + i, (*astr) + i + shift, str_len(*astr));
+	if (dst)
+	{
+		str_n_cpy(dst, *astr, i);
+		str_n_cpy(dst + i, (*astr) + i + shift, str_len(*astr));
+	}
 	free(*astr);
 	*astr = dst;
 }
