@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:22:29 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/06 15:49:53 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/07 18:08:04 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,30 @@ char	*str_tok(char **astr, char *str, char **cons, char *quotes)
 		ptr++;
 	}
 	*astr = str_n_dup(start, ptr - start);
+	return (NULL);
+}
+
+char	*str_tok_simple(char *str, char sep, char *quotes)
+{
+	static char	*ptr;
+	char		*start;
+	char		*dst;
+
+	if (!str || !ptr)
+		ptr = str;
+	if (!str)
+		return (NULL);
+	start = ptr;
+	while (*ptr)
+	{
+		if (!is_in_quote(str, quotes, ptr - str) && *ptr == sep)
+		{
+			ptr++;
+			return (str_n_dup(start, ptr - start - 1));
+		}
+		ptr++;
+	}
+	if (ptr - start)
+		return (str_n_dup(start, ptr - start));
 	return (NULL);
 }

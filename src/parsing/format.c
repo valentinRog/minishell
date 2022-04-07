@@ -1,39 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   format.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/07 18:12:08 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/04/07 18:23:01 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/04/07 18:23:24 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(void)
+void	format(char **astr)
 {
-	char	*line;
-	t_list	*lst;
-
-	lst = NULL;
-	while (true)
-	{
-		line = readline(PROMPT);
-		if (!line)
-		{
-			lst_clear(&lst, del_cmd);
-			clear_history();
-			exit (EXIT_FAILURE);
-		}
-		add_history(line);
-		parse_into_lst(&lst, line);
-		free(line);
-		print_lst(lst);
-		lst_clear(&lst, del_cmd);
-		//execute(lst);
-	}
-	clear_history();
-	return (0);
+	
 }

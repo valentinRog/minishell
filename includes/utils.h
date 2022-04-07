@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/06 20:19:19 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/07 17:57:37 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ void	str_arr_free(char **arr);
 
 /*str_tok*/
 char	*str_tok(char **astr, char *str, char **charsets, char *quotes);
+char	*str_tok_simple(char *str, char sep, char *quotes);
 
 #endif

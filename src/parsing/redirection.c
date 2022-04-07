@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/07 18:12:08 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/04/07 19:36:14 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/04/07 20:13:10 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(void)
+bool	redirection(t_cmd *cmd, char *arg)
 {
-	char	*line;
-	t_list	*lst;
-
-	lst = NULL;
-	while (true)
+	if (!str_n_cmp("<<", arg, str_len("<<")))
 	{
-		line = readline(PROMPT);
-		if (!line)
-		{
-			lst_clear(&lst, del_cmd);
-			clear_history();
-			exit (EXIT_FAILURE);
-		}
-		add_history(line);
-		parse_into_lst(&lst, line);
-		free(line);
-		print_lst(lst);
-		lst_clear(&lst, del_cmd);
-		//execute(lst);
+		if (str_len(arg) == str_len("<<"))
+			return (true);
+		if (cmd->limiter)
+			free(cmd->limiter);
+		cmd->limiter = str_n_dup(arg + str_len("<<"), str_len(arg) - str_len("<<"));
 	}
-	clear_history();
-	return (0);
+	return (false);
 }

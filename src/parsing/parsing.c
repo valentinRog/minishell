@@ -6,16 +6,11 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/06 19:44:49 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/07 20:09:12 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	parse_cmd(t_cmd *cmd, char *cmd_line, char *con)
-{
-	cmd->connector = con;
-}
 
 void	append_cmd(t_list **alst, char *cmd_line, char *con)
 {
@@ -24,19 +19,19 @@ void	append_cmd(t_list **alst, char *cmd_line, char *con)
 
 	cmd = malloc(sizeof(t_cmd));
 	init_cmd(cmd);
-	parse_cmd(cmd, cmd_line, con);
-	new_node = lst_new(cmd);
-	if (!new_node || !cmd)
+	if (!cmd || parse_cmd(cmd, cmd_line, con))
 	{
 		del_cmd(cmd);
-		if (new_node)
-			free(new_node);
-		lst_clear(alst, del_cmd);
-		if (!cmd)
-			free(con);
-		return ;
+		return lst_clear(alst, del_cmd);
 	}
-	lst_add_back(alst, new_node);
+	new_node = lst_new(cmd);
+	if (!new_node)
+	{
+		del_cmd(cmd);
+		return lst_clear(alst, del_cmd);
+	}
+	else
+		lst_add_back(alst, new_node);
 }
 
 static void	clear_parsing(t_list **alst, char **cons, char *con, char *cmd_line)
