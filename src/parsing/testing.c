@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 18:18:49 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/05 10:47:42 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/06 16:19:16 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	print_lst(t_list *lst)
 		printf("\"append\": %d\n", cmd->append);
 		printf("\"limiter\": %s\n", cmd->limiter);
 		printf("\"z_index\": %d\n", cmd->z_index);
-		printf("\"connector\": %d\n", cmd->connector);
+		printf("\"connector\": %s\n", cmd->connector);
 		lst = lst->next;
 		printf("--------------------\n");
 	}
