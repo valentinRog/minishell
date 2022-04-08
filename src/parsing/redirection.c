@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:36:14 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/08 17:52:47 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/08 19:18:12 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,30 @@ static char	*get_con(char *str)
 
 bool	redirection(t_cmd *cmd, char *arg)
 {
-	char	*str;
-	printf("%s\n", get_con(arg));
+	char	*con;
+
+	con = get_con(arg);
+	if (!con)
+		return (false);
+	if (strlen(con) == str_len(arg))
+		return (true);
+	if (!str_n_cmp(con, APPEND, str_len(APPEND)))
+	{
+		str_arr_add(&cmd->outfiles, str_n_dup(arg + str_len(con), str_len(arg)));
+		cmd->append = true;
+	}
+	else if (!str_n_cmp(con, HEREDOC, str_len(HEREDOC)))
+		str_arr_add(&cmd->limiters, str_n_dup(arg + str_len(con), str_len(arg)));
+	else if (!str_n_cmp(con, INFILE, str_len(INFILE)))
+	{
+		if (cmd->infile)
+			free(cmd->infile);
+		cmd->infile = str_n_dup(arg + str_len(con), str_len(arg));
+	}
+	else if (!str_n_cmp(con, OUTFILE, str_len(OUTFILE)))
+	{
+		str_arr_add(&cmd->outfiles, str_n_dup(arg + str_len(con), str_len(arg)));
+		cmd->append = false;
+	}
 	return (false);
 }
