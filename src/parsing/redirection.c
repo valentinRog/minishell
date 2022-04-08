@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:36:14 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/07 22:57:50 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/08 11:39:19 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,34 @@ bool	redirection(t_cmd *cmd, char *arg)
 	char	*str;
 
 	str = NULL;
-	if (get_file(&str, arg, "<<"))
+	if (get_file(&str, arg, "<"))
 		return (true);
 	if (str)
 	{
-		if (cmd->limiter)
-			free(cmd->limiter);
-		cmd->limiter = str;
+		if (cmd->infile)
+			free(cmd->infile);
+		cmd->infile = str;
 	}
+	str = NULL;
+	if (get_file(&str, arg, "<<"))
+		return (true);
+	if (str)
+		str_arr_add(&cmd->limiters, str);
+	str = NULL;
 	if (get_file(&str, arg, ">"))
 		return (true);
 	if (str)
+	{
 		str_arr_add(&cmd->outfiles, str);
+		cmd->append = false;
+	}
 	str = NULL;
 	if (get_file(&str, arg, ">>"))
 		return (true);
 	if (str)
-		str_arr_add(&cmd->append_files, str);
-	str = NULL;
-	if (get_file(&str, arg, "<"))
-		return (true);
-	if (str)
-		str_arr_add(&cmd->infiles, str);
+	{
+		str_arr_add(&cmd->outfiles, str);
+		cmd->append = true;
+	}
 	return (false);
 }
