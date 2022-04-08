@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/08 11:13:46 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/08 17:19:40 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,13 @@
 
 # include "minishell.h"
 
-enum
-{
-	INCREMENT,
-	DECREMENT,
-	RESET,
-	NONE
-};
-
 # define WHITESPACES " "
 # define QUOTES "\"\'"
-# define RESERVED "<>&|"
+
+# define INFILE "<"
+# define OUTFILE ">"
+# define APPEND ">>"
+# define HEREDOC "<<"
 
 typedef struct s_cmd
 {

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/08 13:26:56 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/08 13:33:18 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void	append_cmd(t_list **alst, char *cmd_line, char *con)
 		del_cmd(cmd);
 		return (lst_clear(alst, del_cmd));
 	}
-	else
-		lst_add_back(alst, new_node);
+	lst_add_back(alst, new_node);
 }
 
 static void	clear_parsing(t_list **alst, char **cons, char *con, char *cmd_line)

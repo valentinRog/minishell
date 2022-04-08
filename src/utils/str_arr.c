@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 10:52:18 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/07 22:49:38 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/08 16:25:19 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	str_arr_add(char ***arr, char *str)
 	char	**new_arr;
 	size_t	i;
 
+	if (!str)
+		return ;
 	if (!*arr)
 	{
 		*arr = malloc(sizeof(char *));
