@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:15:14 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/08 13:35:26 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/08 19:32:42 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static bool	cmd_parse_loop(t_cmd *cmd, char *cmd_line)
 	arg = str_tok_simple(cmd_line, ' ', QUOTES);
 	if (arg)
 	{
-		if (redirection(cmd, arg))
+		if (redirection(cmd, arg) || errno == ENOMEM)
 		{
 			str_tok_simple(NULL, '\0', NULL);
 			return (true);
