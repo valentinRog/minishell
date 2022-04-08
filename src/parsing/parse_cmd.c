@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:15:14 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/07 22:11:37 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/08 13:26:26 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static bool	cmd_parse_loop(t_cmd *cmd, char *cmd_line)
 		return (cmd_parse_loop(cmd, cmd_line));
 	}
 	str_tok_simple(NULL, '\0', NULL);
+	return (false);
 }
 
 bool	parse_cmd(t_cmd *cmd, char *cmd_line, char *con)
@@ -48,6 +49,6 @@ bool	parse_cmd(t_cmd *cmd, char *cmd_line, char *con)
 			return (true);
 		}
 		free(cmd_line_cpy);
-		return (false);
 	}
+	return (false);
 }

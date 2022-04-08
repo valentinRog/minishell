@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/07 20:09:12 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/08 13:26:56 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	append_cmd(t_list **alst, char *cmd_line, char *con)
 	if (!cmd || parse_cmd(cmd, cmd_line, con))
 	{
 		del_cmd(cmd);
-		return lst_clear(alst, del_cmd);
+		return (lst_clear(alst, del_cmd));
 	}
 	new_node = lst_new(cmd);
 	if (!new_node)
 	{
 		del_cmd(cmd);
-		return lst_clear(alst, del_cmd);
+		return (lst_clear(alst, del_cmd));
 	}
 	else
 		lst_add_back(alst, new_node);
