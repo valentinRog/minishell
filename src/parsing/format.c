@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 18:23:01 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/11 18:10:28 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/11 18:53:29 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	format_space(char **astr)
 	while (*ptr)
 	{
 		n = 0;
-		while (is_in_str(WHITESPACES, *(ptr + n)))
+		while (is_in_str(WHITESPACES, *(ptr + n)) && !is_in_quote(*astr, QUOTES, ptr - *astr))
 			n++;
 		if (n > 1)
 		{
