@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/11 09:55:46 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/11 16:17:19 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # define WHITESPACES " "
 # define QUOTES "\"\'"
+# define RESERVED "<>"
 
 # define INFILE "<"
 # define OUTFILE ">"
@@ -46,6 +47,9 @@ void	parse_cmd(t_cmd *cmd, char *cmd_line, char *con);
 
 /*redirection*/
 void	redirection(t_cmd *cmd, char *arg);
+
+/*check*/
+bool	check(char *str);
 
 /*format*/
 void	format(char **astr);

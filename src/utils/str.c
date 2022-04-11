@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 22:21:22 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/06 10:57:58 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/11 17:47:43 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,23 @@ int	str_n_cmp(const char *s1, const char *s2, size_t n)
 	while (i < n - 1 && s1[i] == s2[i] && s1[i] && s2[i])
 		i++;
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+int	str_cmp(const char *s1, const char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	while (s1[i] == s2[i] && s1[i] && s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	if (!n)
+		return (NULL);
+	if (*((unsigned char *) s) == (unsigned char) c)
+		return ((void *) s);
+	return (ft_memchr(s + 1, c, n - 1));
 }

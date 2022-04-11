@@ -1,4 +1,4 @@
-NAME = minishell
+ NAME = minishell
 
 SRC = $(wildcard src/main/*.c)\
       $(wildcard src/parsing/*.c)\

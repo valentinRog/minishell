@@ -6,13 +6,13 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/11 10:01:30 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/11 17:31:11 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	append_cmd(t_list **alst, char *cmd_line, char *con)
+static void	append_cmd(t_list **alst, char *cmd_line, char *con)
 {
 	t_list	*new_node;
 	t_cmd	*cmd;
@@ -59,6 +59,7 @@ void	parse_into_lst(t_list **alst, char *line)
 	if (!cons)
 		return (clear_parsing(alst, cons, con, cmd_line));
 	con = str_tok(&cmd_line, line, cons, QUOTES);
+	format(&cmd_line);
 	if (!cmd_line)
 		return (clear_parsing(alst, cons, con, cmd_line));
 	append_cmd(alst, cmd_line, con);

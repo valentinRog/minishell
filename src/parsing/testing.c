@@ -6,52 +6,57 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 09:49:33 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/08 11:30:27 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/11 13:58:39 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	print_tab(char *str, char **tab)
+static void	print_tab(char **arr)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	if (str)
-		printf("%s", str);
-	if (tab)
+	if (arr)
 	{
-		while (tab[i])
+		printf("[");
+		while (arr[i])
 		{
-			printf("  %s\n", tab[i]);
+			if (i)
+				printf(", ");
+			printf("\"%s\"", arr[i]);
 			i++;
 		}
+		printf("]\n");
 	}
 	else
-		printf("  Empty array\n");
-	return (0);
+		printf("%s\n", NULL);
 }
 
 void	print_lst(t_list *lst)
 {
 	t_cmd	*cmd;
 
-	if (!lst)
-		return ;
-	printf("\n");
-	cmd = lst->content;
-	print_tab("Exec_args :\n", cmd->exec_args);
-	if (cmd->infile)
-		printf("Infile : %s\n", cmd->infile);
-	print_tab("Outfiles :\n", cmd->outfiles);
-	if (cmd->append == true)
-		printf("Append : TRUE\n");
-	else if (cmd->append == false)
-		printf("Append : FALSE\n");
-	print_tab("limiters :\n", cmd->limiters);
-	if (cmd->connector)
-		printf("Connector : %s\n", cmd->connector);
-	printf("Z_index : %d\n", cmd->z_index);
-	if (lst->next)
+	if (lst)
+	{
+		cmd = (t_cmd *)lst->content;
+		if (!lst->prev)
+			printf("---------------------------------\n");
+		printf("\"exec_args\" : ");
+		print_tab(cmd->exec_args);
+		printf("\"infile\" : ");
+		printf("%s\n", cmd->infile);
+		printf("\"outfiles\" : ");
+		print_tab(cmd->outfiles);
+		if (cmd->append)
+			printf("\"append\" : true\n");
+		else
+			printf("\"append\" : false\n");
+		printf("\"limiters\" : ");
+		print_tab(cmd->limiters);
+		printf("\"connector\" : ");
+		printf("%s\n", cmd->connector);
+		printf("\n");
 		print_lst(lst->next);
+	}
 }
