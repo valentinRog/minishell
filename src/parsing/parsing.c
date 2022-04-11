@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/08 13:33:18 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/11 10:01:30 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	append_cmd(t_list **alst, char *cmd_line, char *con)
 
 	cmd = malloc(sizeof(t_cmd));
 	init_cmd(cmd);
-	if (!cmd || parse_cmd(cmd, cmd_line, con))
+	parse_cmd(cmd, cmd_line, con);
+	if (errno == ENOMEM)
 	{
 		del_cmd(cmd);
 		return (lst_clear(alst, del_cmd));
