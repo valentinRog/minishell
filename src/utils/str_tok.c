@@ -6,13 +6,13 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 12:22:29 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/07 18:08:04 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/12 09:13:00 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static size_t	con_len(char *str, size_t i, char **cons, char *quotes)
+size_t	con_len(char *str, size_t i, char **cons, char *quotes)
 {
 	while (*cons)
 	{
