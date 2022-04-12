@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 18:23:01 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/12 17:06:16 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/12 17:29:47 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ void	format_redirection(char **astr)
 {
 	char	*ptr;
 	size_t	len;
+	char	**seps;
 
-	ptr = *astr;
 	while (*ptr)
 	{
-		len = con_len(*astr, ptr - *astr, split("<<:>>:>:<", ':'), QUOTES);
+		seps = split("<<:>>:>:<", ':');
+		len = con_len(*astr, ptr - *astr, seps, QUOTES);
+		str_arr_free(seps);
 		if (len)
 		{
 			if (ptr - 1 >= *astr && !is_in_str(WHITESPACES, *(ptr - 1)))
@@ -36,7 +38,7 @@ void	format_redirection(char **astr)
 			}
 		}
 		ptr++;
-	}	
+	}
 }
 
 void	format_space(char **astr)
@@ -49,23 +51,28 @@ void	format_space(char **astr)
 	while (*ptr)
 	{
 		n = 0;
-		while (is_in_str(WHITESPACES, *(ptr + n)) && !is_in_quote(*astr, QUOTES, ptr - *astr))
+		while (is_in_str(WHITESPACES, ptr[n])
+			&& !is_in_quote(*astr, QUOTES, ptr - *astr))
 			n++;
 		if (ptr == *astr && *ptr == ' ')
 			n++;
 		if (n > 1)
 		{
 			str_n_remove(astr, ptr - *astr, n - 1);
-			return format_space(astr);
+			return (format_space(astr));
 		}
 		ptr++;
-	}	
+	}
 }
 
 void	format(char **astr)
 {
 	format_space(astr);
-	//format_redictions(astr);
 	format_redirection(astr);
+	if (errno == ENOMEM)
+	{
+		free(*astr);
+		*astr = NULL;
+	}
 	printf("%s\n", *astr);
 }
