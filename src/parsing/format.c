@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 18:23:01 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/12 17:29:47 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/12 18:41:58 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	format_redirection(char **astr)
 	size_t	len;
 	char	**seps;
 
+	seps = split("<<:>>:>:<", ':');
+	ptr = (*astr);
 	while (*ptr)
 	{
-		seps = split("<<:>>:>:<", ':');
 		len = con_len(*astr, ptr - *astr, seps, QUOTES);
-		str_arr_free(seps);
 		if (len)
 		{
-			if (ptr - 1 >= *astr && !is_in_str(WHITESPACES, *(ptr - 1)))
+			if (ptr > *astr && !is_in_str(WHITESPACES, *(ptr - 1)))
 			{
 				str_n_insert(astr, " ", (ptr) - *astr, 1);
 				return (format_redirection(astr));
@@ -39,6 +39,7 @@ void	format_redirection(char **astr)
 		}
 		ptr++;
 	}
+	str_arr_free(seps);
 }
 
 void	format_space(char **astr)
@@ -47,14 +48,11 @@ void	format_space(char **astr)
 	size_t	n;
 
 	ptr = *astr;
-	n = 0;
 	while (*ptr)
 	{
 		n = 0;
 		while (is_in_str(WHITESPACES, ptr[n])
 			&& !is_in_quote(*astr, QUOTES, ptr - *astr))
-			n++;
-		if (ptr == *astr && *ptr == ' ')
 			n++;
 		if (n > 1)
 		{
@@ -63,6 +61,14 @@ void	format_space(char **astr)
 		}
 		ptr++;
 	}
+}
+
+void	format_parenthesis(char **astr)
+{
+	char	*ptr;
+
+	if (is_in_str(WHITESPACES, **astr))
+		str_n_remove(astr, 0, 1);
 }
 
 void	format(char **astr)
