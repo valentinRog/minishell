@@ -5,76 +5,54 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 12:22:29 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/12 09:13:00 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/04/13 10:59:23 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/04/13 15:11:48 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	con_len(char *str, size_t i, char **cons, char *quotes)
+static char	*get_con(char *str, size_t i, t_tok *tok)
 {
-	while (*cons)
-	{
-		if (!is_in_quote(str, quotes, i))
-		{
-			if (!str_n_cmp(str + i, *cons, str_len(*cons)))
-				return (str_len(*cons));
-		}
-		cons++;
-	}
-	return (0);
-}
+	char	**seps;
 
-char	*str_tok(char **astr, char *str, char **cons, char *quotes)
-{
-	static char	*ptr;
-	char		*start;
-	size_t		len;
-
-	if (!str || !ptr)
-		ptr = str;
-	if (!astr || !str || !cons)
-		return (NULL);
-	start = ptr;
-	while (*ptr)
+	seps = tok->seps;
+	while (seps && *seps)
 	{
-		len = con_len(str, ptr - str, cons, quotes);
-		if (len)
+		if (!in_quote(str, tok->quotes, i))
 		{
-			*astr = str_n_dup(start, ptr - start);
-			ptr += len;
-			if (!*astr)
-				return (NULL);
-			return (str_n_dup(ptr - len, len));
+			if (!str_n_cmp(str + i, *seps, str_len(*seps)))
+				return (*seps);
 		}
-		ptr++;
+		seps++;
 	}
-	*astr = str_n_dup(start, ptr - start);
 	return (NULL);
 }
 
-char	*str_tok_simple(char *str, char sep, char *quotes)
+char	*str_tok(char **astr, char *src, t_tok *tok)
 {
 	static char	*ptr;
 	char		*start;
-	char		*dst;
 
-	if (!str || !ptr)
-		ptr = str;
-	if (!str)
+	if (!src || !ptr || !tok)
+		ptr = src;
+	if (!tok || !src)
 		return (NULL);
+	while (in_str(tok->spaces, *ptr) && !in_quote(src, tok->quotes, ptr - src))
+		ptr++;
+	if (!*ptr)
+		return (NULL);
+	if (astr)
+		*astr = get_con(src, ptr - src, tok);
+	ptr += str_len(get_con(src, ptr - src, tok));
+	while (in_str(tok->spaces, *ptr) && !in_quote(src, tok->quotes, ptr - src))
+		ptr++;
 	start = ptr;
-	while (*ptr)
-	{
-		if (!is_in_quote(str, quotes, ptr - str) && *ptr == sep)
-		{
+	while
+	(
+		*ptr && !get_con(src, ptr - src, tok)
+		&& (!in_str(SPACES, *ptr) || in_quote(src, tok->quotes, ptr - src))
+	)
 			ptr++;
-			return (str_n_dup(start, ptr - start - 1));
-		}
-		ptr++;
-	}
-	if (ptr - start)
-		return (str_n_dup(start, ptr - start));
-	return (NULL);
+	return (str_n_dup(start, ptr - start));
 }

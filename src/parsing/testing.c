@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 09:49:33 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/11 13:58:39 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/13 15:21:13 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	print_tab(char **arr)
 		printf("]\n");
 	}
 	else
-		printf("%s\n", NULL);
+		printf("(null)\n");
 }
 
 void	print_lst(t_list *lst)

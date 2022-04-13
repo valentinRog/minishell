@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/07 22:54:29 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/13 15:13:47 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	main(void)
 	t_list	*lst;
 
 	lst = NULL;
-	
 	while (true)
 	{
 		line = readline(PROMPT);
@@ -33,7 +32,6 @@ int	main(void)
 		free(line);
 		print_lst(lst);
 		lst_clear(&lst, del_cmd);
-		//execute(lst);
 	}
 	clear_history();
 	return (0);

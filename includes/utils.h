@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/11 17:48:18 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/13 15:20:25 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,28 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+typedef struct s_tok
+{
+	char	**seps;
+	char	*quotes;
+	char	*spaces;
+}	t_tok;
+
 /*str*/
 size_t	str_len(char *str);
-bool	is_in_str(char *str, char c);
-bool	is_in_quote(char *str, char *quote, size_t index);
 void	str_n_cpy(char *dst, char *src, size_t len);
 int		str_n_cmp(const char *s1, const char *s2, size_t n);
 int		str_cmp(const char *s1, const char *s2);
-void	*ft_memchr(const void *s, int c, size_t n);
+
+/*in*/
+bool	in_str(char *str, char c);
+bool	in_quote(char *str, char *quote, size_t index);
 
 /*str_alloc*/
 char	*str_n_dup(char *str, size_t n);
 char	*str_n_dup1(void);
 void	str_n_insert(char **astr, char *str, size_t i, size_t n);
 void	str_n_remove(char **astr, size_t i, size_t n);
-
-/*str_manip*/
-void	str_reverse(char *str);
 
 /*lst*/
 int		lst_size(t_list *lst);
@@ -65,7 +70,6 @@ void	str_arr_add(char ***arr, char *str);
 void	str_arr_free(char **arr);
 
 /*str_tok*/
-char	*str_tok(char **astr, char *str, char **charsets, char *quotes);
-char	*str_tok_simple(char *str, char sep, char *quotes);
+char	*str_tok(char **astr, char *src, t_tok *tok);
 
 #endif

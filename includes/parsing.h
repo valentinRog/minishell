@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/12 09:13:16 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/13 15:15:48 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,8 @@
 
 # include "minishell.h"
 
-# define WHITESPACES " "
+# define SPACES " "
 # define QUOTES "\"\'"
-# define RESERVED "<>"
-
-# define INFILE "<"
-# define OUTFILE ">"
-# define APPEND ">>"
-# define HEREDOC "<<"
 
 typedef struct s_cmd
 {
@@ -40,20 +34,7 @@ void	parse_into_lst(t_list **alst, char *line);
 
 /*new_cmd*/
 void	init_cmd(t_cmd *cmd);
-void	del_cmd(void *cmd);
-
-/*parse_cmd*/
-void	parse_cmd(t_cmd *cmd, char *cmd_line, char *con);
-
-/*redirection*/
-void	redirection(t_cmd *cmd, char *arg);
-size_t	con_len(char *str, size_t i, char **cons, char *quotes);
-
-/*check*/
-bool	check(char *str);
-
-/*format*/
-void	format(char **astr);
+void	del_cmd(void *args);
 
 //TEST
 void	print_lst(t_list *lst);
