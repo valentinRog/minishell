@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/13 20:01:09 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/13 22:37:39 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		get_con(char *sep);
 
 /*new_cmd*/
 void	init_cmd(t_cmd *cmd);
-t_cmd	*new_cmd(void);
+t_cmd	*new_cmd(t_cmd **dst);
 void	del_cmd(void *args);
 
 //TEST

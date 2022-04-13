@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:15:02 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/13 20:00:36 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/13 22:35:32 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@ void	init_cmd(t_cmd *cmd)
 	}
 }
 
-t_cmd	*new_cmd(void)
+t_cmd	*new_cmd(t_cmd **dst)
 {
 	t_cmd	*cmd;
 
 	cmd = malloc(sizeof(t_cmd));
 	init_cmd(cmd);
+	if (dst)
+		*dst = cmd;
 	return (cmd);
 }
 
