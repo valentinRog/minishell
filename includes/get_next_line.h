@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/13 15:45:22 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/04/09 12:10:38 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/04/13 15:45:29 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-int	main(void)
-{
-	char	*line;
-	t_list	*lst;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 64
+# endif
 
-	lst = NULL;
-	while (true)
-	{
-		line = readline(PROMPT);
-		if (!line)
-		{
-			lst_clear(&lst, del_cmd);
-			clear_history();
-			exit (EXIT_FAILURE);
-		}
-		add_history(line);
-		parse_into_lst(&lst, line);
-		free(line);
-		print_lst(lst);
-		lst_clear(&lst, del_cmd);
-	}
-	clear_history();
-	return (0);
-}
+/*get_next_line*/
+char	*get_next_line(int fd);
+
+#endif

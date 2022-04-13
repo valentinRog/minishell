@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   in.c                                               :+:      :+:    :+:   */
+/*   str_find.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:19:29 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/13 15:21:29 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/13 15:45:39 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,13 @@ bool	in_quote(char *str, char *quotes, size_t index)
 	if (quote)
 		return (true);
 	return (false);
+}
+
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	if (!n)
+		return (NULL);
+	if (*((unsigned char *) s) == (unsigned char) c)
+		return ((void *) s);
+	return (ft_memchr(s + 1, c, n - 1));
 }

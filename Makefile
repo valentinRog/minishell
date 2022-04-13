@@ -2,7 +2,8 @@
 
 SRC = $(wildcard src/main/*.c)\
       $(wildcard src/parsing/*.c)\
-      $(wildcard src/utils/*.c)
+      $(wildcard src/utils/*.c)\
+	  $(wildcard src/get_next_line/*.c)
 
 INCLUDES = includes
 

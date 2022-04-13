@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/13 15:20:25 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/13 15:44:50 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ void	str_n_cpy(char *dst, char *src, size_t len);
 int		str_n_cmp(const char *s1, const char *s2, size_t n);
 int		str_cmp(const char *s1, const char *s2);
 
-/*in*/
+/*str_find*/
 bool	in_str(char *str, char c);
 bool	in_quote(char *str, char *quote, size_t index);
+void	*ft_memchr(const void *s, int c, size_t n);
 
 /*str_alloc*/
 char	*str_n_dup(char *str, size_t n);
