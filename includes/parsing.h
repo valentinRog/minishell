@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/13 15:15:48 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/13 20:01:09 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 # define SPACES " "
 # define QUOTES "\"\'"
 
+enum
+{
+	NONE,
+	PIPE,
+	AND,
+	OR
+};
+
 typedef struct s_cmd
 {
 	char	**exec_args;
@@ -25,15 +33,19 @@ typedef struct s_cmd
 	char	**outfiles;
 	bool	append;
 	char	**limiters;
-	char	*connector;
+	int		con;
 	int		z_index;
 }	t_cmd;
 
 /*parsing*/
-void	parse_into_lst(t_list **alst, char *line);
+t_list	*get_parsed_lst(char *line);
+
+/*connector*/
+int		get_con(char *sep);
 
 /*new_cmd*/
 void	init_cmd(t_cmd *cmd);
+t_cmd	*new_cmd(void);
 void	del_cmd(void *args);
 
 //TEST

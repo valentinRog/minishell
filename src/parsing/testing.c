@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 09:49:33 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/13 15:21:13 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/13 20:00:36 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ void	print_lst(t_list *lst)
 		printf("\"exec_args\" : ");
 		print_tab(cmd->exec_args);
 		printf("\"infile\" : ");
-		printf("%s\n", cmd->infile);
+		if (cmd->infile)
+			printf("%s\n", cmd->infile);
+		else
+			printf("(null)\n");
 		printf("\"outfiles\" : ");
 		print_tab(cmd->outfiles);
 		if (cmd->append)
@@ -54,8 +57,8 @@ void	print_lst(t_list *lst)
 			printf("\"append\" : false\n");
 		printf("\"limiters\" : ");
 		print_tab(cmd->limiters);
-		printf("\"connector\" : ");
-		printf("%s\n", cmd->connector);
+		printf("\"con\" : ");
+		printf("%d\n", cmd->con);
 		printf("\n");
 		print_lst(lst->next);
 	}
