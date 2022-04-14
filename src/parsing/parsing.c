@@ -6,23 +6,11 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/14 07:20:04 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/14 14:46:33 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	parse_con(t_cmd *cmd, char *arg, char *con)
-{
-	cmd->con = get_con(con);
-}
-
-bool	parse_arg(t_cmd *cmd, char *arg, char *con)
-{
-	if (!arg)
-		return (true);
-	return (false);
-}
 
 static void	clear_parsing(t_list **alst, char *arg, char *con)
 {
@@ -53,6 +41,14 @@ static t_cmd	*add_new_cmd(t_list **alst)
 	return (cmd);
 }
 
+static void	parsing_error(char *line, char *arg, char *con, t_tok *tok)
+{
+	char	*new_con;
+
+	arg = str_tok(&new_con, line, tok);
+	printf("syntax error near unexpected token `%s'\n", new_con);
+}
+
 static void	parse_into_lst(t_list **alst, char *line, t_tok *tok)
 {
 	t_cmd	*cmd;
@@ -60,9 +56,7 @@ static void	parse_into_lst(t_list **alst, char *line, t_tok *tok)
 	char	*con;
 
 	cmd = add_new_cmd(alst);
-	if (!cmd)
-		return ;
-	while (true)
+	while (cmd)
 	{
 		arg = str_tok(&con, line, tok);
 		if (get_con(con))
@@ -74,7 +68,11 @@ static void	parse_into_lst(t_list **alst, char *line, t_tok *tok)
 		}
 		if (!arg)
 			break ;
-		parse_arg(cmd, arg, con);
+		if (parse_arg(cmd, arg, con))
+		{
+			parsing_error(line, arg, con, tok);
+			return (clear_parsing(alst, NULL, NULL));
+		}
 		free(arg);
 	}
 	str_tok(NULL, NULL, NULL);
