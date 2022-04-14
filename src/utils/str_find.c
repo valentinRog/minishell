@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:19:29 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/13 15:45:39 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/14 18:42:50 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,20 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	if (*((unsigned char *) s) == (unsigned char) c)
 		return ((void *) s);
 	return (ft_memchr(s + 1, c, n - 1));
+}
+
+bool	is_tok(char *str, char *tokens, char sep)
+{
+	char	*ptr;
+
+	if (!tokens || !str)
+		return (false);
+	ptr = tokens;
+	while (*ptr && *ptr != sep)
+		ptr++;
+	if (!str_n_cmp(str, tokens, ptr - tokens))
+		return (true);
+	if (*ptr)
+		return (is_tok(str, ptr, sep));
+	return (false);
 }

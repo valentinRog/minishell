@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/14 16:48:13 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/14 18:30:24 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int		str_cmp(const char *s1, const char *s2);
 bool	in_str(char *str, char c);
 bool	in_quote(char *str, char *quote, size_t index);
 void	*ft_memchr(const void *s, int c, size_t n);
+bool	is_tok(char *str, char *tokens, char sep);
 
 /*str_alloc*/
 char	*str_n_dup(char *str, size_t n);
