@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/14 07:18:10 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/14 07:20:04 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	parse_into_lst(t_list **alst, char *line, t_tok *tok)
 
 	cmd = add_new_cmd(alst);
 	if (!cmd)
-		return (lst_clear(alst, del_cmd));
+		return ;
 	while (true)
 	{
 		arg = str_tok(&con, line, tok);
