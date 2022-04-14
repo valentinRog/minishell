@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/14 18:39:01 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/14 22:49:14 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ static void	parsing_error(char *line, char *arg, char *con, t_tok *tok)
 
 	if (errno == ENOMEM)
 		perror("");
+	else if (!con)
+		printf("syntax error near unexpected token `new line'\n");
 	else if (is_tok(con, "(:)", ':'))
-		printf("syntax error near unexpected token `%c'\n", *con);
+		printf("syntax error near unexpected token `%s'\n", con);
 	else
 	{
 		arg = str_tok(&new_con, line, tok);

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 09:49:33 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/14 09:35:48 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/14 19:05:42 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	print_lst(t_list *lst)
 		print_tab(cmd->exec_args);
 		printf("\"infile\" : ");
 		if (cmd->infile)
-			printf("%s\n", cmd->infile);
+			printf("\"%s\"\n", cmd->infile);
 		else
 			printf("(null)\n");
 		printf("\"outfiles\" : ");
