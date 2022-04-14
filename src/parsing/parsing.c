@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/14 14:46:33 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/14 17:02:05 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ static void	parsing_error(char *line, char *arg, char *con, t_tok *tok)
 {
 	char	*new_con;
 
-	arg = str_tok(&new_con, line, tok);
-	printf("syntax error near unexpected token `%s'\n", new_con);
+	if (errno != ENOMEM)
+	{
+		arg = str_tok(&new_con, line, tok);
+		printf("syntax error near unexpected token `%s'\n", new_con);
+	}
 }
 
 static void	parse_into_lst(t_list **alst, char *line, t_tok *tok)
@@ -71,7 +74,7 @@ static void	parse_into_lst(t_list **alst, char *line, t_tok *tok)
 		if (parse_arg(cmd, arg, con))
 		{
 			parsing_error(line, arg, con, tok);
-			return (clear_parsing(alst, NULL, NULL));
+			return (clear_parsing(alst, arg, con));
 		}
 		free(arg);
 	}
