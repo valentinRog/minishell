@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/14 17:02:05 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/14 18:09:18 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ static void	parsing_error(char *line, char *arg, char *con, t_tok *tok)
 {
 	char	*new_con;
 
-	if (errno != ENOMEM)
+	if (errno == ENOMEM)
+		perror("");
+	else if (in_str_arr(con, split("(:)", ':')))
+		printf("syntax error near unexpected token `%c'\n", *con);
+	else
 	{
 		arg = str_tok(&new_con, line, tok);
 		printf("syntax error near unexpected token `%s'\n", new_con);
@@ -74,7 +78,7 @@ static void	parse_into_lst(t_list **alst, char *line, t_tok *tok)
 		if (parse_arg(cmd, arg, con))
 		{
 			parsing_error(line, arg, con, tok);
-			return (clear_parsing(alst, arg, con));
+			return (clear_parsing(alst, NULL, NULL));
 		}
 		free(arg);
 	}
@@ -87,7 +91,7 @@ t_list	*get_parsed_lst(char *line)
 	t_tok	tok;
 
 	lst = NULL;
-	tok.seps = split(">>:<<:<:>:&&:||:|", ':');
+	tok.seps = split(">>:<<:<:>:&&:||:|:(:)", ':');
 	if (!tok.seps)
 		return (NULL);
 	tok.quotes = QUOTES;
