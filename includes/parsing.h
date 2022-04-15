@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/14 10:44:30 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/15 04:38:20 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ enum
 
 typedef struct s_cmd
 {
-	char	**exec_args;
+	t_list	*args;
 	char	*infile;
-	char	**outfiles;
+	t_list	*outfiles;
 	bool	append;
-	char	**limiters;
+	t_list	*limiters;
 	int		con;
 	int		z_index;
 }	t_cmd;

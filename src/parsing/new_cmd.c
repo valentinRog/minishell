@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:15:02 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/13 22:35:32 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/15 04:46:21 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_cmd(t_cmd *cmd)
 {
 	if (cmd)
 	{
-		cmd->exec_args = NULL;
+		cmd->args = NULL;
 		cmd->infile = NULL;
 		cmd->outfiles = NULL;
 		cmd->append = false;
@@ -44,11 +44,11 @@ void	del_cmd(void *args)
 	cmd = (t_cmd *) args;
 	if (cmd)
 	{
-		str_arr_free(cmd->exec_args);
+		lst_clear(&cmd->args, free);
 		if (cmd->infile)
 			free(cmd->infile);
-		str_arr_free(cmd->outfiles);
-		str_arr_free(cmd->limiters);
+		lst_clear(&cmd->outfiles, free);
+		lst_clear(&cmd->limiters, free);
 		free(cmd);
 	}
 }

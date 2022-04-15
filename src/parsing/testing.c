@@ -6,26 +6,23 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 09:49:33 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/14 19:05:42 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/15 04:41:32 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	print_tab(char **arr)
+static void	print_tab(t_list *lst)
 {
-	size_t	i;
-
-	i = 0;
-	if (arr)
+	if (lst)
 	{
 		printf("[");
-		while (arr[i])
+		while (lst)
 		{
-			if (i)
+			if (lst->prev)
 				printf(", ");
-			printf("\"%s\"", arr[i]);
-			i++;
+			printf("\"%s\"", (char *)lst->content);
+			lst = lst->next;
 		}
 		printf("]\n");
 	}
@@ -43,7 +40,7 @@ void	print_lst(t_list *lst)
 		if (!lst->prev)
 			printf("---------------------------------\n");
 		printf("\"exec_args\" : ");
-		print_tab(cmd->exec_args);
+		print_tab(cmd->args);
 		printf("\"infile\" : ");
 		if (cmd->infile)
 			printf("\"%s\"\n", cmd->infile);

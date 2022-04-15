@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 10:43:41 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/15 03:07:26 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/15 04:44:23 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ bool	redirection(t_cmd *cmd, char *arg, char *con)
 	if (!*arg)
 		return (true);
 	if (!str_cmp("<<", con))
-		str_arr_add(&cmd->limiters, strdup(arg));
+		lst_add_back(&cmd->limiters, lst_new(strdup(arg)));
 	else if (!str_cmp(">>", con))
 	{
-		str_arr_add(&cmd->outfiles, strdup(arg));
+		lst_add_back(&cmd->outfiles, lst_new(strdup(arg)));
 		cmd->append = true;
 	}
 	else if (!str_cmp("<", con))
 		cmd->infile = strdup(arg);
 	else if (!str_cmp(">", con))
 	{
-		str_arr_add(&cmd->outfiles, strdup(arg));
+		lst_add_back(&cmd->outfiles, lst_new(strdup(arg)));
 		cmd->append = false;
 	}
 	return (false);
