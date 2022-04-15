@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 10:43:41 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/15 11:58:26 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/15 14:32:33 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,13 @@ bool	redirection(t_cmd *cmd, char *arg, char *con)
 	return (false);
 }
 
-bool	parenthesis(t_cmd *cmd, char *arg, char *con)
-{
-	if (!str_cmp("(", con))
-	{
-		if (cmd->args || cmd->limiters || cmd->outfiles || cmd->infile)
-			return (true);
-		if (*arg)
-			lst_add_back(&cmd->args, lst_new(str_n_dup(arg, str_len(arg))));
-	}
-	else if (!str_cmp(")", con))
-	{
-		if (arg && *arg)
-			return (true);
-	}
-	return (false);
-}
-
 bool	parse_arg(t_cmd *cmd, char *arg, char *con)
 {
 	if (is_tok(con, "<<:>>:<:>", ':'))
 		return (redirection(cmd, arg, con));
 	if (parenthesis(cmd, arg, con))
 		return (true);
-	lst_add_back(&cmd->args, lst_new(str_n_dup(arg, str_len(arg))));
+	if (*arg)
+		lst_add_back(&cmd->args, lst_new(str_n_dup(arg, str_len(arg))));
 	return (false);
 }

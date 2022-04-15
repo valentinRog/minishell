@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/15 03:05:27 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/15 14:48:17 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	clear_parsing(t_list **alst, char *arg)
 	lst_clear(alst, del_cmd);
 	if (arg)
 		free(arg);
+	z_index(RESET);
 	str_tok(NULL, NULL, NULL);
 }
 
@@ -97,6 +98,8 @@ t_list	*get_parsed_lst(char *line)
 	tok.quotes = QUOTES;
 	tok.spaces = SPACES;
 	parse_into_lst(&lst, line, &tok);
+	if (z_index(NONE) || z_index(RESET))
+		return (NULL);
 	str_arr_free(tok.seps);
 	return (lst);
 }

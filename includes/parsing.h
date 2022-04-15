@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/15 04:38:20 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/15 14:46:31 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@ enum
 	PIPE,
 	AND,
 	OR
+};
+
+enum
+{
+	GET,
+	INCR,
+	DECR,
+	RESET
 };
 
 typedef struct s_cmd
@@ -53,5 +61,7 @@ void	del_cmd(void *args);
 
 //TEST
 void	print_lst(t_list *lst);
+bool	parenthesis(t_cmd *cmd, char *arg, char *con);
 
+int		z_index(int op);
 #endif
