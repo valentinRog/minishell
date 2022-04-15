@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 09:49:33 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/15 04:41:32 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/15 06:20:11 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	print_lst(t_list *lst)
 			printf("\"append\" : false\n");
 		printf("\"limiters\" : ");
 		print_tab(cmd->limiters);
-		printf("\"con\" : %d\n\n", cmd->con);
+		printf("\"con\" : %d\n", cmd->con);
+		printf("\"z_index\" : %d\n\n", cmd->z_index);
 		print_lst(lst->next);
 	}
 }
