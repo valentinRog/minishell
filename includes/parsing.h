@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/15 14:46:31 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/15 19:19:22 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,11 @@ void	init_cmd(t_cmd *cmd);
 t_cmd	*new_cmd(t_cmd **dst);
 void	del_cmd(void *args);
 
-//TEST
-void	print_lst(t_list *lst);
+/*parenthesis*/
+int		z_index(int op);
 bool	parenthesis(t_cmd *cmd, char *arg, char *con);
 
-int		z_index(int op);
+//TEST
+void	print_lst(t_list *lst);
+
 #endif
