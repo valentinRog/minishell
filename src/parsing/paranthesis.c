@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 14:32:09 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/15 18:12:32 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/16 15:53:35 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,10 @@ bool	parenthesis(t_cmd *cmd, char *arg, char *con)
 		if (cmd->args || cmd->limiters || cmd->outfiles || cmd->infile)
 			return (true);
 		z_index(INCR);
-		cmd->z_index = z_index(NONE);
+		cmd->z_index = z_index(GET);
 	}
 	else if (!str_cmp(")", con))
 	{
-		if (!cmd->args && !cmd->limiters && !cmd->outfiles && !cmd->infile)
-			return (true);
 		z_index(DECR);
 		if (arg && *arg)
 			return (true);
