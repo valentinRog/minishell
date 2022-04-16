@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 10:43:41 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/15 14:32:33 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/16 23:16:54 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ bool	parse_arg(t_cmd *cmd, char *arg, char *con)
 		return (redirection(cmd, arg, con));
 	if (parenthesis(cmd, arg, con))
 		return (true);
-	if (*arg)
+	if (arg && *arg)
 		lst_add_back(&cmd->args, lst_new(str_n_dup(arg, str_len(arg))));
 	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/16 18:20:58 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/17 00:19:58 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,28 +40,65 @@ static void	parsing_error(t_list **alst, char *arg, char *token)
 	str_tok(NULL, NULL, NULL);
 	if (errno == ENOMEM)
 		perror("");
-	else
+	else if (token)
 		printf("syntax error near token `%s`\n", token);
 }
 
-static t_cmd	*parse_con(t_list **alst, t_cmd *cmd, char *con)
+static void	check_parsed_lst(t_list **alst)
 {
-	t_cmd	*n_cmd;
+	t_list	*node;
+	t_cmd	*cmd;
 
-	n_cmd = cmd;
-	if (get_con(con))
+	node = *alst;
+	while (node)
 	{
-		if (!cmd->args && !cmd->limiters && !cmd->outfiles && !cmd->infile)
+		cmd = node->content;
+		if (!cmd->args && !cmd->infile && !cmd->outfiles && !cmd->limiters)
 		{
-			del_cmd(cmd);
-			return (NULL);
-		}
-		cmd->con = get_con(con);
-		n_cmd = add_new_cmd(alst);
+			if (node->prev && ((t_cmd *)node->prev->content)->con == PIPE)
+				return (parsing_error(alst, NULL, "|"));
+			if (node->prev && ((t_cmd *)node->prev->content)->con == AND)
+				return (parsing_error(alst, NULL, "&&"));
+			if (node->prev && ((t_cmd *)node->prev->content)->con == OR)
+				return (parsing_error(alst, NULL, "||"));
+			return (parsing_error(alst, NULL, NULL));
+		}	
+		node = node->next;
 	}
-	return (n_cmd);
+	if (z_index(NONE) > 0)
+		return (parsing_error(alst, NULL, "("));
+	if (z_index(NONE) < 0)
+		return (parsing_error(alst, NULL, ")"));
+	str_tok(NULL, NULL, NULL);
 }
 
+static void	parse_into_lst(t_list **alst, char *line, t_tok *tok)
+{
+	t_cmd	*cmd;
+	char	*arg;
+	char	*con;
+
+	if (!*alst)
+		add_new_cmd(alst);
+	cmd = (t_cmd *)((lst_last(*alst))->content);
+	arg = str_tok(&con, line, tok);
+	if (arg)
+	{
+		if (get_con(con))
+		{
+			cmd->con = get_con(con);
+			cmd = add_new_cmd(alst);
+			if (!cmd)
+				return (parsing_error(alst, arg, NULL));
+		}
+		if (parse_arg(cmd, arg, con))
+			return (parsing_error(alst, arg, con));
+		free(arg);
+		return (parse_into_lst(alst, line, tok));
+	}
+	check_parsed_lst(alst);
+}
+/*
 static void	parse_into_lst(t_list **alst, char *line, t_tok *tok)
 {
 	t_cmd	*cmd;
@@ -81,12 +118,14 @@ static void	parse_into_lst(t_list **alst, char *line, t_tok *tok)
 			return (parsing_error(alst, arg, con));
 		free(arg);
 	}
+	if (!cmd->args && !cmd->limiters && !cmd->outfiles && !cmd->infile)
+		return (parsing_error(alst, arg, "yo"));
 	if (z_index(NONE) > 0)
 		return (parsing_error(alst, arg, "("));
 	if (z_index(NONE) < 0)
 		return (parsing_error(alst, arg, ")"));
 	str_tok(NULL, NULL, NULL);
-}
+}*/
 
 t_list	*get_parsed_lst(char *line)
 {
