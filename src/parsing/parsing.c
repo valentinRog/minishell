@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/17 00:19:58 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/17 00:20:20 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,34 +98,6 @@ static void	parse_into_lst(t_list **alst, char *line, t_tok *tok)
 	}
 	check_parsed_lst(alst);
 }
-/*
-static void	parse_into_lst(t_list **alst, char *line, t_tok *tok)
-{
-	t_cmd	*cmd;
-	char	*arg;
-	char	*con;
-
-	cmd = add_new_cmd(alst);
-	while (cmd)
-	{
-		arg = str_tok(&con, line, tok);
-		cmd = parse_con(alst, cmd, con);
-		if (!cmd)
-			return (parsing_error(alst, arg, con));
-		if (!arg)
-			break ;
-		if (parse_arg(cmd, arg, con))
-			return (parsing_error(alst, arg, con));
-		free(arg);
-	}
-	if (!cmd->args && !cmd->limiters && !cmd->outfiles && !cmd->infile)
-		return (parsing_error(alst, arg, "yo"));
-	if (z_index(NONE) > 0)
-		return (parsing_error(alst, arg, "("));
-	if (z_index(NONE) < 0)
-		return (parsing_error(alst, arg, ")"));
-	str_tok(NULL, NULL, NULL);
-}*/
 
 t_list	*get_parsed_lst(char *line)
 {
