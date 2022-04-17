@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 10:52:18 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/17 16:22:24 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/17 17:55:36 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	str_arr_free(char **arr)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (arr && arr[i])

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:19:29 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/14 23:21:38 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/17 18:36:19 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ bool	is_tok(char *str, char *tokens, char sep)
 	ptr = tokens;
 	while (*ptr && *ptr != sep)
 		ptr++;
-	if (!str_n_cmp(str, tokens, str_len(str)) && str_len(str) == ptr - tokens)
+	if (!str_cmp(str, tokens) && (int64_t) str_len(str) == ptr - tokens)
 		return (true);
 	if (*ptr)
 		return (is_tok(str, ptr + 1, sep));

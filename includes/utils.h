@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/17 16:21:43 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/17 18:13:15 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool	is_tok(char *str, char *tokens, char sep);
 /*str_alloc*/
 char	*str_n_dup(char *str, size_t n);
 char	*str_dup(char *src);
-char	*str_n_dup1(void);
+char	*str_dup1(void);
 void	str_n_insert(char **astr, char *str, size_t i, size_t n);
 void	str_n_remove(char **astr, size_t i, size_t n);
 
