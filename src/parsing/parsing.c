@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/17 00:21:23 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/17 15:56:08 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	parsing_error(t_list **alst, char *arg, char *token)
 	lst_clear(alst, del_cmd);
 	if (arg)
 		free(arg);
-	z_index(RESET);
+	z_index(z_RESET);
 	str_tok(NULL, NULL, NULL);
 	if (errno == ENOMEM)
 		perror("");
@@ -55,19 +55,19 @@ static void	check_parsed_lst(t_list **alst)
 		cmd = node->content;
 		if (!cmd->args && !cmd->infile && !cmd->outfiles && !cmd->limiters)
 		{
-			if (node->prev && ((t_cmd *)node->prev->content)->con == PIPE)
+			if (node->prev && ((t_cmd *)node->prev->content)->con == con_PIPE)
 				return (parsing_error(alst, NULL, "|"));
-			if (node->prev && ((t_cmd *)node->prev->content)->con == AND)
+			if (node->prev && ((t_cmd *)node->prev->content)->con == con_AND)
 				return (parsing_error(alst, NULL, "&&"));
-			if (node->prev && ((t_cmd *)node->prev->content)->con == OR)
+			if (node->prev && ((t_cmd *)node->prev->content)->con == con_OR)
 				return (parsing_error(alst, NULL, "||"));
 			return (parsing_error(alst, NULL, NULL));
 		}	
 		node = node->next;
 	}
-	if (z_index(NONE) > 0)
+	if (z_index(z_NONE) > 0)
 		return (parsing_error(alst, NULL, "("));
-	if (z_index(NONE) < 0)
+	if (z_index(z_NONE) < 0)
 		return (parsing_error(alst, NULL, ")"));
 	str_tok(NULL, NULL, NULL);
 }

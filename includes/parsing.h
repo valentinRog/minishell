@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/15 19:19:22 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/17 15:57:11 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@
 # define SPACES " "
 # define QUOTES "\"\'"
 
-enum
+enum e_con
 {
-	NONE,
-	PIPE,
-	AND,
-	OR
+	con_NONE,
+	con_PIPE,
+	con_AND,
+	con_OR
 };
 
-enum
+enum e_z
 {
-	GET,
-	INCR,
-	DECR,
-	RESET
+	z_NONE,
+	z_INCR,
+	z_DECR,
+	z_RESET
 };
 
 typedef struct s_cmd
@@ -46,24 +46,24 @@ typedef struct s_cmd
 }	t_cmd;
 
 /*parsing*/
-t_list	*get_parsed_lst(char *line);
+t_list		*get_parsed_lst(char *line);
 
 /*parse_arg*/
-bool	parse_arg(t_cmd *cmd, char *arg, char *con);
+bool		parse_arg(t_cmd *cmd, char *arg, char *con);
 
 /*connector*/
-int		get_con(char *sep);
+enum e_con	get_con(char *sep);
 
 /*new_cmd*/
-void	init_cmd(t_cmd *cmd);
-t_cmd	*new_cmd(t_cmd **dst);
-void	del_cmd(void *args);
+void		init_cmd(t_cmd *cmd);
+t_cmd		*new_cmd(t_cmd **dst);
+void		del_cmd(void *args);
 
 /*parenthesis*/
-int		z_index(int op);
-bool	parenthesis(t_cmd *cmd, char *arg, char *con);
+int			z_index(enum e_z z);
+bool		parenthesis(t_cmd *cmd, char *arg, char *con);
 
 //TEST
-void	print_lst(t_list *lst);
+void		print_lst(t_list *lst);
 
 #endif

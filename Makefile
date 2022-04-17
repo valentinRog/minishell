@@ -1,9 +1,6 @@
  NAME = minishell
 
-SRC = $(wildcard src/main/*.c)\
-      $(wildcard src/parsing/*.c)\
-      $(wildcard src/utils/*.c)\
-	  $(wildcard src/get_next_line/*.c)
+SRC = $(wildcard src/*/*.c)\
 
 INCLUDES = includes
 
@@ -18,7 +15,7 @@ CC = gcc
 $(RM) = rm -rf
 
 .c.o: $(SRC) $(SRCB)
-	@printf "%-33.33s\r" $@
+	@printf "%-42s\r" $@
 	@$(CC) $(CFLAGS) -I $(INCLUDES) -c -o $@ $<
 
 $(NAME): $(OBJ)
@@ -34,7 +31,7 @@ fclean: clean
 
 re: fclean all
 
-run: $(NAME)
+run: $(NAME) clean
 	./$(NAME)
 
 rerun: re run

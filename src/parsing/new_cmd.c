@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:15:02 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/15 04:46:21 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/17 15:55:47 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_cmd(t_cmd *cmd)
 		cmd->outfiles = NULL;
 		cmd->append = false;
 		cmd->limiters = NULL;
-		cmd->con = NONE;
+		cmd->con = con_NONE;
 		cmd->z_index = 0;
 	}
 }
