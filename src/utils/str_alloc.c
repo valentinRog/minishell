@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 20:47:01 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/06 10:02:51 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/17 16:21:00 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ char	*str_n_dup(char *src, size_t n)
 		return (NULL);
 	str_n_cpy(dst, src, n);
 	return (dst);
+}
+
+char	*str_dup(char *src)
+{
+	return (str_n_dup(src, strlen(src)));
 }
 
 char	*str_n_dup1(void)
