@@ -19,7 +19,7 @@ $(RM) = rm -rf
 	@$(CC) $(CFLAGS) -I $(INCLUDES) -c -o $@ $<
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIB)
+	@$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIB)
 
 all: $(NAME)
 
@@ -32,7 +32,7 @@ fclean: clean
 re: fclean all
 
 run: $(NAME) clean
-	./$(NAME)
+	@./$(NAME)
 
 rerun: re run
 

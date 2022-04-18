@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/17 15:57:11 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/18 16:15:36 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,8 @@ typedef struct s_cmd
 t_list		*get_parsed_lst(char *line);
 
 /*parse_arg*/
-bool		parse_arg(t_cmd *cmd, char *arg, char *con);
-
-/*connector*/
 enum e_con	get_con(char *sep);
+bool		parse_arg(t_cmd *cmd, char *arg, char *con);
 
 /*new_cmd*/
 void		init_cmd(t_cmd *cmd);
@@ -63,7 +61,7 @@ void		del_cmd(void *args);
 int			z_index(enum e_z z);
 bool		parenthesis(t_cmd *cmd, char *arg, char *con);
 
-//TEST
+/*testing*/
 void		print_lst(t_list *lst);
 
 #endif

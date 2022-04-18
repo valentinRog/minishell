@@ -6,11 +6,25 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 10:43:41 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/17 18:41:43 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/18 16:15:16 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+enum e_con	get_con(char *sep)
+{
+	if (sep)
+	{
+		if (!strcmp("||", sep))
+			return (con_OR);
+		if (!strcmp("&&", sep))
+			return (con_AND);
+		if (!strcmp("|", sep))
+			return (con_PIPE);
+	}
+	return (con_NONE);
+}
 
 bool	redirection(t_cmd *cmd, char *arg, char *con)
 {
