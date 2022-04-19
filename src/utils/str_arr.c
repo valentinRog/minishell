@@ -6,22 +6,15 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 10:52:18 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/17 17:55:36 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/19 16:37:00 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	str_arr_free(char **arr)
+size_t	str_arr_len(char **arr)
 {
-	size_t	i;
-
-	i = 0;
-	while (arr && arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	if (arr)
-		free(arr);
+	if (arr && *arr)
+		return (1 + str_arr_len(arr + 1));
+	return (0);
 }

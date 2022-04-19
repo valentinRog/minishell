@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   str_arr_alloc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/19 18:38:47 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/04/19 16:37:02 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/04/19 18:39:08 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **env)
+void	str_arr_free(char **arr)
 {
-	char	*line;
-	t_list	*lst;
+	size_t	i;
 
-	lst = NULL;
-	while (true)
+	i = 0;
+	while (arr && arr[i])
 	{
-		line = readline(PROMPT);
-		if (!line)
-		{
-			lst_clear(&lst, del_cmd);
-			clear_history();
-			exit (EXIT_FAILURE);
-		}
-		add_history(line);
-		lst = get_parsed_lst(line);
-		free(line);
-		print_lst(lst);
-		lst_clear(&lst, del_cmd);
+		free(arr[i]);
+		i++;
 	}
-	clear_history();
-	return (0);
+	if (arr)
+		free(arr);
 }

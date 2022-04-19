@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/19 09:42:23 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/19 17:41:43 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ void	lst_add_back(t_list **alst, t_list *new_node);
 
 /*lst_alloc*/
 t_list	*lst_new(void *content);
+void	lst_del_one(t_list *node, void (*del)(void*));
 void	lst_clear(t_list **lst, void (*del)(void*));
+void	lst_remove(t_list *node, void (*del)(void*));
 
 /*get_next_line*/
 char	*get_next_line(int fd);
@@ -69,6 +71,7 @@ int64_t	max(int64_t a, int64_t b);
 char	**split(char const *s, char c);
 
 /*str_arr*/
+size_t	str_arr_len(char **arr);
 void	str_arr_free(char **arr);
 
 /*str_tok*/
