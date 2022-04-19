@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 10:43:41 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/18 16:15:16 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/19 10:50:33 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ bool	redirection(t_cmd *cmd, char *arg, char *con)
 			free(cmd->infile);
 		cmd->infile = arg_cpy;
 	}
-	if (errno != ENOMEM && *arg)
-		return (false);
 	if (errno == ENOMEM)
 		free(arg_cpy);
-	return (true);
+	if (!*arg || errno == ENOMEM)
+		return (true);
+	return (false);
 }
 
 bool	parse_arg(t_cmd *cmd, char *arg, char *con)

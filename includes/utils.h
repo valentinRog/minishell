@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/17 18:13:15 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/19 09:42:23 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	str_n_insert(char **astr, char *str, size_t i, size_t n);
 void	str_n_remove(char **astr, size_t i, size_t n);
 
 /*lst*/
-int		lst_size(t_list *lst);
+size_t	lst_size(t_list *lst);
 t_list	*lst_last(t_list *lst);
 void	lst_add_front(t_list **alst, t_list *new_node);
 void	lst_add_back(t_list **alst, t_list *new_node);

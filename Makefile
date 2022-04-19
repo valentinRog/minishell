@@ -15,11 +15,12 @@ CC = gcc
 $(RM) = rm -rf
 
 .c.o: $(SRC) $(SRCB)
-	@printf "%-42s\r" $@
 	@$(CC) $(CFLAGS) -I $(INCLUDES) -c -o $@ $<
+	@printf "%-42s\r" $@
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIB)
+	@printf "%-42s\r"
 
 all: $(NAME)
 
@@ -31,9 +32,10 @@ fclean: clean
 
 re: fclean all
 
-run: $(NAME) clean
+run: $(NAME)
+	@make clean
 	@./$(NAME)
 
 rerun: re run
 
-.PHONY: $(NAME) all clean fclean re run
+.PHONY: $(NAME) all clean fclean re run rerun

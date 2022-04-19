@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	lst_size(t_list *lst)
+size_t	lst_size(t_list *lst)
 {
 	if (lst)
 		return (1 + lst_size(lst->next));
