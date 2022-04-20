@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 12:10:41 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/13 15:40:30 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/20 10:58:30 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static char	*get_line(char *str)
 
 	if (!str)
 		return (NULL);
-	ptr = ft_memchr(str, '\n', str_len(str));
+	ptr = str_chr(str, '\n');
 	if (!ptr)
 		ptr = str + str_len(str);
 	return (str_n_dup(str, ptr + 1 - str));
@@ -75,7 +75,7 @@ static void	cut_line(char **astr)
 
 	if (!*astr)
 		return ;
-	ptr = ft_memchr(*astr, '\n', str_len(*astr));
+	ptr = str_chr(*astr, '\n');
 	if (!ptr)
 		ptr = *astr + str_len(*astr);
 	str_n_del_front(astr, ptr + 1 - *astr);
@@ -97,7 +97,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	*buff = '\0';
-	while (!ft_memchr(reminder, '\n', str_len(reminder)))
+	while (!str_chr(reminder, '\n'))
 	{
 		bytes_read = read(fd, buff, BUFFER_SIZE);
 		str_append_buff(&reminder, buff, bytes_read);

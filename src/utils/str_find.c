@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:19:29 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/17 18:45:07 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/20 10:57:24 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ bool	in_quote(char *str, char *quotes, size_t index)
 	return (false);
 }
 
-void	*ft_memchr(const void *s, int c, size_t n)
+char	*str_chr(char *str, char c)
 {
-	if (!n)
+	if (!str || !*str)
 		return (NULL);
-	if (*((unsigned char *) s) == (unsigned char) c)
-		return ((void *) s);
-	return (ft_memchr(s + 1, c, n - 1));
+	if (*str == c)
+		return (str);
+	return (str_chr(str + 1, c));
 }
 
 bool	is_tok(char *str, char *tokens, char sep)

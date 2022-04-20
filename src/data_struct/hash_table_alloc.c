@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:11:57 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/20 10:37:53 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/20 14:05:11 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,6 @@ void	table_remove(t_list *table[TABLE_SIZE], char *key)
 		lst_remove(&table[hash(key) % TABLE_SIZE], node, del_var);
 }
 
-void	del_var(void *arg)
-{
-	t_var	*var;
-
-	var = (t_var *)arg;
-	// free(var->key);
-	// free(var->data);
-	// free(var);
-}
-
 void	table_clear(t_list *table[TABLE_SIZE], void (*del)(void*))
 {
 	size_t	i;
@@ -49,7 +39,7 @@ void	table_clear(t_list *table[TABLE_SIZE], void (*del)(void*))
 	i = 0;
 	while (i < TABLE_SIZE)
 	{
-		lst_clear(&table[i], del);		
+		lst_clear(&table[i], del);
 		i++;
 	}
 }
