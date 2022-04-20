@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/20 07:16:12 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/20 10:11:12 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,23 @@ int	main(int argc, char **argv, char **env)
 
 	lst = NULL;
 	t_list	*table[TABLE_SIZE];
-	init_table(table);
-	t_table_var		*var = malloc(sizeof(t_table_var));
+	table_init(table);
+	t_var		*var = malloc(sizeof(t_var));
 	var->key = "yo";
-	add_var(table, var);
-	var = malloc(sizeof(t_table_var));
+	table_add(table, var);
+	var = malloc(sizeof(t_var));
 	var->key = "oy";
-	add_var(table, var);
-	var = malloc(sizeof(t_table_var));
+	table_add(table, var);
+	var = malloc(sizeof(t_var));
 	var->key = "salut";
-	add_var(table, var);
-	var = malloc(sizeof(t_table_var));
+	table_add(table, var);
+	var = malloc(sizeof(t_var));
 	var->key = "bonjour";
-	add_var(table, var);
-	print_table(table);
+	table_add(table, var);
+	var = malloc(sizeof(t_var));
+	var->key = "bonjour";
+	table_add(table, var);
+	table_print(table);
 	/*
 	while (true)
 	{

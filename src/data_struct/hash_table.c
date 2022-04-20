@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 01:08:14 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/20 07:18:19 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/20 10:17:31 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,21 @@ uint64_t	hash(char *key)
 	return (sum);
 }
 
-bool	add_var(t_list *table[TABLE_SIZE], t_table_var *var)
+t_list	*table_find(t_list *table[TABLE_SIZE], char *key)
 {
-	lst_add_back(&table[hash(var->key) % TABLE_SIZE], lst_new(var));
-	return false;
+	t_list	*lst;
+
+	lst = table[hash(key) % TABLE_SIZE];
+	while (lst)
+	{
+		if (!str_cmp(((t_var *)lst->content)->key, key))
+			return (lst);
+		lst = lst->next;
+	}
+	return (NULL);
 }
 
-void	init_table(t_list *table[TABLE_SIZE])
+void	table_init(t_list *table[TABLE_SIZE])
 {
 	size_t	i;
 
@@ -43,15 +51,24 @@ void	init_table(t_list *table[TABLE_SIZE])
 	}
 }
 
-void	print_table(t_list *table[TABLE_SIZE])
+void	table_print(t_list *table[TABLE_SIZE])
 {
+	size_t	i;
+	t_list	*node;
+
+	i = 0;
 	printf("--------------------\n");
-	for (size_t i = 0; i < TABLE_SIZE; i++)
+	while (i < TABLE_SIZE)
 	{
 		printf("#%zu", i);
-		for (t_list *node = table[i]; node; node = node->next)
-			printf("->%s", ((t_table_var *)node->content)->key);
+		node = table[i];
+		while (node)
+		{
+			printf("->%s", ((t_var *)node->content)->key);
+			node = node->next;
+		}
 		printf("\n");
+		i++;
 	}
 	printf("--------------------\n");
 }
