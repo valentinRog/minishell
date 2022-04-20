@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/20 10:11:12 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/20 10:39:18 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int argc, char **argv, char **env)
 	var = malloc(sizeof(t_var));
 	var->key = "bonjour";
 	table_add(table, var);
+	table_remove(table, "oy");
 	table_print(table);
 	/*
 	while (true)

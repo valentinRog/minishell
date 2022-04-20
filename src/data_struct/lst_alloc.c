@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 19:07:50 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/20 09:48:38 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/20 10:39:06 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	lst_remove(t_list **alst, t_list *node, void (*del)(void*))
 	{
 		if (node->prev)
 			node->prev->next = node->next;
-		else
-			*alst = NULL;
+		if (!node->prev)
+			*alst = node->next;
 		if (node->next)
 			node->next->prev = node->prev;
 		lst_del_one(node, del);
