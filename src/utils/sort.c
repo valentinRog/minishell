@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/20 19:31:16 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/04/20 19:09:58 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/04/20 19:40:06 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **env)
+void	lst_sort(t_list *lst, int (*cmp)(void *, void *))
 {
-	char	*line;
-	t_list	*lst;
-	t_list	*table[TABLE_SIZE];
+	bool	swapped;
+    t_list	*node;
 
-	lst = NULL;
-	init_env(table, env);
-	ft_env(table);
-	/*while (true)
+	swapped = true;
+	while (swapped)
 	{
-		line = readline(PROMPT);
-		if (!line)
+		swapped = false;
+		node = lst;
+		while (node->next)
 		{
-			lst_clear(&lst, del_cmd);
-			clear_history();
-			exit (EXIT_FAILURE);
+			if (cmp(node->content, node->next->content) > 0)
+			{
+				swap_ptr(&node->content, &node->next->content);
+				swapped = true;
+			}
+			node = node->next;
 		}
-		add_history(line);
-		lst = get_parsed_lst(line);
-		free(line);
-		print_lst(lst);
-		lst_clear(&lst, del_cmd);
 	}
-	clear_history();*/
-	return (0);
 }
