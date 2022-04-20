@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/20 01:11:40 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/20 07:18:43 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,10 @@ void	str_arr_free(char **arr);
 
 /*str_tok*/
 char	*str_tok(char **astr, char *src, t_tok *tok);
+
+/*hash_table*/
+void	init_table(t_list *table[TABLE_SIZE]);
+bool	add_var(t_list *table[TABLE_SIZE], t_table_var *var);
+void	print_table(t_list *table[TABLE_SIZE]);
 
 #endif
