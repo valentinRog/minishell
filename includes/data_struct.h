@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_struct.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:06:15 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/20 14:25:36 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/20 15:27:20 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void		lst_remove(t_list **alst, t_list *node, void (*del)(void*));
 
 /*hash_table*/
 uint64_t	hash(char *key);
-void		table_init(t_list *table[TABLE_SIZE]);
 t_list		*table_find(t_list *table[TABLE_SIZE], char *key);
+void		table_init(t_list *table[TABLE_SIZE]);
 size_t		table_size(t_list *table[TABLE_SIZE]);
 void		table_print(t_list *table[TABLE_SIZE]);
 
