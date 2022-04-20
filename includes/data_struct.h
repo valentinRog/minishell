@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:06:15 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/20 14:04:04 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/20 14:25:36 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void		lst_remove(t_list **alst, t_list *node, void (*del)(void*));
 uint64_t	hash(char *key);
 void		table_init(t_list *table[TABLE_SIZE]);
 t_list		*table_find(t_list *table[TABLE_SIZE], char *key);
+size_t		table_size(t_list *table[TABLE_SIZE]);
 void		table_print(t_list *table[TABLE_SIZE]);
 
 /*hash_table_alloc*/

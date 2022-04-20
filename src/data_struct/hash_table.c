@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 01:08:14 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/20 10:17:31 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/20 14:24:33 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,21 @@ void	table_init(t_list *table[TABLE_SIZE])
 		table[i] = NULL;
 		i++;
 	}
+}
+
+size_t	table_size(t_list *table[TABLE_SIZE])
+{
+	size_t	i;
+	size_t	size;
+
+	i = 0;
+	size = 0;
+	while (i < TABLE_SIZE)
+	{
+		size += lst_size(table[i]);
+		i++;
+	}
+	return (size);
 }
 
 void	table_print(t_list *table[TABLE_SIZE])
