@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_arr.c                                          :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 10:52:18 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/20 18:07:19 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/04/20 17:17:41 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/04/20 18:09:54 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-size_t	str_arr_len(char **arr)
-{
-	if (arr && *arr)
-		return (1 + str_arr_len(arr + 1));
-	return (0);
-}
+# include "minishell.h"
 
-void	str_arr_free(char **arr)
-{
-	size_t	i;
+void	ft_env(t_list *table[TABLE_SIZE]);
 
-	i = 0;
-	while (arr && arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	if (arr)
-		free(arr);
-}
+#endif

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/20 15:24:24 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/20 18:01:42 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ int	main(int argc, char **argv, char **env)
 {
 	char	*line;
 	t_list	*lst;
+	t_list	*table[TABLE_SIZE];
 
 	lst = NULL;
+	init_env(table, env);
 	while (true)
 	{
 		line = readline(PROMPT);

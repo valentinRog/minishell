@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 22:21:22 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/14 11:32:11 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/20 17:43:00 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	str_n_cpy(char *dst, char *src, size_t len)
 	}
 }
 
-int	str_n_cmp(const char *s1, const char *s2, size_t n)
+int	str_n_cmp(char *s1, char *s2, size_t n)
 {
 	size_t	i;
 
@@ -49,14 +49,26 @@ int	str_n_cmp(const char *s1, const char *s2, size_t n)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-int	str_cmp(const char *s1, const char *s2)
+int	str_cmp(char *s1, char *s2)
 {
 	size_t	i;
 
 	i = 0;
 	if (!s1 || !s2)
 		return (1);
-	while (s1[i] == s2[i] && s1[i] && s2[i])
+	while (s1[i] == s2[i] && s1[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+int	str_cmp_no_case(char *s1, char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	if (!s1 || !s2)
+		return (1);
+	while (toupper(s1[i]) == toupper(s2[i]) && s1[i])
 		i++;
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

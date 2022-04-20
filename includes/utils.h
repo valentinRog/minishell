@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/20 10:56:26 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/20 18:07:38 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef struct s_tok
 /*str*/
 size_t	str_len(char *str);
 void	str_n_cpy(char *dst, char *src, size_t len);
-int		str_n_cmp(const char *s1, const char *s2, size_t n);
-int		str_cmp(const char *s1, const char *s2);
+int		str_n_cmp(char *s1, char *s2, size_t n);
+int		str_cmp(char *s1, char *s2);
 
 /*str_find*/
 bool	in_str(char *str, char c);
@@ -54,5 +54,8 @@ void	str_arr_free(char **arr);
 
 /*str_tok*/
 char	*str_tok(char **astr, char *src, t_tok *tok);
+
+/*swap*/
+void	swap_ptr(void **a, void **b);
 
 #endif
