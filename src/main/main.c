@@ -6,7 +6,7 @@
 /*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/21 15:13:07 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/04/21 15:27:19 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int argc, char **argv, char **env)
 {
 	ft_pwd();
-	ft_cd(split("cd", ':'));
+	ft_cd(split("cd:src", ':'));
 	ft_pwd();
 	/*char	*line;
 	t_list	*lst;
