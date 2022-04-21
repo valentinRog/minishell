@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/20 19:31:16 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/21 10:03:50 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 int	main(int argc, char **argv, char **env)
 {
-	char	*line;
+	ft_echo(split("echo:-n:salut: mon: gars", ':'));
+	/*char	*line;
 	t_list	*lst;
 	t_list	*table[TABLE_SIZE];
 
 	lst = NULL;
 	init_env(table, env);
-	ft_env(table);
+	ft_env(table);*/
 	/*while (true)
 	{
 		line = readline(PROMPT);
