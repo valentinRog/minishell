@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/21 11:58:03 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/21 16:16:44 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char **argv, char **env)
 {
-	char	*line;
+char	*line;
 	t_list	*lst;
 	t_list	*table[TABLE_SIZE];
 
