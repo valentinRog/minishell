@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/21 10:43:51 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/21 15:43:52 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ char	**split(char const *s, char c);
 /*str_arr*/
 size_t	str_arr_len(char **arr);
 void	str_arr_free(char **arr);
+char	**lst_to_str_arr(t_list *lst);
 
 /*str_tok*/
 char	*str_tok(char **astr, char *src, t_tok *tok);

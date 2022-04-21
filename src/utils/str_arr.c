@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 10:52:18 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/20 18:07:19 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/21 15:45:17 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,29 @@ void	str_arr_free(char **arr)
 	}
 	if (arr)
 		free(arr);
+}
+
+char	**lst_to_str_arr(t_list *lst)
+{
+	char	**arr;
+	size_t	i;
+
+	if (!lst)
+		return (NULL);
+	arr = malloc((lst_size(lst) + 1) * sizeof(char *));
+	if (!arr)
+		return (NULL);
+	i = 0;
+	while (lst)
+	{
+		arr[i] = str_dup((char *)lst->content);
+		if (!arr[i])
+		{
+			str_arr_free(arr);
+			return (NULL);
+		}
+		i++;
+	}
+	arr[i] = NULL;
+	return (arr);
 }

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/19 10:47:00 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/21 14:36:21 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ static void	parsing_error(t_list **alst, char *arg, char *token)
 	if (errno == ENOMEM)
 		perror("");
 	else if (token)
+	{
 		printf("syntax error near token `%s`\n", token);
+		g_exit_code = 258;
+	}
 }
 
 static void	check_parsed_lst(t_list **alst)

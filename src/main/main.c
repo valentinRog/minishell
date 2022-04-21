@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/21 10:29:21 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/04/21 11:58:03 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 int	main(int argc, char **argv, char **env)
 {
-	ft_pwd();
-	/*char	*line;
+	char	*line;
 	t_list	*lst;
 	t_list	*table[TABLE_SIZE];
 
 	lst = NULL;
 	init_env(table, env);
-	ft_env(table);*/
+	ft_env(table);
 	/*while (true)
 	{
 		line = readline(PROMPT);
