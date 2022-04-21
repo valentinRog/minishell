@@ -6,7 +6,7 @@
 /*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/21 10:03:50 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/04/21 10:29:21 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char **argv, char **env)
 {
-	ft_echo(split("echo:-n:salut: mon: gars", ':'));
+	ft_pwd();
 	/*char	*line;
 	t_list	*lst;
 	t_list	*table[TABLE_SIZE];

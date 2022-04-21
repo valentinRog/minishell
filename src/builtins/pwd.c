@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/20 17:17:41 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/21 10:27:03 by bvernimm         ###   ########.fr       */
+/*   Created: 2022/04/21 10:23:51 by bvernimm          #+#    #+#             */
+/*   Updated: 2022/04/21 10:27:46 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "minishell.h"
 
-# include "minishell.h"
+void	ft_pwd()
+{
+	char	*path;
 
-void	ft_env(t_list *table[TABLE_SIZE]);
-void	ft_echo(char **cmd);
-void	ft_pwd();
-
-#endif
+	path = NULL;
+	path = getcwd(path, 0);
+	printf("%s\n", path);
+	free (path);
+}
