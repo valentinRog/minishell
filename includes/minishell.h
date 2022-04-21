@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:40:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/20 19:23:13 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/21 10:44:53 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@
 # include "builtins.h"
 
 # include <ctype.h>
+
+int	g_exit_code;
 
 #endif

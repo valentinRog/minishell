@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/20 19:45:54 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/21 10:43:51 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ typedef struct s_tok
 /*str*/
 size_t	str_len(char *str);
 void	str_n_cpy(char *dst, char *src, size_t len);
+char	to_upper(char c);
+
+/*str_cmp*/
 int		str_n_cmp(char *s1, char *s2, size_t n);
 int		str_cmp(char *s1, char *s2);
 int		str_cmp_no_case(char *s1, char *s2);
