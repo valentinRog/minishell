@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 19:09:58 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/20 19:40:06 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/21 09:46:40 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	lst_sort(t_list *lst, int (*cmp)(void *, void *))
 {
 	bool	swapped;
-    t_list	*node;
+	t_list	*node;
 
 	swapped = true;
 	while (swapped)

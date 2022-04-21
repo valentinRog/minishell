@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_alloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 19:07:50 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/20 10:39:06 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/21 09:35:05 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ t_list	*lst_new(void *content)
 
 void	lst_del_one(t_list *node, void (*del)(void*))
 {
-	if (node && del)
+	if (node)
 	{
-		del(node->content);
+		if (del)
+			del(node->content);
 		free(node);
 	}
 }
@@ -42,7 +43,7 @@ void	lst_clear(t_list **alst, void (*del)(void*))
 	if (!alst)
 		return ;
 	node = *alst;
-	while (node && del)
+	while (node)
 	{
 		swap = node->next;
 		lst_del_one(node, del);
