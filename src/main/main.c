@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/21 16:16:44 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/22 10:33:15 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ char	*line;
 
 	lst = NULL;
 	init_env(table, env);
+	ft_export(split("export:a=8:b=7", ':'), table);
+	ft_env(table);
+	printf("\n");
+	ft_unset(split("unset:b=7", ':'), table);
 	ft_env(table);
 	/*while (true)
 	{

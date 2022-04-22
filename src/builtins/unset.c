@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/20 17:17:41 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/22 10:31:25 by bvernimm         ###   ########.fr       */
+/*   Created: 2022/04/22 10:20:37 by bvernimm          #+#    #+#             */
+/*   Updated: 2022/04/22 10:34:20 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "minishell.h"
 
-# include "minishell.h"
+void	ft_unset(char **cmd, t_list *table[TABLE_SIZE])
+{
+	char	*var;
+	char	*ptr;
+	int		i;
 
-void	ft_env(t_list *table[TABLE_SIZE]);
-void	ft_echo(char **cmd);
-void	ft_pwd(void);
-void	ft_cd(char **cmd);
-void	ft_export(char **cmd, t_list *table[TABLE_SIZE]);
-void	ft_unset(char **cmd, t_list *table[TABLE_SIZE]);
-
-#endif
+	if (str_n_cmp(cmd[0], "unset", str_len(cmd[0])) != 0)
+		return ;
+	i = 1;
+	while (cmd[i])
+	{
+		ptr = str_chr(cmd[i], '=');
+		var = str_n_dup(cmd[i], ptr - cmd[i]);
+		if (errno == ENOMEM)
+			return ;
+		if (table_find(table, var))
+			table_remove(table, var);
+		free (var);
+		i++;
+	}
+}
