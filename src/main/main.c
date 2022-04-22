@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/22 15:30:25 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/04/22 17:59:37 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ int	main(int argc, char **argv, char **env)
 		lst = get_parsed_lst(line);
 		if (lst)
 		{
+			print_lst(lst);
 			exec_lst = get_exec_lst(lst);
 			lst_clear(&lst, NULL);
 			free(line);
-			cool_recursive_function(exec_lst, 0);
+			//cool_recursive_function(exec_lst, 0);
 			lst_clear(&exec_lst, del_exec);
 		}
 	}
