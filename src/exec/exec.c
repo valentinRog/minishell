@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 05:12:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/22 17:24:54 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/22 18:30:35 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	cool_recursive_function(t_list *lst, int z_index)
 			else
 				ret = 1;
 		}
+		if (!lst)
+			return ret;
 		if (ret == 0 && ((t_exec *)lst->content)->cmd->con == con_AND)
 			break ;
 		else if (ret == 1 && ((t_exec *)lst->content)->cmd->con == con_OR)

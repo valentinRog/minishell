@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/22 17:59:37 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/22 18:17:53 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int argc, char **argv, char **env)
 			exec_lst = get_exec_lst(lst);
 			lst_clear(&lst, NULL);
 			free(line);
-			//cool_recursive_function(exec_lst, 0);
+			cool_recursive_function(exec_lst, 0);
 			lst_clear(&exec_lst, del_exec);
 		}
 	}
