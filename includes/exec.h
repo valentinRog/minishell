@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:33:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/22 14:35:49 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/22 14:43:17 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ void	del_exec(t_exec *exec);
 t_list	*get_exec_lst(t_list *parsed_lst);
 
 /*exec*/
-int	cool_recursive_function(t_list *lst);
+int	cool_recursive_function(t_list *lst, int z_index);
 
 #endif
