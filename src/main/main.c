@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/21 16:16:44 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/22 02:42:49 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*line;
 
 	lst = NULL;
 	init_env(table, env);
-	ft_env(table);
+	table_print(table);
 	/*while (true)
 	{
 		line = readline(PROMPT);
