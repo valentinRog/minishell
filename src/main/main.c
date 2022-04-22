@@ -6,7 +6,7 @@
 /*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/22 14:40:47 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/04/22 15:30:25 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv, char **env)
 
 	lst = NULL;
 	init_env(table, env);
-	table_print(table);
+	//table_print(table);
 	while (true)
 	{
 		line = readline(PROMPT);
