@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 10:43:41 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/19 10:50:33 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/22 18:09:03 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ bool	redirection(t_cmd *cmd, char *arg, char *con)
 
 bool	parse_arg(t_cmd *cmd, char *arg, char *con)
 {
-	if (is_tok(con, "<<:>>:<:>", ':'))
-		return (redirection(cmd, arg, con));
 	if (parenthesis(cmd, arg, con))
 		return (true);
+	if (is_tok(con, "<<:>>:<:>", ':'))
+		return (redirection(cmd, arg, con));
 	if (arg && *arg)
 		lst_add_back(&cmd->args, lst_new(str_dup(arg)));
 	return (false);

@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.h                                             :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/21 10:33:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/24 20:59:10 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/04/23 21:23:31 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/04/24 21:06:51 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_H
-# define EXEC_H
+#include "minishell.h"
 
-# include "minishell.h"
-
-# define PIPE_READ 0
-# define PIPE_WRITE 1
-
-typedef struct s_exec
+void	pipex(t_list *lst, t_list	*table[TABLE_SIZE], t_list **alst)
 {
-	t_cmd	*cmd;
-	int		fds[2];
-	t_list	*table[TABLE_SIZE];
-}	t_exec;
-
-/*launcher*/
-void	launcher(t_list *lst, int z, t_list *table[TABLE_SIZE], t_list **alst);
-
-/*pipex*/
-void	pipex(t_list *lst, t_list *table[TABLE_SIZE], t_list **alst);
-
-#endif
+	printf("%s\n", (char *)((t_cmd *)lst->content)->args->content);
+	if (!str_cmp((char *)((t_cmd *)lst->content)->args->content, "0"))
+		g_exit_code = 1;
+	else
+		g_exit_code = 0;
+	if (((t_cmd *)lst->content)->con == con_PIPE)
+		pipex(lst->next, table, alst);
+}
