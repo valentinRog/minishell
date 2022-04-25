@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:23:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/25 15:52:02 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/25 15:59:05 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	pipex(t_list *lst, t_list **alst, int i_pipe[2])
 		if (pipe(o_pipe) == -1)
 			return (error_pipex("pipe", i_pipe, NULL));
 	if (is_tok((char *)((t_cmd *)lst->content)->args->content, BUILTINS, ':'))
-		exec_builtin();
+		exec_builtin((t_cmd *)lst->content, o_pipe);
 	else
 	{
 		pid = fork();

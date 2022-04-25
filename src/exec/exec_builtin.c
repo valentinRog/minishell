@@ -6,9 +6,13 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 15:39:38 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/25 15:51:42 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:00:47 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	exec_builtin(t_cmd *cmd, int o_pipe[2])
+{
+	printf("exec a built-in\n");
+}
