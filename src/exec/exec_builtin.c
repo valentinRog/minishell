@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 15:39:38 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/25 16:17:35 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/25 18:28:24 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ void	exec_builtin(t_cmd *cmd, int o_pipe[2])
 		ft_env(get_table(NULL));
 	else if (!str_cmp(str, "exit"))
 		ft_exit();
+	str_arr_free(cmds);
 }

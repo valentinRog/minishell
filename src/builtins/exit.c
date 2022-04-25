@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:40:23 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/25 15:33:52 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:19:14 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	ft_exit(void)
 {
-	exit(EXIT_FAILURE);
+	exit(EXIT_SUCCESS);
 }

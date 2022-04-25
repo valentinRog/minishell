@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:23:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/25 16:09:23 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/25 18:37:54 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ static void	child(t_cmd *cmd, int i_pipe[2], int o_pipe[2])
 		dup2(o_pipe[PIPE_WRITE], STDOUT_FILENO);
 		close(o_pipe[PIPE_WRITE]);
 		close(o_pipe[PIPE_READ]);
+	}
+	if (is_tok((char *)cmd->args->content, "env:echo:pwd", ':'))
+	{
+		exec_builtin(cmd, NULL);
+		exit(EXIT_SUCCESS);
 	}
 	exec(cmds);
 }
