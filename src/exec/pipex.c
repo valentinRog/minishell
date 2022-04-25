@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:23:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/25 14:40:15 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/25 15:52:02 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,38 @@ static void	child(t_cmd *cmd, int i_pipe[2], int o_pipe[2])
 
 	cmds = lst_to_str_arr(cmd->args);
 	if (i_pipe)
-		{
-			dup2(i_pipe[PIPE_READ], STDIN_FILENO);
-			close(i_pipe[PIPE_WRITE]);
-			close(i_pipe[PIPE_READ]);
-		}
-		if (cmd->con == con_PIPE)
-		{
-			dup2(o_pipe[PIPE_WRITE], STDOUT_FILENO);
-			close(o_pipe[PIPE_WRITE]);
-			close(o_pipe[PIPE_READ]);
-		}
-		exec(cmds);
+	{
+		dup2(i_pipe[PIPE_READ], STDIN_FILENO);
+		close(i_pipe[PIPE_WRITE]);
+		close(i_pipe[PIPE_READ]);
+	}
+	if (cmd->con == con_PIPE)
+	{
+		dup2(o_pipe[PIPE_WRITE], STDOUT_FILENO);
+		close(o_pipe[PIPE_WRITE]);
+		close(o_pipe[PIPE_READ]);
+	}
+	exec(cmds);
 }
 
 void	pipex(t_list *lst, t_list **alst, int i_pipe[2])
 {
 	int		o_pipe[2];
+	int		pid;
 
 	if (((t_cmd *)lst->content)->con == con_PIPE)
-		pipe(o_pipe);
-	if (!fork())
-		child((t_cmd *)lst->content, i_pipe, o_pipe);
+		if (pipe(o_pipe) == -1)
+			return (error_pipex("pipe", i_pipe, NULL));
+	if (is_tok((char *)((t_cmd *)lst->content)->args->content, BUILTINS, ':'))
+		exec_builtin();
+	else
+	{
+		pid = fork();
+		if (pid == -1)
+			return (error_pipex("fork", i_pipe, o_pipe));
+		if (!pid)
+			child((t_cmd *)lst->content, i_pipe, o_pipe);
+	}
 	if (i_pipe)
 	{
 		close(i_pipe[PIPE_WRITE]);
