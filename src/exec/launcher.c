@@ -6,19 +6,19 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 05:12:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/24 20:58:57 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/25 10:20:13 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	launcher(t_list *lst, int z, t_list *table[TABLE_SIZE], t_list **alst)
+void	launcher(t_list *lst, int z, t_list **alst)
 {
 	while (lst && ((t_cmd *)lst->content)->z_index >= z)
 	{
 		if (((t_cmd *)lst->content)->z_index > z)
 		{
-			launcher(lst, z + 1, table, alst);
+			launcher(lst, z + 1, alst);
 			while
 				(
 				lst && lst->next
@@ -27,7 +27,7 @@ void	launcher(t_list *lst, int z, t_list *table[TABLE_SIZE], t_list **alst)
 				lst = lst->next;
 		}
 		else
-			pipex(lst, table, alst);
+			pipex(lst, alst);
 		while (((t_cmd *)lst->content)->con == con_PIPE)
 			lst = lst->next;
 		if

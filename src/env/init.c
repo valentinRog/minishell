@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 12:46:56 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/20 14:04:47 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/25 10:14:43 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,13 @@ void	init_env(t_list *table[TABLE_SIZE], char **env)
 		}
 		env++;
 	}
+}
+
+t_list	**get_table(t_list **new_table)
+{
+	static t_list	**table;
+
+	if (new_table)
+		table = new_table;
+	return (table);
 }
