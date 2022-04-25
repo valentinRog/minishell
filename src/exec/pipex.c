@@ -6,13 +6,13 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:23:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/25 14:29:48 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/25 14:40:15 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec(char **cmds)
+static void	exec(char **cmds)
 {
 	char	**paths;
 	char	*cmd;
@@ -29,36 +29,40 @@ void	exec(char **cmds)
 	exit(EXIT_FAILURE);
 }
 
-void	pipex(t_list *lst, t_list **alst, int i_pipe[2])
+static void	child(t_cmd *cmd, int i_pipe[2], int o_pipe[2])
 {
 	char	**cmds;
-	int		o_pipe[2];
 
-	cmds = lst_to_str_arr(((t_cmd *)lst->content)->args);
-	if (((t_cmd *)lst->content)->con == con_PIPE)
-		pipe(o_pipe);
-	if (!fork())
-	{
-		if (i_pipe)
+	cmds = lst_to_str_arr(cmd->args);
+	if (i_pipe)
 		{
 			dup2(i_pipe[PIPE_READ], STDIN_FILENO);
 			close(i_pipe[PIPE_WRITE]);
 			close(i_pipe[PIPE_READ]);
 		}
-		if (((t_cmd *)lst->content)->con == con_PIPE)
+		if (cmd->con == con_PIPE)
 		{
 			dup2(o_pipe[PIPE_WRITE], STDOUT_FILENO);
 			close(o_pipe[PIPE_WRITE]);
 			close(o_pipe[PIPE_READ]);
 		}
 		exec(cmds);
-	}
+}
+
+void	pipex(t_list *lst, t_list **alst, int i_pipe[2])
+{
+	int		o_pipe[2];
+
+	if (((t_cmd *)lst->content)->con == con_PIPE)
+		pipe(o_pipe);
+	if (!fork())
+		child((t_cmd *)lst->content, i_pipe, o_pipe);
 	if (i_pipe)
 	{
 		close(i_pipe[PIPE_WRITE]);
 		close(i_pipe[PIPE_READ]);
 	}
-	wait(NULL);
 	if (((t_cmd *)lst->content)->con == con_PIPE)
 		pipex(lst->next, alst, o_pipe);
+	wait(NULL);
 }
