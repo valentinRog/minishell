@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:33:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/25 10:19:08 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/25 11:11:05 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ typedef struct s_exec
 void	launcher(t_list *lst, int z, t_list **alst);
 
 /*pipex*/
-void	pipex(t_list *lst, t_list **alst);
+void	pipex(t_list *lst, t_list **alst, int fds[2]);
 
 #endif

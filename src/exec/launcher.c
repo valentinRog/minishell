@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 05:12:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/25 10:20:13 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/25 11:11:20 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	launcher(t_list *lst, int z, t_list **alst)
 				lst = lst->next;
 		}
 		else
-			pipex(lst, alst);
+			pipex(lst, alst, NULL);
 		while (((t_cmd *)lst->content)->con == con_PIPE)
 			lst = lst->next;
 		if

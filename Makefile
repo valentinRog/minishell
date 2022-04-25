@@ -33,7 +33,6 @@ fclean: clean
 re: fclean all
 
 run: $(NAME)
-	@make clean
 	@./$(NAME)
 
 rerun: re run
