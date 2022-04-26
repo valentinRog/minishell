@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/25 10:09:19 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:13:25 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,6 @@ static void	parse_into_lst(t_list **alst, char *line, t_tok *tok)
 		if (get_con(con))
 		{
 			cmd->con = get_con(con);
-			if (cmd->con == con_PIPE && !*arg)
-				return (parsing_error(alst, arg, "|"));
 			cmd = add_new_cmd(alst);
 			if (!cmd)
 				return (parsing_error(alst, arg, NULL));
