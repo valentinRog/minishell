@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:23:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/26 14:53:14 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/26 20:12:20 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ void	close_pipe(int fds[2])
 		close(fds[PIPE_WRITE]);
 		close(fds[PIPE_READ]);
 	}
+}
+
+static void	error_pipex(char *str, int i_pipe[2], int o_pipe[2])
+{
+	perror(str);
+	close_pipe(i_pipe);
+	close_pipe(o_pipe);
+	g_exit_code = 1;
 }
 
 void	wait_status(void)
