@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:23:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/26 11:00:29 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/26 12:48:23 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,16 @@ void	close_pipe(int fds[2])
 	}
 }
 
-static void	exec(char **cmds)
+void	wait_status(void)
 {
-	char	**paths;
-	char	*cmd;
+	int	w_status;
 
-	paths = split(((t_var *)table_find(get_table(NULL), "PATH")->content)->data, ':');
-	while (*paths)
-	{
-		cmd = str_dup(*cmds);
-		str_n_insert(&cmd, "/", 0, 1);
-		str_n_insert(&cmd, *paths, 0, str_len(*paths));
-		execve(cmd, cmds, NULL);
-		paths++;
-	}
-	exit(EXIT_FAILURE);
+	wait(&w_status);
+	if (WIFEXITED(w_status))
+		g_exit_code = WEXITSTATUS(w_status);
 }
 
-static void	child(t_cmd *cmd, int i_pipe[2], int o_pipe[2])
+void	child(t_cmd *cmd, int i_pipe[2], int o_pipe[2])
 {
 	char	**cmds;
 
@@ -59,15 +51,6 @@ static void	child(t_cmd *cmd, int i_pipe[2], int o_pipe[2])
 		exit(EXIT_SUCCESS);
 	}
 	exec(cmds);
-}
-
-void	wait_status(void)
-{
-	int	w_status;
-
-	wait(&w_status);
-	if (WIFEXITED(w_status))
-		g_exit_code = WEXITSTATUS(w_status);
 }
 
 void	pipex(t_list *lst, t_list **alst, int i_pipe[2])
