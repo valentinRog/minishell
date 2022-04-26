@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:43:11 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/26 16:10:41 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:57:26 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,16 @@ static void	dup_stdin(t_cmd *cmd, int i_pipe[2])
 
 static void	dup_stdout(t_cmd *cmd, int o_pipe[2])
 {
-	if (cmd->con == con_PIPE)
+	int	fd;
+
+	if (cmd->outfiles)
+	{
+		fd = open((char *)cmd->outfiles->content, O_RDWR | O_CREAT);
+		dup2(fd, STDOUT_FILENO);
+		close(fd);
+		close_pipe(o_pipe);
+	}
+	else if (cmd->con == con_PIPE)
 	{
 		dup2(o_pipe[PIPE_WRITE], STDOUT_FILENO);
 		close_pipe(o_pipe);
