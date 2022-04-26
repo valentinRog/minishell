@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:33:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/25 18:29:07 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/26 10:41:57 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 
 # define PIPE_READ 0
 # define PIPE_WRITE 1
-
-# define BUILTINS "cd:export:unset:exit"
 
 /*launcher*/
 void	launcher(t_list *lst, int z, t_list **alst);

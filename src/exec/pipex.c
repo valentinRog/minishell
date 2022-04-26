@@ -6,11 +6,20 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:23:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/25 18:37:54 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/26 10:43:26 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	close_pipe(int fds[2])
+{
+	if (fds)
+	{
+		close(fds[PIPE_WRITE]);
+		close(fds[PIPE_READ]);
+	}
+}
 
 static void	exec(char **cmds)
 {
@@ -37,14 +46,12 @@ static void	child(t_cmd *cmd, int i_pipe[2], int o_pipe[2])
 	if (i_pipe)
 	{
 		dup2(i_pipe[PIPE_READ], STDIN_FILENO);
-		close(i_pipe[PIPE_WRITE]);
-		close(i_pipe[PIPE_READ]);
+		close_pipe(i_pipe);
 	}
 	if (cmd->con == con_PIPE)
 	{
 		dup2(o_pipe[PIPE_WRITE], STDOUT_FILENO);
-		close(o_pipe[PIPE_WRITE]);
-		close(o_pipe[PIPE_READ]);
+		close_pipe(o_pipe);
 	}
 	if (is_tok((char *)cmd->args->content, "env:echo:pwd", ':'))
 	{
@@ -58,11 +65,13 @@ void	pipex(t_list *lst, t_list **alst, int i_pipe[2])
 {
 	int		o_pipe[2];
 	int		pid;
+	t_cmd	*cmd;
 
-	if (((t_cmd *)lst->content)->con == con_PIPE)
+	cmd = (t_cmd *)lst->content;
+	if (cmd->con == con_PIPE)
 		if (pipe(o_pipe) == -1)
 			return (error_pipex("pipe", i_pipe, NULL));
-	if (is_tok((char *)((t_cmd *)lst->content)->args->content, BUILTINS, ':'))
+	if (is_tok((char *)cmd->args->content, "cd:export:unset:exit", ':'))
 		exec_builtin((t_cmd *)lst->content, o_pipe);
 	else
 	{
@@ -72,12 +81,8 @@ void	pipex(t_list *lst, t_list **alst, int i_pipe[2])
 		if (!pid)
 			child((t_cmd *)lst->content, i_pipe, o_pipe);
 	}
-	if (i_pipe)
-	{
-		close(i_pipe[PIPE_WRITE]);
-		close(i_pipe[PIPE_READ]);
-	}
-	if (((t_cmd *)lst->content)->con == con_PIPE)
+	close_pipe(i_pipe);
+	if (cmd->con == con_PIPE)
 		pipex(lst->next, alst, o_pipe);
 	wait(NULL);
 }
