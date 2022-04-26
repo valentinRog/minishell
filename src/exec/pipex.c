@@ -6,13 +6,13 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:23:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/26 10:46:26 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/26 11:00:29 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	close_pipe(int fds[2])
+void	close_pipe(int fds[2])
 {
 	if (fds)
 	{
@@ -61,6 +61,15 @@ static void	child(t_cmd *cmd, int i_pipe[2], int o_pipe[2])
 	exec(cmds);
 }
 
+void	wait_status(void)
+{
+	int	w_status;
+
+	wait(&w_status);
+	if (WIFEXITED(w_status))
+		g_exit_code = WEXITSTATUS(w_status);
+}
+
 void	pipex(t_list *lst, t_list **alst, int i_pipe[2])
 {
 	int		o_pipe[2];
@@ -84,5 +93,5 @@ void	pipex(t_list *lst, t_list **alst, int i_pipe[2])
 	close_pipe(i_pipe);
 	if (cmd->con == con_PIPE)
 		pipex(lst->next, alst, o_pipe);
-	wait(NULL);
+	wait_status();
 }

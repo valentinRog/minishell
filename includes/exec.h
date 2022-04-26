@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:33:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/26 10:41:57 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/26 10:53:31 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 void	launcher(t_list *lst, int z, t_list **alst);
 
 /*pipex*/
+void	close_pipe(int fds[2]);
 void	pipex(t_list *lst, t_list **alst, int fds[2]);
 
 /*error_pipex*/
