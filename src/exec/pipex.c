@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:23:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/26 12:48:23 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:53:14 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,6 @@ void	wait_status(void)
 		g_exit_code = WEXITSTATUS(w_status);
 }
 
-void	child(t_cmd *cmd, int i_pipe[2], int o_pipe[2])
-{
-	char	**cmds;
-
-	cmds = lst_to_str_arr(cmd->args);
-	if (i_pipe)
-	{
-		dup2(i_pipe[PIPE_READ], STDIN_FILENO);
-		close_pipe(i_pipe);
-	}
-	if (cmd->con == con_PIPE)
-	{
-		dup2(o_pipe[PIPE_WRITE], STDOUT_FILENO);
-		close_pipe(o_pipe);
-	}
-	if (is_tok((char *)cmd->args->content, "env:echo:pwd", ':'))
-	{
-		exec_builtin(cmd, NULL);
-		exit(EXIT_SUCCESS);
-	}
-	exec(cmds);
-}
-
 void	pipex(t_list *lst, t_list **alst, int i_pipe[2])
 {
 	int		o_pipe[2];
@@ -64,14 +41,14 @@ void	pipex(t_list *lst, t_list **alst, int i_pipe[2])
 		if (pipe(o_pipe) == -1)
 			return (error_pipex("pipe", i_pipe, NULL));
 	if (is_tok((char *)cmd->args->content, "cd:export:unset:exit", ':'))
-		exec_builtin(cmd, o_pipe);
+		exec_builtin(cmd);
 	else
 	{
 		pid = fork();
 		if (pid == -1)
 			return (error_pipex("fork", i_pipe, o_pipe));
 		if (!pid)
-			child(cmd, i_pipe, o_pipe);
+			child(cmd, i_pipe, o_pipe, alst);
 	}
 	close_pipe(i_pipe);
 	if (cmd->con == con_PIPE)

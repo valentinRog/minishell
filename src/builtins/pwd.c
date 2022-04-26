@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:23:51 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/21 15:11:30 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:51:06 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_pwd(void)
+void	bi_pwd(void)
 {
 	char	*path;
 

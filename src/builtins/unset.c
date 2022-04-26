@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 10:20:37 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/22 10:34:20 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:51:28 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_unset(char **cmd, t_list *table[TABLE_SIZE])
+void	bi_unset(char **cmd, t_list *table[TABLE_SIZE])
 {
 	char	*var;
 	char	*ptr;

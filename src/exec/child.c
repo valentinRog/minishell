@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/21 09:52:21 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/26 14:50:04 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/04/26 14:43:11 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/04/26 14:52:38 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	bi_echo(char **cmd)
+void	child(t_cmd *cmd, int i_pipe[2], int o_pipe[2], t_list **alst)
 {
-	int		i;
-	bool	n;
+	char	**cmds;
 
-	n = false;
-	i = 1;
-	if (str_n_cmp(cmd[0], "echo", str_len(cmd[0])) != 0)
-		return ;
-	if (str_n_cmp(cmd[1], "-n", str_len(cmd[1])) == 0)
+	cmds = lst_to_str_arr(cmd->args);
+	if (i_pipe)
 	{
-		n = true;
-		i++;
+		dup2(i_pipe[PIPE_READ], STDIN_FILENO);
+		close_pipe(i_pipe);
 	}
-	while (cmd[i])
+	else if (cmd->con == con_PIPE)
 	{
-		printf("%s", cmd[i]);
-		i++;
+		dup2(o_pipe[PIPE_WRITE], STDOUT_FILENO);
+		close_pipe(o_pipe);
 	}
-	if (n == false)
-		printf("\n");
+	if (is_tok((char *)cmd->args->content, "env:echo:pwd", ':'))
+	{
+		exec_builtin(cmd);
+		exit(EXIT_SUCCESS);
+	}
+	exec(cmds);
 }

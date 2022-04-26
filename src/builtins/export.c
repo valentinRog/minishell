@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 15:49:40 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/21 16:07:39 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:51:16 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_export(char **cmd, t_list *table[TABLE_SIZE])
+void	bi_export(char **cmd, t_list *table[TABLE_SIZE])
 {
 	t_var	*new_var;
 	int		i;

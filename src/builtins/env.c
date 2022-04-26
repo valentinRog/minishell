@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 17:17:25 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/21 10:28:58 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:51:39 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	print_env(t_list	*node)
 	}
 }
 
-void	ft_env(t_list *table[TABLE_SIZE])
+void	bi_env(t_list *table[TABLE_SIZE])
 {
 	t_list	*lst;
 	size_t	i;

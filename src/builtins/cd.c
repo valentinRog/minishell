@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:37:31 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/21 15:30:15 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:50:22 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_cd(char **cmd)
+void	bi_cd(char **cmd)
 {
 	char	*path;
 	char	*user;

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:45:34 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/26 12:49:27 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:52:32 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	exec(char **cmds)
 	exit(EXIT_FAILURE);
 }
 
-void	exec_builtin(t_cmd *cmd, int o_pipe[2])
+void	exec_builtin(t_cmd *cmd)
 {
 	char	*str;
 	char	**cmds;
@@ -37,18 +37,18 @@ void	exec_builtin(t_cmd *cmd, int o_pipe[2])
 	str = (char *)cmd->args->content;
 	cmds = lst_to_str_arr(cmd->args);
 	if (!str_cmp(str, "echo"))
-		ft_echo(cmds);
+		bi_echo(cmds);
 	else if (!str_cmp(str, "cd"))
-		ft_cd(cmds);
+		bi_cd(cmds);
 	else if (!str_cmp(str, "pwd"))
-		ft_pwd();
+		bi_pwd();
 	else if (!str_cmp(str, "export"))
-		ft_export(cmds, get_table(NULL));
+		bi_export(cmds, get_table(NULL));
 	else if (!str_cmp(str, "unset"))
-		ft_unset(cmds, get_table(NULL));
+		bi_unset(cmds, get_table(NULL));
 	else if (!str_cmp(str, "env"))
-		ft_env(get_table(NULL));
+		bi_env(get_table(NULL));
 	else if (!str_cmp(str, "exit"))
-		ft_exit();
+		bi_exit();
 	str_arr_free(cmds);
 }
