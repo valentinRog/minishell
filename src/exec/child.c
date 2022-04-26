@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 14:43:11 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/26 18:57:39 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/26 20:19:30 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void	child(t_cmd *cmd, int i_pipe[2], int o_pipe[2], t_list **alst)
 	if (is_tok((char *)cmd->args->content, "env:echo:pwd", ':'))
 	{
 		exec_builtin(cmd);
+		lst_clear(alst, del_cmd);
 		exit(EXIT_SUCCESS);
 	}
 	cmds = lst_to_str_arr(cmd->args);

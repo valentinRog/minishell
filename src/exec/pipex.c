@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:23:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/26 20:12:20 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/26 20:16:44 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	close_pipe(int fds[2])
 	}
 }
 
-static void	error_pipex(char *str, int i_pipe[2], int o_pipe[2])
+static void	error(char *str, int i_pipe[2], int o_pipe[2])
 {
 	perror(str);
 	close_pipe(i_pipe);
@@ -47,14 +47,14 @@ void	pipex(t_list *lst, t_list **alst, int i_pipe[2])
 	cmd = (t_cmd *)lst->content;
 	if (cmd->con == con_PIPE)
 		if (pipe(o_pipe) == -1)
-			return (error_pipex("pipe", i_pipe, NULL));
+			return (error("pipe", i_pipe, NULL));
 	if (is_tok((char *)cmd->args->content, "cd:export:unset:exit", ':'))
 		exec_builtin(cmd);
 	else
 	{
 		pid = fork();
 		if (pid == -1)
-			return (error_pipex("fork", i_pipe, o_pipe));
+			return (error("fork", i_pipe, o_pipe));
 		if (!pid)
 			child(cmd, i_pipe, o_pipe, alst);
 	}
