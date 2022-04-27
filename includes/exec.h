@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:33:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 16:53:02 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/27 18:18:31 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	pipex(t_list *lst, int i_pipe[2], t_shell *shell);
 
 /*exec*/
 void	exec(char **cmds, t_shell *shell);
-void	exec_builtin(t_cmd *cmd);
+bool	exec_builtin(t_cmd *cmd);
 
 /*child*/
 void	child(t_cmd *cmd, int i_pipe[2], int o_pipe[2], t_shell *shell);
