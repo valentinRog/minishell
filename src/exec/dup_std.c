@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 09:50:15 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 13:32:41 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/27 15:26:20 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	dup_stdin(t_cmd *cmd, int i_pipe[2])
 
 	ret = 0;
 	if (cmd->heredoc)
-		return heredoc(cmd);
+		return heredoc(cmd, NULL);
 	else if (cmd->infile)
 	{
 		fd = open(cmd->infile, O_RDONLY);

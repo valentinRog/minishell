@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:33:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 13:58:39 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/27 15:10:45 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ bool	dup_stdin(t_cmd *cmd, int i_pipe[2]);
 bool	dup_stdout(t_cmd *cmd, int o_pipe[2]);
 
 /*heredoc*/
-bool	heredoc(t_cmd *cmd);
+bool	heredoc(t_cmd *cmd, t_shell *shell);
 
 #endif
