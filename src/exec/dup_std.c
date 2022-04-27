@@ -6,29 +6,29 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 09:50:15 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 16:09:39 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/27 17:02:03 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	dup_stdin(t_cmd *cmd, int i_pipe[2])
+bool	dup_stdin(t_cmd *cmd, int i_pipe[2], t_shell *shell)
 {
 	int	fd;
 
 	if (cmd->heredoc)
-		return heredoc(cmd, NULL);
+		return (heredoc(cmd, shell));
 	if (cmd->infile)
 	{
 		fd = open(cmd->infile, O_RDONLY);
 		if (fd < 0)
 			return (exec_error(cmd->infile, NULL, i_pipe, NULL));
 		if (dup2(fd, STDIN_FILENO) < 0 || close(fd))
-			return ("dup2", NULL, i_pipe, NULL);
+			return (exec_error("dup2", NULL, i_pipe, NULL));
 	}
 	else if (i_pipe)
 		if (dup2(i_pipe[PIPE_READ], STDIN_FILENO) < 0)
-			return ("dup2", NULL, i_pipe, NULL);
+			return (exec_error("dup2", NULL, i_pipe, NULL));
 	close_pipe(i_pipe);
 	return (false);
 }
