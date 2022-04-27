@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:33:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 12:57:19 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:58:39 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@
 # define PIPE_WRITE 1
 
 /*launcher*/
-void	launcher(t_list *lst, int z, t_list **alst);
+void	launcher(t_list *lst, int z, t_shell *shell);
 
 /*pipex*/
 void	close_pipe(int fds[2]);
-void	pipex(t_list *lst, t_list **alst, int fds[2]);
+void	pipex(t_list *lst, int i_pipe[2], t_shell *shell);
 
 /*exec*/
-void	exec(char **cmds);
+void	exec(char **cmds, t_shell *shell);
 void	exec_builtin(t_cmd *cmd);
 
 /*child*/
-void	child(t_cmd *cmd, int i_pipe[2], int o_pipe[2], t_list **alst);
+void	child(t_cmd *cmd, int i_pipe[2], int o_pipe[2], t_shell *shell);
 
 /*dup_std*/
 bool	dup_stdin(t_cmd *cmd, int i_pipe[2]);

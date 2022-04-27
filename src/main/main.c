@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/25 15:24:09 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:53:18 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,26 @@
 int	main(int argc, char **argv, char **env)
 {
 	char	*line;
-	t_list	*lst;
-	t_list	*table[TABLE_SIZE];
+	t_shell	shell;
 
-	lst = NULL;
+	shell.lst = NULL;
 	(void) argc;
 	(void) argv;
-	init_env(table, env);
-	get_table(table);
+	init_env(shell.table, env);
 	while (true)
 	{
 		line = readline(PROMPT);
 		if (!line)
 		{
-			lst_clear(&lst, del_cmd);
+			lst_clear(&shell.lst, del_cmd);
 			clear_history();
 			exit (EXIT_FAILURE);
 		}
 		add_history(line);
-		lst = get_parsed_lst(line);
+		shell.lst = get_parsed_lst(line);
 		free(line);
-		launcher(lst, 0, &lst);
-		lst_clear(&lst, del_cmd);
+		launcher(shell.lst, 0, &shell);
+		lst_clear(&shell.lst, del_cmd);
 	}
 	clear_history();
 	return (0);

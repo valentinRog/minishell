@@ -6,18 +6,18 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:45:34 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/26 14:52:32 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:59:06 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec(char **cmds)
+void	exec(char **cmds, t_shell *shell)
 {
 	char	**paths;
 	char	*cmd;
 
-	paths = split(((t_var *)table_find(get_table(NULL), "PATH")->content)->data, ':');
+	paths = split(((t_var *)table_find(shell->table, "PATH")->content)->data, ':');
 	while (*paths)
 	{
 		cmd = str_dup(*cmds);

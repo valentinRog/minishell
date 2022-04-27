@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:23:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/26 20:16:44 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:55:02 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	wait_status(void)
 		g_exit_code = WEXITSTATUS(w_status);
 }
 
-void	pipex(t_list *lst, t_list **alst, int i_pipe[2])
+void	pipex(t_list *lst, int i_pipe[2], t_shell *shell)
 {
 	int		o_pipe[2];
 	int		pid;
@@ -56,10 +56,10 @@ void	pipex(t_list *lst, t_list **alst, int i_pipe[2])
 		if (pid == -1)
 			return (error("fork", i_pipe, o_pipe));
 		if (!pid)
-			child(cmd, i_pipe, o_pipe, alst);
+			child(cmd, i_pipe, o_pipe, shell);
 	}
 	close_pipe(i_pipe);
 	if (cmd->con == con_PIPE)
-		pipex(lst->next, alst, o_pipe);
+		pipex(lst->next, o_pipe, shell);
 	wait_status();
 }

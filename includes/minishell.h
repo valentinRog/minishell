@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:40:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/26 15:05:26 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:43:28 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,5 @@
 # include "env.h"
 # include "builtins.h"
 # include "exec.h"
-
-int	g_exit_code;
 
 #endif
