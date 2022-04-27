@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 10:12:42 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/27 18:23:15 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	check_parsed_lst(t_list **alst)
 	while (node)
 	{
 		cmd = node->content;
-		if (!cmd->args && !cmd->infile && !cmd->outfiles && !cmd->heredoc)
+		if (!cmd->args)
 		{
 			if (node->prev && ((t_cmd *)node->prev->content)->con == con_PIPE)
 				return (parsing_error(alst, NULL, "|"));
