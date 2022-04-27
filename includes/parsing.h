@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/25 10:30:55 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/27 10:09:44 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_cmd
 	char	*infile;
 	t_list	*outfiles;
 	bool	append;
-	t_list	*limiters;
+	char	*heredoc;
 	int		con;
 	int		z_index;
 }	t_cmd;

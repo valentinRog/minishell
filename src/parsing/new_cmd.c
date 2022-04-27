@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:15:02 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/17 15:55:47 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/27 10:12:25 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_cmd(t_cmd *cmd)
 		cmd->infile = NULL;
 		cmd->outfiles = NULL;
 		cmd->append = false;
-		cmd->limiters = NULL;
+		cmd->heredoc = NULL;
 		cmd->con = con_NONE;
 		cmd->z_index = 0;
 	}
@@ -48,7 +48,8 @@ void	del_cmd(void *args)
 		if (cmd->infile)
 			free(cmd->infile);
 		lst_clear(&cmd->outfiles, free);
-		lst_clear(&cmd->limiters, free);
+		if (cmd->heredoc)
+			free(cmd->heredoc);
 		free(cmd);
 	}
 }

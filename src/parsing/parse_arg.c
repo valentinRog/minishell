@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 10:43:41 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/25 10:30:24 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/27 10:19:10 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,15 @@ bool	redirection(t_cmd *cmd, char *arg, char *con)
 	char	*arg_cpy;
 
 	arg_cpy = str_dup(arg);
-	if (!arg_cpy)
-		return (true);
-	if (!str_cmp("<<", con))
-		lst_add_back(&cmd->limiters, lst_new(arg_cpy));
+	if (!str_cmp("<<", con) || !str_cmp("<", con))
+	{
+		safe_free(cmd->infile);
+		safe_free(cmd->heredoc);
+		if (!str_cmp("<<", con))
+			cmd->heredoc = arg_cpy;
+		else
+			cmd->infile = arg_cpy;
+	}
 	else if (!str_cmp(">>", con) || !str_cmp(">", con))
 	{
 		lst_add_back(&cmd->outfiles, lst_new(arg_cpy));
@@ -42,14 +47,6 @@ bool	redirection(t_cmd *cmd, char *arg, char *con)
 		if (!str_cmp(">>", con))
 			cmd->append = true;
 	}
-	else if (!str_cmp("<", con))
-	{
-		if (cmd->infile)
-			free(cmd->infile);
-		cmd->infile = arg_cpy;
-	}
-	if (errno == ENOMEM)
-		free(arg_cpy);
 	if (!*arg || errno == ENOMEM)
 		return (true);
 	return (false);
@@ -72,7 +69,7 @@ bool	parenthesis(t_cmd *cmd, char *arg, char *con)
 {
 	if (!str_cmp("(", con))
 	{
-		if (cmd->args || cmd->limiters || cmd->outfiles || cmd->infile)
+		if (cmd->args || cmd->heredoc || cmd->outfiles || cmd->infile)
 			return (true);
 		z_index(z_INCR);
 	}
