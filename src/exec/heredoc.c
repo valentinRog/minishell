@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:56:55 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 15:29:40 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/27 16:07:55 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,18 @@ bool	heredoc(t_cmd *cmd, t_shell *shell)
 	int	fds[2];
 	int	pid;
 	int	exit_code;
-	int	ret;
 
 	if (pipe(fds) == -1)
-		return (b_perror("pipe"));
+		return (exec_error("pipe", shell, NULL, NULL));
 	pid = fork();
 	if (pid == -1)
-	{
-		close_pipe(fds);
-		return (b_perror("fork"));
-	}
+		return (exec_error("fork", shell, fds, NULL));
 	if (!pid)
 		heredoc_child(cmd, fds);
 	wait(&exit_code);
 	if (!exit_code)
-		ret = dup2(fds[PIPE_READ], STDIN_FILENO);
+		if (dup2(fds[PIPE_READ], STDIN_FILENO) < 0)
+			return (exec_error("dup2", shell, fds, NULL));
 	close_pipe(fds);
-	return ((bool)(exit_code || ret));
+	return (false);
 }

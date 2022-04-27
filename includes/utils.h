@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 10:14:08 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/27 15:45:19 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,6 @@ void	swap_ptr(void **a, void **b);
 
 /*sort*/
 void	lst_sort(t_list *lst, int (*cmp)(void *, void *));
-
-/*error*/
-bool	b_perror(char *str);
 
 /*free*/
 void	safe_free(void *ptr);

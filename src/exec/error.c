@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   erroc.c                                            :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/27 09:54:19 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 09:54:37 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/04/27 15:41:28 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/04/27 15:44:32 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	b_perror(char *str)
+bool	exec_error(char *str, t_shell *shell, int i_pipe[2], int o_pipe[2])
 {
-	perror(str);
+	if (str)
+		perror(str);
+	close_pipe(i_pipe);
+	close_pipe(o_pipe);
+	g_exit_code = 1;
 	return (true);
 }
