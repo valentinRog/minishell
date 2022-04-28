@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 09:50:15 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 17:02:03 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:37:23 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ static bool	dup_outfile(t_cmd *cmd, int o_pipe[2])
 	node = cmd->outfiles;
 	while (node)
 	{
-		fd = open((char *)node->content, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		if (cmd->append)
+			fd = open((char *)node->content, O_WRONLY | O_CREAT | O_APPEND, 0666);
+		else
+			fd = open((char *)node->content, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 		if (fd < 0)
 			return (exec_error((char *)node->content, NULL, NULL, o_pipe));
 		if (node->next)
