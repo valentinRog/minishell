@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 09:52:21 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/28 10:31:16 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 12:15:47 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ bool	bi_echo(char **cmds)
 	}
 	while (cmds[i])
 	{
+		if (i > 1)
+			printf(" ");
 		printf("%s", cmds[i]);
 		i++;
 	}

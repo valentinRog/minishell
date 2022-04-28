@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 12:46:56 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/25 10:14:43 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 12:54:54 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,24 @@ t_var	*str_to_var(char *str)
 	t_var	*var;
 	char	*ptr;
 
+	ptr = str_chr(str, '=');
+	if (!ptr)
+		return (NULL);
 	var = malloc(sizeof(t_var));
-	if (var)
+	if (!var)
+		return (NULL);
+	var->key = str_n_dup(str, ptr - str);
+	if (!var->key)
 	{
-		ptr = str_chr(str, '=');
-		var->key = str_n_dup(str, ptr - str);
-		if (!var->key)
-		{
-			free(var);
-			return (NULL);
-		}
-		var->data = str_dup(ptr + 1);
-		if (!var->data)
-		{
-			free(var->key);
-			free(var);
-			return (NULL);
-		}
+		free(var);
+		return (NULL);
+	}
+	var->data = str_dup(ptr + 1);
+	if (!var->data)
+	{
+		free(var->key);
+		free(var);
+		return (NULL);
 	}
 	return (var);
 }
