@@ -6,13 +6,13 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:37:31 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/28 10:31:00 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 13:31:00 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	bi_cd(char **cmds)
+bool	bi_cd(char **cmds, t_shell *shell)
 {
 	char	*path;
 	char	*user;
@@ -25,15 +25,15 @@ bool	bi_cd(char **cmds)
 		str_n_insert(&path, "/", str_len(path), 1);
 		str_n_insert(&path, cmds[1], str_len(path), str_len(cmds[1]));
 		if (errno == ENOMEM)
-			return (true);
+			return exec_error("cd", NULL, NULL, NULL);
 	}
 	else
 	{
 		path = str_dup("/Users/");
-		user = getenv("USER");
+		user = ((t_var *)table_find(shell->table, "USER")->content)->data;
 		str_n_insert(&path, user, str_len(path), str_len(user));
 		if (errno == ENOMEM)
-			return (true);
+			return exec_error("cd", NULL, NULL, NULL);
 	}
 	chdir(path);
 	free (path);
