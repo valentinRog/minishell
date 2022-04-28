@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:45:34 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/28 14:35:10 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:39:32 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	**get_paths(t_shell *shell)
 	node = table_find(shell->table, "PATH");
 	if (!node)
 	{
-		put_str_fd("PATH not found\n", STDERR_FILENO);
+		put_str_fd(EMPTY_PATH, STDERR_FILENO);
 		e_exec_error(NULL, shell);
 	}
 	paths = split(((t_var *)node->content)->data, ':');
