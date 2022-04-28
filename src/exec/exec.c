@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:45:34 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/28 14:39:32 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 21:17:22 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,37 +21,57 @@ static char	**get_paths(t_shell *shell)
 	if (!node)
 	{
 		put_str_fd(EMPTY_PATH, STDERR_FILENO);
-		e_exec_error(NULL, shell);
+		return (NULL);
 	}
 	paths = split(((t_var *)node->content)->data, ':');
-	if (!paths)
-		e_exec_error("split", shell);
 	return (paths);
+}
+
+t_list	*get_full_cmds(char **cmds, char **paths)
+{
+	t_list	*lst;
+	char	*cmd;
+
+	lst = NULL;
+	if (**cmds == '/' || !str_n_cmp(*cmds, "./", 2))
+		lst_add_back(&lst, lst_new(str_dup(*cmds)));
+	while (**cmds != '/' && str_n_cmp(*cmds, "./", 2) && *paths)
+	{
+		cmd = str_dup(*cmds);
+		str_n_insert(&cmd, "/", 0, 1);
+		str_n_insert(&cmd, *paths, 0, str_len(*paths));
+		paths++;
+		lst_add_back(&lst, lst_new(cmd));
+	}
+	return (lst);	
 }
 
 void	exec_bin(char **cmds, t_shell *shell)
 {
 	char		**paths;
-	char		*cmd;
-	size_t		i;
+	t_list		*lst;
 
 	paths = get_paths(shell);
-	i = 0;
-	while (paths[i])
+	lst = get_full_cmds(cmds, paths);
+	if (!paths || !lst)
 	{
-		cmd = str_dup(*cmds);
-		str_n_insert(&cmd, "/", 0, 1);
-		str_n_insert(&cmd, paths[i], 0, str_len(paths[i]));
-		if (!access(cmd, F_OK))
+		str_arr_free(paths);
+		e_exec_error("exec_bin", shell);
+	}
+	while (lst)
+	{
+		if (!access(lst->content, F_OK))
 		{
-			if (!access(cmd, X_OK))
-				execve(cmd, cmds, NULL);
-			b_exec_error(cmd, shell, NULL, NULL);
+			if (!access(lst->content, X_OK))
+				execve(lst->content, cmds, NULL);
+			b_exec_error(lst->content, shell, NULL, NULL);
 			exit(126);
 		}
-		i++;
+		lst = lst->next;
 	}
-	b_exec_error(*cmds, shell, NULL, NULL);
+	put_str_fd(*cmds, STDERR_FILENO);
+	put_str_fd(": command not found\n", STDERR_FILENO);
+	b_exec_error(NULL, shell, NULL, NULL);
 	str_arr_free(paths);
 	exit(127);
 }
