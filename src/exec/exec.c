@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:45:34 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/28 10:06:56 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:13:54 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,28 @@ void	exec(char **cmds, t_shell *shell)
 
 bool	exec_builtin(t_cmd *cmd, t_shell *shell)
 {
-	char	*str;
 	char	**cmds;
 
-	str = (char *)cmd->args->content;
-	cmds = lst_to_str_arr(cmd->args);
-	if (!str_cmp(str, "echo"))
-		bi_echo(cmds);
-	else if (!str_cmp(str, "cd"))
-		bi_cd(cmds);
-	else if (!str_cmp(str, "pwd"))
+	if (!str_cmp((char *)cmd->args->content, "pwd"))
 		bi_pwd();
-	else if (!str_cmp(str, "export"))
-		bi_export(cmds, shell);
-	else if (!str_cmp(str, "unset"))
-		bi_unset(cmds, shell);
-	else if (!str_cmp(str, "env"))
+	else if (!str_cmp((char *)cmd->args->content, "env"))
 		bi_env(shell);
-	else if (!str_cmp(str, "exit"))
+	else if (!str_cmp((char *)cmd->args->content, "exit"))
 		bi_exit(shell);
-	str_arr_free(cmds);
+	else
+	{
+		cmds = lst_to_str_arr(cmd->args);
+		if (!cmds)
+			return (exec_error("exec_builtin", NULL, NULL, NULL));
+		if (!str_cmp((char *)cmd->args->content, "echo"))
+			bi_echo(cmds);
+		else if (!str_cmp((char *)cmd->args->content, "cd"))
+			bi_cd(cmds);
+		else if (!str_cmp((char *)cmd->args->content, "export"))
+			bi_export(cmds, shell);
+		else if (!str_cmp((char *)cmd->args->content, "unset"))
+			bi_unset(cmds, shell);
+		str_arr_free(cmds);
+	}
 	return (false);
 }
