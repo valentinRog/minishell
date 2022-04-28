@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 17:17:25 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/28 12:36:52 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:30:55 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	print_env(t_list *node)
 static bool	error(t_list **alst)
 {
 	lst_clear(alst, NULL);
-	return (exec_error("env", NULL, NULL, NULL));
+	return (b_exec_error("env", NULL, NULL, NULL));
 }
 
 bool	bi_env(t_shell *shell)

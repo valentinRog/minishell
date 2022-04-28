@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:37:31 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/28 13:50:41 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:30:55 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ bool	bi_cd(char **cmds, t_shell *shell)
 		return (true);
 	path = get_path(cmds, shell);
 	if (!path)
-		return (exec_error("cd", NULL, NULL, NULL));
+		return (b_exec_error("cd", NULL, NULL, NULL));
 	if (chdir(path) < 0)
 	{
 		perror(path);

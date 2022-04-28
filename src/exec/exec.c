@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:45:34 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/28 14:28:33 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:35:10 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,12 @@ static char	**get_paths(t_shell *shell)
 	node = table_find(shell->table, "PATH");
 	if (!node)
 	{
-		exec_error(NULL, shell, NULL, NULL);
-		write(2, "PATH not found\n", str_len("PATH not found\n"));
-		exit(EXIT_FAILURE);
+		put_str_fd("PATH not found\n", STDERR_FILENO);
+		e_exec_error(NULL, shell);
 	}
 	paths = split(((t_var *)node->content)->data, ':');
 	if (!paths)
-	{
-		exec_error("split", shell, NULL, NULL);
-		exit(EXIT_FAILURE);
-	}
+		e_exec_error("split", shell);
 	return (paths);
 }
 
@@ -50,12 +46,12 @@ void	exec_bin(char **cmds, t_shell *shell)
 		{
 			if (!access(cmd, X_OK))
 				execve(cmd, cmds, NULL);
-			exec_error(cmd, shell, NULL, NULL);
+			b_exec_error(cmd, shell, NULL, NULL);
 			exit(126);
 		}
 		i++;
 	}
-	exec_error(*cmds, shell, NULL, NULL);
+	b_exec_error(*cmds, shell, NULL, NULL);
 	str_arr_free(paths);
 	exit(127);
 }
@@ -74,7 +70,7 @@ bool	exec_builtin(t_cmd *cmd, t_shell *shell)
 		return (bi_env(shell));
 	cmds = lst_to_str_arr(cmd->args);
 	if (!cmds)
-		return (exec_error("exec_builtin", NULL, NULL, NULL));
+		return (b_exec_error("exec_builtin", NULL, NULL, NULL));
 	if (!str_cmp((char *)cmd->args->content, "echo"))
 		err = bi_echo(cmds);
 	else if (!str_cmp((char *)cmd->args->content, "cd"))

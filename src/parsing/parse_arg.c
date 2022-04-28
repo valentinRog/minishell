@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 10:43:41 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 10:19:10 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:37:30 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ bool	redirection(t_cmd *cmd, char *arg, char *con)
 	arg_cpy = str_dup(arg);
 	if (!str_cmp("<<", con) || !str_cmp("<", con))
 	{
-		safe_free(cmd->infile);
-		safe_free(cmd->heredoc);
+		if (cmd->infile)
+			free(cmd->infile);
+		if (cmd->heredoc)
+			free(cmd->heredoc);
 		if (!str_cmp("<<", con))
 			cmd->heredoc = arg_cpy;
 		else

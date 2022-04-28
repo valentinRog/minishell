@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 15:49:40 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/28 13:16:25 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:30:55 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	bi_export(char **cmd, t_shell *shell)
 	{
 		new_var = str_to_var(cmd[i]);
 		if (errno == ENOMEM)
-			return (exec_error("export", NULL, NULL, NULL));
+			return (b_exec_error("export", NULL, NULL, NULL));
 		i++;
 		if (!new_var)
 			continue ;
@@ -34,7 +34,7 @@ bool	bi_export(char **cmd, t_shell *shell)
 		if (errno == ENOMEM)
 		{
 			del_var((void *)new_var);
-			return (exec_error("export", NULL, NULL, NULL));
+			return (b_exec_error("export", NULL, NULL, NULL));
 		}
 	}
 	return (false);

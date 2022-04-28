@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:56:55 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 17:04:06 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:36:54 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ void	heredoc_child(t_cmd *cmd, int fds[2], t_shell *shell)
 	line = NULL;
 	while (true)
 	{
-		safe_free(line);
+		if (line)
+			free(line);
 		line = get_next_line(STDIN_FILENO);
 		if (!line)
 		{
-			exec_error("get_next_line", shell, fds, NULL);
+			b_exec_error("get_next_line", shell, fds, NULL);
 			exit(EXIT_FAILURE);
 		}
 		if
@@ -47,16 +48,16 @@ bool	heredoc(t_cmd *cmd, t_shell *shell)
 	int	exit_code;
 
 	if (pipe(fds) < 0)
-		return (exec_error("pipe", NULL, NULL, NULL));
+		return (b_exec_error("pipe", NULL, NULL, NULL));
 	pid = fork();
 	if (pid < 0)
-		return (exec_error("fork", NULL, fds, NULL));
+		return (b_exec_error("fork", NULL, fds, NULL));
 	if (!pid)
 		heredoc_child(cmd, fds, shell);
 	wait(&exit_code);
 	if (!exit_code)
 		if (dup2(fds[PIPE_READ], STDIN_FILENO) < 0)
-			return (exec_error("dup2", NULL, fds, NULL));
+			return (b_exec_error("dup2", NULL, fds, NULL));
 	close_pipe(fds);
 	return (false);
 }
