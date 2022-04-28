@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:33:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/28 14:39:25 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:53:38 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define PIPE_WRITE 1
 
 # define EMPTY_PATH "PATH not found\n"
+# define EMPTY_USER "USER not found\n"
 
 /*launcher*/
 void	launcher(t_list *lst, int z, t_shell *shell);

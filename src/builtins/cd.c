@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:37:31 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/28 14:30:55 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:55:42 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*get_path(char **cmds, t_shell *shell)
 		node = table_find(shell->table, "USER");
 		if (!node)
 		{
-			chdir(NULL);
+			put_str_fd(EMPTY_USER, STDERR_FILENO);
 			return (NULL);
 		}
 		path = str_dup("/Users/");
@@ -46,8 +46,10 @@ bool	bi_cd(char **cmds, t_shell *shell)
 	if (!cmds || str_cmp("cd", *cmds))
 		return (true);
 	path = get_path(cmds, shell);
-	if (!path)
+	if (errno == ENOMEM)
 		return (b_exec_error("cd", NULL, NULL, NULL));
+	if (!path)
+		return (true);
 	if (chdir(path) < 0)
 	{
 		perror(path);
