@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   builtin.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,30 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#ifndef BUILTIN_H
+# define BUILTIN_H
 
 # include "minishell.h"
 
 /*echo*/
-void	bi_echo(char **cmd);
+void	bi_echo(char **cmds);
 
 /*cd*/
-void	bi_cd(char **cmd);
+void	bi_cd(char **cmds);
 
 /*pwd*/
 void	bi_pwd(void);
 
 /*export*/
-void	bi_export(char **cmd, t_list *table[TABLE_SIZE]);
+void	bi_export(char **cmds, t_shell *shell);
 
 /*unset*/
-void	bi_unset(char **cmd, t_list *table[TABLE_SIZE]);
+void	bi_unset(char **cmds, t_shell *shell);
 
 /*env*/
-void	bi_env(t_list *table[TABLE_SIZE]);
+void	bi_env(t_shell *shell);
 
 /*exit*/
-void	bi_exit(void);
+void	bi_exit(t_shell *shell);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 10:20:37 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/26 14:51:28 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:05:12 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	bi_unset(char **cmd, t_list *table[TABLE_SIZE])
+void	bi_unset(char **cmd, t_shell *shell)
 {
 	char	*var;
 	char	*ptr;
@@ -27,8 +27,8 @@ void	bi_unset(char **cmd, t_list *table[TABLE_SIZE])
 		var = str_n_dup(cmd[i], ptr - cmd[i]);
 		if (errno == ENOMEM)
 			return ;
-		if (table_find(table, var))
-			table_remove(table, var);
+		if (table_find(shell->table, var))
+			table_remove(shell->table, var);
 		free (var);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:40:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 13:43:28 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:01:17 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # include "main.h"
 # include "get_next_line.h"
 # include "env.h"
-# include "builtins.h"
+# include "builtin.h"
 # include "exec.h"
 
 #endif

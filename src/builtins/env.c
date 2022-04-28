@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 17:17:25 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/26 14:51:39 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:03:24 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	env_cmp(void *arg_1, void *arg_2)
 	return (str_cmp_no_case(var_1->key, var_2->key));
 }
 
-static void	print_env(t_list	*node)
+static void	print_env(t_list *node)
 {
 	t_var	*var;
 
@@ -34,7 +34,7 @@ static void	print_env(t_list	*node)
 	}
 }
 
-void	bi_env(t_list *table[TABLE_SIZE])
+void	bi_env(t_shell *shell)
 {
 	t_list	*lst;
 	size_t	i;
@@ -44,7 +44,7 @@ void	bi_env(t_list *table[TABLE_SIZE])
 	lst = NULL;
 	while (i < TABLE_SIZE)
 	{
-		node = table[i];
+		node = shell->table[i];
 		while (node)
 		{
 			lst_add_back(&lst, lst_new(node->content));

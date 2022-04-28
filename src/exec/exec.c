@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:45:34 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 18:18:18 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:06:56 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	exec(char **cmds, t_shell *shell)
 	exit(EXIT_FAILURE);
 }
 
-bool	exec_builtin(t_cmd *cmd)
+bool	exec_builtin(t_cmd *cmd, t_shell *shell)
 {
 	char	*str;
 	char	**cmds;
@@ -43,13 +43,13 @@ bool	exec_builtin(t_cmd *cmd)
 	else if (!str_cmp(str, "pwd"))
 		bi_pwd();
 	else if (!str_cmp(str, "export"))
-		bi_export(cmds, get_table(NULL));
+		bi_export(cmds, shell);
 	else if (!str_cmp(str, "unset"))
-		bi_unset(cmds, get_table(NULL));
+		bi_unset(cmds, shell);
 	else if (!str_cmp(str, "env"))
-		bi_env(get_table(NULL));
+		bi_env(shell);
 	else if (!str_cmp(str, "exit"))
-		bi_exit();
+		bi_exit(shell);
 	str_arr_free(cmds);
 	return (false);
 }

@@ -6,13 +6,14 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:40:23 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/27 10:41:39 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:03:55 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	bi_exit(void)
+void	bi_exit(t_shell *shell)
 {
+	clear_shell(shell);
 	exit(EXIT_SUCCESS);
 }

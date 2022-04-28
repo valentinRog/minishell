@@ -6,13 +6,13 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 15:49:40 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/26 14:51:16 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:04:31 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	bi_export(char **cmd, t_list *table[TABLE_SIZE])
+void	bi_export(char **cmd, t_shell *shell)
 {
 	t_var	*new_var;
 	int		i;
@@ -25,9 +25,9 @@ void	bi_export(char **cmd, t_list *table[TABLE_SIZE])
 		new_var = str_to_var(cmd[i]);
 		if (errno == ENOMEM)
 			return ;
-		if (table_find(table, new_var->key))
-			table_remove(table, new_var->key);
-		table_add(table, new_var);
+		if (table_find(shell->table, new_var->key))
+			table_remove(shell->table, new_var->key);
+		table_add(shell->table, new_var);
 		if (errno == ENOMEM)
 			return ;
 		i++;
