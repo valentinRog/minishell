@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:45:34 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/28 21:17:22 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 21:25:47 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_list	*get_full_cmds(char **cmds, char **paths)
 		paths++;
 		lst_add_back(&lst, lst_new(cmd));
 	}
-	return (lst);	
+	return (lst);
 }
 
 void	exec_bin(char **cmds, t_shell *shell)
@@ -60,19 +60,13 @@ void	exec_bin(char **cmds, t_shell *shell)
 	}
 	while (lst)
 	{
-		if (!access(lst->content, F_OK))
-		{
-			if (!access(lst->content, X_OK))
-				execve(lst->content, cmds, NULL);
-			b_exec_error(lst->content, shell, NULL, NULL);
-			exit(126);
-		}
+		execve(lst->content, cmds, NULL);
 		lst = lst->next;
 	}
-	put_str_fd(*cmds, STDERR_FILENO);
-	put_str_fd(": command not found\n", STDERR_FILENO);
-	b_exec_error(NULL, shell, NULL, NULL);
+	b_exec_error(*cmds, shell, NULL, NULL);
 	str_arr_free(paths);
+	if (errno == EACCES)
+		exit(126);
 	exit(127);
 }
 
