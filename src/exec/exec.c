@@ -6,13 +6,13 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:45:34 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/28 10:30:15 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 13:26:16 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec(char **cmds, t_shell *shell)
+void	exec_bin(char **cmds, t_shell *shell)
 {
 	char	**paths;
 	char	*cmd;
@@ -47,7 +47,7 @@ bool	exec_builtin(t_cmd *cmd, t_shell *shell)
 	if (!str_cmp((char *)cmd->args->content, "echo"))
 		err = bi_echo(cmds);
 	else if (!str_cmp((char *)cmd->args->content, "cd"))
-		err = bi_cd(cmds);
+		err = bi_cd(cmds, shell);
 	else if (!str_cmp((char *)cmd->args->content, "export"))
 		err = bi_export(cmds, shell);
 	else if (!str_cmp((char *)cmd->args->content, "unset"))

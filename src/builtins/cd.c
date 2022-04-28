@@ -6,13 +6,13 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:37:31 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/28 11:37:10 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 13:42:23 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*get_path(char **cmds)
+static char	*get_path(char **cmds, t_shell *shell)
 {
 	char	*path;
 	char	*user;
@@ -26,19 +26,19 @@ static char	*get_path(char **cmds)
 	else
 	{
 		path = str_dup("/Users/");
-		user = getenv("USER");
+		user = ((t_var *)table_find(shell->table, "USER")->content)->data;
 		str_n_insert(&path, user, str_len(path), str_len(user));
 	}
 	return (path);
 }
 
-bool	bi_cd(char **cmds)
+bool	bi_cd(char **cmds, t_shell *shell)
 {
 	char	*path;
 
 	if (!cmds || str_cmp("cd", *cmds))
 		return (true);
-	path = get_path(cmds);
+	path = get_path(cmds, shell);
 	if (!path)
 		return (exec_error("cd", NULL, NULL, NULL));
 	if (chdir(path) < 0)
