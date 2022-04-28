@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 17:17:25 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/28 10:03:24 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:20:05 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	print_env(t_list *node)
 	}
 }
 
-void	bi_env(t_shell *shell)
+bool	bi_env(t_shell *shell)
 {
 	t_list	*lst;
 	size_t	i;
@@ -49,7 +49,7 @@ void	bi_env(t_shell *shell)
 		{
 			lst_add_back(&lst, lst_new(node->content));
 			if (errno == ENOMEM)
-				return (lst_clear(&lst, NULL));
+				return (true);//??????
 			node = node->next;
 		}
 		i++;
@@ -58,4 +58,5 @@ void	bi_env(t_shell *shell)
 	lst_sort(lst, env_cmp);
 	print_env(node);
 	lst_clear(&lst, NULL);
+	return (false);
 }

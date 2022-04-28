@@ -16,22 +16,22 @@
 # include "minishell.h"
 
 /*echo*/
-void	bi_echo(char **cmds);
+bool	bi_echo(char **cmds);
 
 /*cd*/
-void	bi_cd(char **cmds);
+bool	bi_cd(char **cmds);
 
 /*pwd*/
-void	bi_pwd(void);
+bool	bi_pwd(void);
 
 /*export*/
-void	bi_export(char **cmds, t_shell *shell);
+bool	bi_export(char **cmds, t_shell *shell);
 
 /*unset*/
-void	bi_unset(char **cmds, t_shell *shell);
+bool	bi_unset(char **cmds, t_shell *shell);
 
 /*env*/
-void	bi_env(t_shell *shell);
+bool	bi_env(t_shell *shell);
 
 /*exit*/
 void	bi_exit(t_shell *shell);
