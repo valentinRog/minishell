@@ -6,13 +6,13 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:45:34 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/28 10:30:15 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 13:03:45 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec(char **cmds, t_shell *shell)
+void	exec_bin(char **cmds, t_shell *shell)
 {
 	char	**paths;
 	char	*cmd;
