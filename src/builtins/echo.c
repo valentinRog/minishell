@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 09:52:21 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/28 10:31:16 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/28 11:28:43 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,17 @@
 bool	bi_echo(char **cmds)
 {
 	int		i;
-	bool	n;
 
-	n = false;
-	i = 1;
-	if (str_n_cmp(cmds[0], "echo", str_len(cmds[0])) != 0)
+	if (!cmds || str_cmp("echo", *cmds))
 		return (true);
-	if (str_n_cmp(cmds[1], "-n", str_len(cmds[1])) == 0)
-	{
-		n = true;
-		i++;
-	}
+	i = 1;
 	while (cmds[i])
 	{
-		printf("%s", cmds[i]);
+		if (str_cmp(cmds[1], "-n") || i > 1)
+			printf("%s", cmds[i]);
 		i++;
 	}
-	if (n == false)
+	if (str_cmp(cmds[1], "-n"))
 		printf("\n");
 	return (false);
 }
