@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 12:46:56 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/28 12:54:54 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/29 23:57:32 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	init_env(t_list *table[TABLE_SIZE], char **env)
 	t_var	*var;
 
 	table_init(table);
-	while (*env)
+	while (env && *env)
 	{
 		var = str_to_var(*env);
 		if (!var)
