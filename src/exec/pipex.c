@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:23:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/28 14:30:55 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:13:22 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,24 @@ void	wait_status(void)
 	wait(&w_status);
 	if (WIFEXITED(w_status))
 		g_exit_code = WEXITSTATUS(w_status);
+}
+
+static void	child(t_cmd *cmd, int i_pipe[2], int o_pipe[2], t_shell *shell)
+{
+	char	**cmds;
+
+	if (dup_stdin(cmd, i_pipe, shell) || dup_stdout(cmd, o_pipe))
+		e_exec_error(NULL, shell);
+	if (is_tok((char *)cmd->args->content, "env:echo:pwd", ':'))
+	{
+		if (exec_builtin(cmd, shell))
+			e_exec_error(cmd->args->content, shell);
+		exit(EXIT_SUCCESS);
+	}
+	cmds = lst_to_str_arr(cmd->args);
+	if (!cmds)
+		e_exec_error("lst_to_str_arr", shell);
+	exec_bin(cmds, shell);
 }
 
 void	pipex(t_list *lst, int i_pipe[2], t_shell *shell)
