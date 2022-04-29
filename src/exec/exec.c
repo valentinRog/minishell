@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:45:34 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/29 23:37:14 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/30 00:26:13 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,8 @@ t_list	*get_full_cmds(char **cmds, char **paths)
 	{
 		cmd = str_dup(*cmds);
 		if (cmd)
-			lst_add_back(&lst, lst_new(cmd));
-		if (errno == ENOMEM)
-			return (error(&lst, NULL, NULL, cmd));
+			if (!lst_add_back(&lst, lst_new(cmd)))
+				return (error(&lst, NULL, NULL, cmd));
 	}
 	while (**cmds != '/' && str_n_cmp(*cmds, "./", 2) && *paths)
 	{
@@ -58,8 +57,7 @@ t_list	*get_full_cmds(char **cmds, char **paths)
 		str_n_insert(&cmd, *paths, 0, str_len(*paths));
 		if (!cmd)
 			return (error(&lst, NULL, NULL, cmd));
-		lst_add_back(&lst, lst_new(cmd));
-		if (errno == ENOMEM)
+		if (!lst_add_back(&lst, lst_new(cmd)))
 			return (error(&lst, NULL, NULL, cmd));
 		paths++;
 	}
