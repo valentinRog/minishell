@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:23:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/29 14:13:22 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:32:45 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	child(t_cmd *cmd, int i_pipe[2], int o_pipe[2], t_shell *shell)
 {
 	char	**cmds;
 
+	if (substitute(cmd, shell))
+		e_exec_error("substitute", shell);
 	if (dup_stdin(cmd, i_pipe, shell) || dup_stdout(cmd, o_pipe))
 		e_exec_error(NULL, shell);
 	if (is_tok((char *)cmd->args->content, "env:echo:pwd", ':'))

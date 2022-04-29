@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:33:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/29 14:13:33 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:34:17 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,8 @@ bool	heredoc(t_cmd *cmd, t_shell *shell);
 /*error*/
 bool	b_exec_error(char *str, t_shell *shell, int i_pipe[2], int o_pipe[2]);
 void	e_exec_error(char *str, t_shell *shell);
+
+/*substitute*/
+bool	substitute(t_cmd *cmd, t_shell *shell);
 
 #endif
