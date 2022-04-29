@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:45:34 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/28 21:25:47 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/29 13:49:06 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@ static char	**get_paths(t_shell *shell)
 	return (paths);
 }
 
+static void	*error(t_list **alst, char *cmd)
+{
+	if (cmd)
+		free(cmd);
+	lst_clear(alst, free);
+	return (NULL);
+}
+
 t_list	*get_full_cmds(char **cmds, char **paths)
 {
 	t_list	*lst;
@@ -34,14 +42,24 @@ t_list	*get_full_cmds(char **cmds, char **paths)
 
 	lst = NULL;
 	if (**cmds == '/' || !str_n_cmp(*cmds, "./", 2))
-		lst_add_back(&lst, lst_new(str_dup(*cmds)));
+	{
+		cmd = str_dup(*cmds);
+		if (cmd)
+			lst_add_back(&lst, lst_new(cmd));
+		if (errno == ENOMEM)
+			return (error(&lst, cmd));
+	}
 	while (**cmds != '/' && str_n_cmp(*cmds, "./", 2) && *paths)
 	{
 		cmd = str_dup(*cmds);
 		str_n_insert(&cmd, "/", 0, 1);
 		str_n_insert(&cmd, *paths, 0, str_len(*paths));
-		paths++;
+		if (!cmd)
+			return (error(&lst, cmd));
 		lst_add_back(&lst, lst_new(cmd));
+		if (errno == ENOMEM)
+			return (error(&lst, cmd));
+		paths++;
 	}
 	return (lst);
 }
@@ -64,6 +82,7 @@ void	exec_bin(char **cmds, t_shell *shell)
 		lst = lst->next;
 	}
 	b_exec_error(*cmds, shell, NULL, NULL);
+	lst_clear(&lst, free);
 	str_arr_free(paths);
 	if (errno == EACCES)
 		exit(126);
