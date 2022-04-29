@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:45:34 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/29 15:23:08 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/29 23:37:14 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ static char	**get_paths(t_shell *shell)
 	return (paths);
 }
 
-static void	*error(t_list **alst, char *cmd)
+static void	*error(t_list **alst, char **paths, char **env, char *cmd)
 {
+	lst_clear(alst, free);
+	str_arr_free(paths);
+	str_arr_free(env);
 	if (cmd)
 		free(cmd);
-	lst_clear(alst, free);
 	return (NULL);
 }
 
@@ -47,7 +49,7 @@ t_list	*get_full_cmds(char **cmds, char **paths)
 		if (cmd)
 			lst_add_back(&lst, lst_new(cmd));
 		if (errno == ENOMEM)
-			return (error(&lst, cmd));
+			return (error(&lst, NULL, NULL, cmd));
 	}
 	while (**cmds != '/' && str_n_cmp(*cmds, "./", 2) && *paths)
 	{
@@ -55,10 +57,10 @@ t_list	*get_full_cmds(char **cmds, char **paths)
 		str_n_insert(&cmd, "/", 0, 1);
 		str_n_insert(&cmd, *paths, 0, str_len(*paths));
 		if (!cmd)
-			return (error(&lst, cmd));
+			return (error(&lst, NULL, NULL, cmd));
 		lst_add_back(&lst, lst_new(cmd));
 		if (errno == ENOMEM)
-			return (error(&lst, cmd));
+			return (error(&lst, NULL, NULL, cmd));
 		paths++;
 	}
 	return (lst);
@@ -68,22 +70,25 @@ void	exec_bin(char **cmds, t_shell *shell)
 {
 	char		**paths;
 	t_list		*lst;
+	char		**env;
+	t_list		*node;
 
 	paths = get_paths(shell);
 	lst = get_full_cmds(cmds, paths);
-	if (!paths || !lst)
+	env = get_full_env(shell->table);
+	if (!paths || !lst || !env)
 	{
-		str_arr_free(paths);
+		error(&lst, paths, env, NULL);
 		e_exec_error("exec_bin", shell);
 	}
-	while (lst)
+	node = lst;
+	while (node)
 	{
-		execve(lst->content, cmds, NULL);
-		lst = lst->next;
+		execve(node->content, cmds, env);
+		node = node->next;
 	}
 	b_exec_error(*cmds, shell, NULL, NULL);
-	lst_clear(&lst, free);
-	str_arr_free(paths);
+	error(&lst, paths, env, NULL);
 	if (errno == EACCES)
 		exit(126);
 	exit(127);
