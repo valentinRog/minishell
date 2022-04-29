@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 10:09:44 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/29 15:45:04 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ enum e_z
 
 typedef struct s_cmd
 {
-	t_list	*args;
-	char	*infile;
-	t_list	*outfiles;
-	bool	append;
-	char	*heredoc;
-	int		con;
-	int		z_index;
+	t_list		*args;
+	char		*infile;
+	t_list		*outfiles;
+	bool		append;
+	char		*heredoc;
+	enum e_con	con;
+	int			z_index;
 }	t_cmd;
 
 /*parsing*/
