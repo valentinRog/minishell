@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/29 15:45:04 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/30 16:31:01 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,16 @@ t_list		*get_parsed_lst(char *line);
 
 /*parse_arg*/
 enum e_con	get_con(char *sep);
-int			z_index(enum e_z z);
-bool		parenthesis(t_cmd *cmd, char *arg, char *con);
 bool		parse_arg(t_cmd *cmd, char *arg, char *con);
 
 /*new_cmd*/
 void		init_cmd(t_cmd *cmd);
 t_cmd		*new_cmd(t_cmd **dst);
 void		del_cmd(void *args);
+
+/*parenthesis*/
+int			z_index(enum e_z z);
+bool		parenthesis(t_cmd *cmd, char *arg, char *con);
 
 /*testing*/
 void		print_lst(t_list *lst);
