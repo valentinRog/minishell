@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 18:23:15 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/01 13:08:09 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static t_cmd	*add_new_cmd(t_list **alst)
 	return (cmd);
 }
 
-static void	parsing_error(t_list **alst, char *arg, char *token)
+static void	error(t_list **alst, char *arg, char *token)
 {
 	lst_clear(alst, del_cmd);
 	if (arg)
@@ -59,19 +59,19 @@ static void	check_parsed_lst(t_list **alst)
 		if (!cmd->args)
 		{
 			if (node->prev && ((t_cmd *)node->prev->content)->con == con_PIPE)
-				return (parsing_error(alst, NULL, "|"));
+				return (error(alst, NULL, "|"));
 			if (node->prev && ((t_cmd *)node->prev->content)->con == con_AND)
-				return (parsing_error(alst, NULL, "&&"));
+				return (error(alst, NULL, "&&"));
 			if (node->prev && ((t_cmd *)node->prev->content)->con == con_OR)
-				return (parsing_error(alst, NULL, "||"));
-			return (parsing_error(alst, NULL, NULL));
+				return (error(alst, NULL, "||"));
+			return (error(alst, NULL, NULL));
 		}
 		node = node->next;
 	}
 	if (z_index(z_NONE) > 0)
-		return (parsing_error(alst, NULL, "("));
+		return (error(alst, NULL, "("));
 	if (z_index(z_NONE) < 0)
-		return (parsing_error(alst, NULL, ")"));
+		return (error(alst, NULL, ")"));
 	str_tok(NULL, NULL, NULL);
 }
 
@@ -92,10 +92,10 @@ static void	parse_into_lst(t_list **alst, char *line, t_tok *tok)
 			cmd->con = get_con(con);
 			cmd = add_new_cmd(alst);
 			if (!cmd)
-				return (parsing_error(alst, arg, NULL));
+				return (error(alst, arg, NULL));
 		}
 		if (parse_arg(cmd, arg, con))
-			return (parsing_error(alst, arg, con));
+			return (error(alst, arg, con));
 		free(arg);
 		return (parse_into_lst(alst, line, tok));
 	}
