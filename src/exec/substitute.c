@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 14:32:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/02 15:53:40 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/02 18:00:26 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,48 @@ static void	print_tab(t_list *lst)
 		printf("(null)\n");
 }
 
+char	*get_value(char *str, t_shell *shell)
+{
+	char	*key = str_dup1();
+
+	size_t	i = 0;
+	while (str[i] && str[i] != ' ' && str[i] != '\"')
+	{
+		str_n_insert(&key, str + i, str_len(key), 1);
+		i++;
+	}
+	t_list	*node = table_find(shell->table, key);
+	free(key);
+	if (node)
+		return ((t_var *)node->content)->data;
+	return ("");
+}
+
 void	split_into_lst(t_list **alst, char *str, t_shell *shell)
 {
-	t_list	*lst;
 	size_t	i;
 	char	*content;
-	lst = NULL;
+	char	quote;
+
 	i = 0;
 	content = str_dup1();
-	while (str[i] && (str[i] != '*' || in_quote(str, QUOTES, i)))
+	quote = '\0';
+	while (str[i] && (str[i] != '*' || quote))
 	{
-		str_n_insert(&content, str + i, str_len(content), 1);
+		if (!quote && (str[i] == '\"' || str[i] == '\''))
+			quote = str[i];
+		else if (quote == str[i])
+			quote = '\0';
+		else if (str[i] == '$' && quote != '\'')
+		{
+			i++;
+			str_n_insert(&content, get_value(str + i, shell), str_len(content), str_len(get_value(str + i, shell)));
+			while (str[i] && str[i] != ' ')
+				i++;
+			continue ;
+		}
+		else
+			str_n_insert(&content, str + i, str_len(content), 1);
 		i++;
 	}
 	lst_add_back(alst, lst_new(content));
