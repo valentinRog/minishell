@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 14:32:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/02 23:29:21 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/02 23:46:58 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,20 +116,6 @@ t_list	*get_wild_lst(char *str, t_shell *shell, t_list *dir_list)
 			lst_add_back(&wild_lst, lst_new(str_dup(node->content)));
 	}
 	return (wild_lst);
-}
-
-t_list	*get_dir_list(void)
-{
-	t_list	*dir_list;
-	DIR *d;
-	struct dirent *dir;
-
-	dir_list = NULL;
-	d = opendir(".");
-	while ((dir = readdir(d)))
-		lst_add_back(&dir_list, lst_new(str_dup(dir->d_name)));
-	closedir(d);
-	return (dir_list);
 }
 
 bool	substitute(t_cmd *cmd, t_shell *shell)
