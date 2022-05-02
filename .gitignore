@@ -1,3 +1,5 @@
 .vscode/**
 .cache/**
 *.json
+**.o
+minishell
