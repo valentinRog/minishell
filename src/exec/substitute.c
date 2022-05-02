@@ -6,58 +6,55 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 14:32:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/02 12:17:00 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/02 15:49:17 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_new_str(char *str, t_shell *shell)
+static void	print_tab(t_list *lst)
 {
-	char	*dst;
-	char	*key;
-	size_t	i = 0;
-	char	quote = 0;
-	dst = str_dup1();
-	while (str[i])
+	if (lst)
 	{
-		if (str[i] == '\"' || str[i] == '\'')
+		printf("[");
+		while (lst)
 		{
-			if (!quote)
-				quote = str[i];
-			else if (quote == str[i])
-				quote = 0;
-			i++;
-			continue;
+			if (lst->prev)
+				printf(", ");
+			printf("\"%s\"", (char *)lst->content);
+			lst = lst->next;
 		}
-		else if (str[i] == '$' && quote != '\'')
-		{
-			i++;
-			key = str_dup1();
-			while (str[i] != '\'' && str[i] != '\"' && str[i] && str[i] != '$' && str[i] != ' ')
-			{
-				str_n_insert(&key, str + i, str_len(key), 1);
-				i++;
-			}
-			char	*val;
-			if (table_find(shell->table, key))
-				val = ((t_var *)table_find(shell->table, key)->content)->data;
-			else
-				val = "";
-			str_n_insert(&dst, val, str_len(dst), str_len(val));
-			continue;
-		}
-		str_n_insert(&dst, str + i, str_len(dst), 1);
+		printf("]\n");
+	}
+	else
+		printf("(null)\n");
+}
+
+void	split_into_lst(t_list **alst, char *str, t_shell *shell)
+{
+	t_list	*lst;
+	size_t	i;
+	char	*content;
+	lst = NULL;
+	i = 0;
+	content = str_dup1();
+	while (str[i] && (str[i] != '*' || in_quote(str, QUOTES, i)))
+	{
+		str_n_insert(&content, str + i, str_len(content), 1);
 		i++;
-	}	
-	return (dst);
+	}
+	lst_add_back(alst, lst_new(content));
+	if (str[i])
+		split_into_lst(alst, str + i + 1, shell);
 }
 
 bool	substitute(t_cmd *cmd, t_shell *shell)
 {
 	for (t_list *node = cmd->args; node; node = node->next)
 	{
-		node->content = get_new_str(node->content, shell);
+		t_list	*lst = NULL;
+		split_into_lst(&lst, node->content, shell);
+		print_tab(lst);
 	}
 	return (false);
 }
