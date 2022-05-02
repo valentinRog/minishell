@@ -6,11 +6,23 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 14:32:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/02 18:35:36 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/02 23:29:21 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	lst_append(t_list **alst, t_list *lst)
+{
+	t_list	*next;
+
+	if (lst)
+	{
+		next = lst->next;
+		lst_add_back(alst, lst);
+		lst_append(alst, next);
+	}
+}
 
 static void	print_tab(t_list *lst)
 {
@@ -83,13 +95,58 @@ void	split_into_lst(t_list **alst, char *str, t_shell *shell)
 		split_into_lst(alst, str + i + 1, shell);
 }
 
+bool	is_ok(t_list *lst, char *str)
+{
+	return (true);
+}
+
+t_list	*get_wild_lst(char *str, t_shell *shell, t_list *dir_list)
+{
+	t_list	*lst;
+	t_list	*wild_lst;
+
+	lst = NULL;
+	split_into_lst(&lst, str, shell);
+	wild_lst = NULL;
+	if (lst_size(lst) == 1)
+		return (lst_new(str_dup(lst->content)));
+	for (t_list *node = dir_list; node; node = node->next)
+	{
+		if (is_ok(lst, node->content))
+			lst_add_back(&wild_lst, lst_new(str_dup(node->content)));
+	}
+	return (wild_lst);
+}
+
+t_list	*get_dir_list(void)
+{
+	t_list	*dir_list;
+	DIR *d;
+	struct dirent *dir;
+
+	dir_list = NULL;
+	d = opendir(".");
+	while ((dir = readdir(d)))
+		lst_add_back(&dir_list, lst_new(str_dup(dir->d_name)));
+	closedir(d);
+	return (dir_list);
+}
+
 bool	substitute(t_cmd *cmd, t_shell *shell)
 {
-	for (t_list *node = cmd->args; node; node = node->next)
+	t_list	*new_args;
+	t_list	*dir_list;
+	t_list	*node;
+
+	new_args = NULL;
+	dir_list = get_dir_list();
+	node = cmd->args;
+	while (node)
 	{
-		t_list	*lst = NULL;
-		split_into_lst(&lst, node->content, shell);
-		print_tab(lst);
+		lst_append(&new_args, get_wild_lst(node->content, shell, dir_list));
+		node = node->next;
 	}
+	lst_clear(&cmd->args, free);
+	cmd->args = new_args;
 	return (false);
 }

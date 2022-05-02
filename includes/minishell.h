@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:40:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/28 10:01:17 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/02 21:44:58 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 
 # include <readline/readline.h>
 # include <readline/history.h>
+
+# include <dirent.h>
 
 # include "data_struct.h"
 # include "utils.h"

@@ -1,4 +1,4 @@
- NAME = minishell
+NAME = minishell
 
 SRC = $(wildcard src/*/*.c)\
 
@@ -6,7 +6,7 @@ INCLUDES = includes
 
 OBJ = $(SRC:.c=.o)
 
-CFLAGS = -Wall -Wextra -fsanitize=address
+CFLAGS = -Wall -Wextra #-fsanitize=address
 
 LIB = -lreadline
 
