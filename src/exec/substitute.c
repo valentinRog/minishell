@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 14:32:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/02 18:07:55 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/02 18:35:36 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,32 +30,31 @@ static void	print_tab(t_list *lst)
 		printf("(null)\n");
 }
 
-char	*get_value(char *str, t_shell *shell)
+size_t	replace_var(char **dst, char *str, t_shell *shell)
 {
-	char	*key = str_dup1();
+	char	*key;
+	size_t	i;
+	t_list	*node;
+	char	*val;
 
-	size_t	i = 0;
+	str++;
+	i = 0;
+	key = str_dup1();
 	while (str[i] && str[i] != ' ' && str[i] != '\"')
 	{
 		str_n_insert(&key, str + i, str_len(key), 1);
 		i++;
 	}
-	t_list	*node = table_find(shell->table, key);
+	node = table_find(shell->table, key);
 	free(key);
 	if (node)
-		return ((t_var *)node->content)->data;
-	return ("");
-}
-
-size_t	yo(char **dst, char *str, t_shell *shell)
-{
-	size_t	i;
-
-	i = 1;
-	str_n_insert(dst, get_value(str + 1, shell), str_len(*dst), str_len(get_value(str + 1, shell)));
+	{
+		val = ((t_var *)node->content)->data;
+		str_n_insert(dst, val, str_len(*dst), str_len(val));
+	}
 	while (str[i] && str[i] != ' ' && str[i] != '\"')
-				i++;
-	return (i - 1);
+		i++;
+	return (i);
 }
 
 void	split_into_lst(t_list **alst, char *str, t_shell *shell)
@@ -74,7 +73,7 @@ void	split_into_lst(t_list **alst, char *str, t_shell *shell)
 		else if (quote == str[i])
 			quote = '\0';
 		else if (str[i] == '$' && quote != '\'')
-			i += yo(&content, str + i, shell);
+			i += replace_var(&content, str + i, shell);
 		else
 			str_n_insert(&content, str + i, str_len(content), 1);
 		i++;
