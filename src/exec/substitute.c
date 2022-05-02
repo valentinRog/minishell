@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 14:32:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/02 18:00:26 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/02 18:07:55 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,17 @@ char	*get_value(char *str, t_shell *shell)
 	return ("");
 }
 
+size_t	yo(char **dst, char *str, t_shell *shell)
+{
+	size_t	i;
+
+	i = 1;
+	str_n_insert(dst, get_value(str + 1, shell), str_len(*dst), str_len(get_value(str + 1, shell)));
+	while (str[i] && str[i] != ' ' && str[i] != '\"')
+				i++;
+	return (i - 1);
+}
+
 void	split_into_lst(t_list **alst, char *str, t_shell *shell)
 {
 	size_t	i;
@@ -63,13 +74,7 @@ void	split_into_lst(t_list **alst, char *str, t_shell *shell)
 		else if (quote == str[i])
 			quote = '\0';
 		else if (str[i] == '$' && quote != '\'')
-		{
-			i++;
-			str_n_insert(&content, get_value(str + i, shell), str_len(content), str_len(get_value(str + i, shell)));
-			while (str[i] && str[i] != ' ')
-				i++;
-			continue ;
-		}
+			i += yo(&content, str + i, shell);
 		else
 			str_n_insert(&content, str + i, str_len(content), 1);
 		i++;
