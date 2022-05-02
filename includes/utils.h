@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 15:45:19 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/29 15:35:16 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		str_cmp_no_case(char *s1, char *s2);
 
 /*str_find*/
 bool	in_str(char *str, char c);
-bool	in_quote(char *str, char *quote, size_t index);
+char	in_quote(char *str, char *quote, size_t index);
 char	*str_chr(char *str, char c);
 bool	is_tok(char *str, char *tokens, char sep);
 
@@ -66,7 +66,7 @@ void	swap_ptr(void **a, void **b);
 /*sort*/
 void	lst_sort(t_list *lst, int (*cmp)(void *, void *));
 
-/*free*/
-void	safe_free(void *ptr);
+/*put*/
+void	put_str_fd(char *str, int fd);
 
 #endif

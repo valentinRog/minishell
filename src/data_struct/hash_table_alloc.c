@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hash_table_alloc.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:11:57 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/21 15:50:25 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/04/30 00:25:44 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ t_list	*table_add(t_list *table[TABLE_SIZE], t_var *var)
 	if (table_find(table, var->key))
 		return (NULL);
 	new_node = lst_new(var);
-	lst_add_back(&table[hash(var->key) % TABLE_SIZE], new_node);
-	return (new_node);
+	return (lst_add_back(&table[hash(var->key) % TABLE_SIZE], new_node));
 }
 
 void	table_remove(t_list *table[TABLE_SIZE], char *key)

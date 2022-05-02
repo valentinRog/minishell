@@ -26,7 +26,7 @@ t_list	*lst_last(t_list *lst)
 	return (lst);
 }
 
-void	lst_add_front(t_list **alst, t_list *new_node)
+t_list	*lst_add_front(t_list **alst, t_list *new_node)
 {
 	if (alst && new_node)
 	{
@@ -36,9 +36,10 @@ void	lst_add_front(t_list **alst, t_list *new_node)
 			(*alst)->prev = new_node;
 		*alst = new_node;
 	}
+	return (new_node);
 }
 
-void	lst_add_back(t_list **alst, t_list *new_node)
+t_list	*lst_add_back(t_list **alst, t_list *new_node)
 {
 	t_list	*last;
 
@@ -57,4 +58,5 @@ void	lst_add_back(t_list **alst, t_list *new_node)
 		}
 		new_node->next = NULL;
 	}
+	return (new_node);
 }

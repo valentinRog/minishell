@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   put.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/27 10:13:07 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 10:13:47 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/04/28 14:33:47 by vrogiste          #+#    #+#             */
+/*   Updated: 2022/04/28 14:34:19 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	safe_free(void *ptr)
+void	put_str_fd(char *str, int fd)
 {
-	if (ptr)
-		free(ptr);
+	if (str)
+		write(fd, str, strlen(str));
 }

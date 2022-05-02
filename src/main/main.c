@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 15:26:33 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/02 14:18:36 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ int	main(int argc, char **argv, char **env)
 	init_env(shell.table, env);
 	while (true)
 	{
+		init_sig();
 		line = readline(PROMPT);
 		if (!line)
 		{
-			lst_clear(&shell.lst, del_cmd);
+			clear_shell(&shell);
 			clear_history();
-			exit (EXIT_FAILURE);
+			dtrap();
 		}
 		add_history(line);
 		shell.lst = get_parsed_lst(line);

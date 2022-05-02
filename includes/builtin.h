@@ -19,7 +19,7 @@
 bool	bi_echo(char **cmds);
 
 /*cd*/
-bool	bi_cd(char **cmds);
+bool	bi_cd(char **cmds, t_shell *shell);
 
 /*pwd*/
 bool	bi_pwd(void);

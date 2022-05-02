@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:19:29 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/20 10:57:24 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/04/29 15:35:03 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,22 @@ bool	in_str(char *str, char c)
 	return (false);
 }
 
-bool	in_quote(char *str, char *quotes, size_t index)
+char	in_quote(char *str, char *quotes, size_t index)
 {
 	char	quote;
 	size_t	i;
 
 	quote = '\0';
 	i = 0;
-	while (i != index)
+	while (i != index && str[i])
 	{
-		if (!str[i])
-			return (false);
 		if (!quote && in_str(quotes, str[i]))
 			quote = str[i];
 		else if (quote == str[i])
 			quote = '\0';
 		i++;
 	}
-	if (quote)
-		return (true);
-	return (false);
+	return (quote);
 }
 
 char	*str_chr(char *str, char c)

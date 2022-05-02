@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:23:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/28 09:59:43 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/02 09:38:42 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,26 @@ void	wait_status(void)
 		g_exit_code = WEXITSTATUS(w_status);
 }
 
+static void	child(t_cmd *cmd, int i_pipe[2], int o_pipe[2], t_shell *shell)
+{
+	char	**cmds;
+
+	if (substitute(cmd, shell))
+		e_exec_error("substitute", shell);
+	if (dup_stdin(cmd, i_pipe, shell) || dup_stdout(cmd, o_pipe))
+		e_exec_error(NULL, shell);
+	if (is_tok((char *)cmd->args->content, "env:echo:pwd", ':'))
+	{
+		if (exec_builtin(cmd, shell))
+			e_exec_error(cmd->args->content, shell);
+		exit(EXIT_SUCCESS);
+	}
+	cmds = lst_to_str_arr(cmd->args);
+	if (!cmds)
+		e_exec_error("lst_to_str_arr", shell);
+	exec_bin(cmds, shell);
+}
+
 void	pipex(t_list *lst, int i_pipe[2], t_shell *shell)
 {
 	int		o_pipe[2];
@@ -39,14 +59,14 @@ void	pipex(t_list *lst, int i_pipe[2], t_shell *shell)
 	cmd = (t_cmd *)lst->content;
 	if (cmd->con == con_PIPE)
 		if (pipe(o_pipe) == -1)
-			return ((void)exec_error("pipe", shell, i_pipe, NULL));
+			return ((void)b_exec_error("pipe", shell, i_pipe, NULL));
 	if (is_tok((char *)cmd->args->content, "cd:export:unset:exit", ':'))
 		exec_builtin(cmd, shell);
 	else
 	{
 		pid = fork();
 		if (pid == -1)
-			return ((void)exec_error("fork", shell, i_pipe, o_pipe));
+			return ((void)b_exec_error("fork", shell, i_pipe, o_pipe));
 		if (!pid)
 			child(cmd, i_pipe, o_pipe, shell);
 	}
