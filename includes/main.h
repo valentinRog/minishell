@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:52:29 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 16:51:43 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/02 14:12:20 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,11 @@ typedef struct s_shell
 
 /*clear*/
 void	clear_shell(t_shell *shell);
+
+/*signals*/
+void	dtrap(void);
+void	ctrap(int sig);
+void	slashtrap(int sig);
+void	init_sig(void);
 
 #endif
