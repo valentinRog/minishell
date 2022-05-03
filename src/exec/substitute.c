@@ -6,20 +6,20 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 14:32:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/03 07:07:43 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/03 07:26:53 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static bool	error(char *msg, t_list **alst, char *str)
+static void	*error(char *msg, t_list **alst, char *str)
 {
 	if (msg)
 		perror(msg);
 	lst_clear(alst, free);
 	if (str)
 		free(str);
-	return (true);
+	return (NULL);
 }
 
 size_t	replace_var(char **dst, char *str, t_shell *shell)
@@ -86,6 +86,8 @@ t_list	*get_new_lst(t_list *lst, t_shell *shell, t_list *dir_list)
 	while (lst)
 	{
 		lst_append_lst(&new_lst, get_match_lst(lst->content, shell, dir_list));
+		if (errno == ENOMEM)
+			return (error("", &new_lst, NULL));
 		lst = lst->next;
 	}
 	return (new_lst);
@@ -93,13 +95,15 @@ t_list	*get_new_lst(t_list *lst, t_shell *shell, t_list *dir_list)
 
 bool	substitute(t_cmd *cmd, t_shell *shell)
 {
-	t_list	*new_args;
+	t_list	*new_lst;
 	t_list	*dir_list;
-	t_list	*node;
 
 	dir_list = get_dir_list();
-	new_args = get_new_lst(cmd->args, shell, dir_list);
+	if (!dir_list)
+		return (true);
+	new_lst = get_new_lst(cmd->args, shell, dir_list);
 	lst_clear(&cmd->args, free);
-	cmd->args = new_args;
-	return (false);
+	cmd->args = new_lst;
+	lst_clear(&dir_list, free);
+	return ((bool)(errno == ENOMEM));
 }
