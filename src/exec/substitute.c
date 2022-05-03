@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 14:32:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/03 12:36:54 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/03 14:07:20 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,15 @@ size_t	replace_var(char **dst, char *str, t_shell *shell)
 		str_n_insert(&key, str + i, str_len(key), 1);
 		i++;
 	}
+	val = "";
+	if (!str_cmp(key, "?"))
+		val = exit_code_str();
 	node = table_find(shell->table, key);
 	if (key)
 		free(key);
 	if (node)
-	{
 		val = ((t_var *)node->content)->data;
-		str_n_insert(dst, val, str_len(*dst), str_len(val));
-	}
+	str_n_insert(dst, val, str_len(*dst), str_len(val));
 	while (str[i] && str[i] != ' ' && str[i] != '\"')
 		i++;
 	return (i);
