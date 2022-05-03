@@ -6,7 +6,7 @@
 /*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/02 14:18:36 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/05/03 15:35:41 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char **argv, char **env)
 		{
 			clear_shell(&shell);
 			clear_history();
-			dtrap();
+			signal_handler(4);
 		}
 		add_history(line);
 		shell.lst = get_parsed_lst(line);

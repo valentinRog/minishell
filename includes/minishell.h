@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:40:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/02 21:44:58 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/03 15:38:44 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # include <readline/history.h>
 
 # include <dirent.h>
+
+# include <signal.h>
 
 # include "data_struct.h"
 # include "utils.h"
