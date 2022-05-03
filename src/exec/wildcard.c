@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 23:46:25 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/03 07:37:55 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/03 10:12:38 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,16 @@ bool	is_ok(t_list *lst, char *str)
 
 	i = 0;
 	while (lst->prev && (*str && *str != ((char *)lst->content)[0]))
-	{
 		str++;
-	}
-	while (((char *)lst->content)[i])
+	while (str[i] && ((char *)lst->content)[i] == str[i])
 	{
-		if (((char *)lst->content)[i] != str[i])
-			return (false);
 		i++;
 	}
 	if (lst->next)
 		return (is_ok(lst->next, str + i));
-	return (true);
+	if (!str[i] && !((char *)lst->content)[i])
+		return (true);
+	return (false);
 }
 
 t_list	*get_match_lst(char *str, t_shell *shell, t_list *dir_list)
