@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 23:46:25 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/03 11:08:03 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/03 11:40:01 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,20 @@ t_list	*get_dir_list(void)
 	return (dir_list);
 }
 
-bool	is_ok(t_list *lst, char *word)
+bool	match(t_list *lst, char *word)
 {
 	size_t	i;
-	char	*str;
 
 	if (!lst)
-	{
-		if (!*(word + 1))
-			return true;
-		return false;
-	}
-	str = lst->content;
+		return (true);
 	i = 0;
 	while (word[i])
 	{
-		if (!str_n_cmp(str, word + i, str_len(str)))
-		{
-			if (is_ok(lst->next, word + i))
+		if (!str_n_cmp(lst->content, word + i, str_len(lst->content)))
+			if (match(lst->next, word + i))
 				return (true);
-		}
+		if (!lst->prev)
+			break ;
 		i++;
 	}
 	return (false);
@@ -63,7 +57,7 @@ t_list	*get_match_lst(char *str, t_shell *shell, t_list *dir_list)
 		return (lst_new(str_dup(lst->content)));
 	for (t_list *node = dir_list; node; node = node->next)
 	{
-		if (is_ok(lst, node->content))
+		if (match(lst, node->content))
 			lst_add_back(&wild_lst, lst_new(str_dup(node->content)));
 	}
 	return (wild_lst);
