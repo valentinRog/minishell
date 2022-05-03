@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 23:46:25 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/03 10:12:38 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/03 11:08:03 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,28 @@ t_list	*get_dir_list(void)
 	return (dir_list);
 }
 
-bool	is_ok(t_list *lst, char *str)
+bool	is_ok(t_list *lst, char *word)
 {
 	size_t	i;
+	char	*str;
 
-	i = 0;
-	while (lst->prev && (*str && *str != ((char *)lst->content)[0]))
-		str++;
-	while (str[i] && ((char *)lst->content)[i] == str[i])
+	if (!lst)
 	{
+		if (!*(word + 1))
+			return true;
+		return false;
+	}
+	str = lst->content;
+	i = 0;
+	while (word[i])
+	{
+		if (!str_n_cmp(str, word + i, str_len(str)))
+		{
+			if (is_ok(lst->next, word + i))
+				return (true);
+		}
 		i++;
 	}
-	if (lst->next)
-		return (is_ok(lst->next, str + i));
-	if (!str[i] && !((char *)lst->content)[i])
-		return (true);
 	return (false);
 }
 
