@@ -60,3 +60,15 @@ t_list	*lst_add_back(t_list **alst, t_list *new_node)
 	}
 	return (new_node);
 }
+
+t_list	*lst_append_lst(t_list **alst, t_list *new_lst)
+{
+	t_list	*next;
+
+	if (new_lst)
+	{
+		next = new_lst->next;
+		lst_add_back(alst, new_lst);
+		lst_append_lst(alst, next);
+	}
+}

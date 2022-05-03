@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:06:15 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/30 00:24:50 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/03 06:41:31 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ size_t		lst_size(t_list *lst);
 t_list		*lst_last(t_list *lst);
 t_list		*lst_add_front(t_list **alst, t_list *new_node);
 t_list		*lst_add_back(t_list **alst, t_list *new_node);
+t_list		*lst_append_lst(t_list **alst, t_list *new_lst);
 
 /*lst_alloc*/
 t_list		*lst_new(void *content);
