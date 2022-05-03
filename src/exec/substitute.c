@@ -6,40 +6,20 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 14:32:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/02 23:46:58 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/03 07:07:43 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	lst_append(t_list **alst, t_list *lst)
+static bool	error(char *msg, t_list **alst, char *str)
 {
-	t_list	*next;
-
-	if (lst)
-	{
-		next = lst->next;
-		lst_add_back(alst, lst);
-		lst_append(alst, next);
-	}
-}
-
-static void	print_tab(t_list *lst)
-{
-	if (lst)
-	{
-		printf("[");
-		while (lst)
-		{
-			if (lst->prev)
-				printf(", ");
-			printf("\"%s\"", (char *)lst->content);
-			lst = lst->next;
-		}
-		printf("]\n");
-	}
-	else
-		printf("(null)\n");
+	if (msg)
+		perror(msg);
+	lst_clear(alst, free);
+	if (str)
+		free(str);
+	return (true);
 }
 
 size_t	replace_var(char **dst, char *str, t_shell *shell)
@@ -49,7 +29,6 @@ size_t	replace_var(char **dst, char *str, t_shell *shell)
 	t_list	*node;
 	char	*val;
 
-	str++;
 	i = 0;
 	key = str_dup1();
 	while (str[i] && str[i] != ' ' && str[i] != '\"')
@@ -58,7 +37,8 @@ size_t	replace_var(char **dst, char *str, t_shell *shell)
 		i++;
 	}
 	node = table_find(shell->table, key);
-	free(key);
+	if (key)
+		free(key);
 	if (node)
 	{
 		val = ((t_var *)node->content)->data;
@@ -85,37 +65,30 @@ void	split_into_lst(t_list **alst, char *str, t_shell *shell)
 		else if (quote == str[i])
 			quote = '\0';
 		else if (str[i] == '$' && quote != '\'')
-			i += replace_var(&content, str + i, shell);
+			i += replace_var(&content, str + i + 1, shell);
 		else
 			str_n_insert(&content, str + i, str_len(content), 1);
 		i++;
 	}
-	lst_add_back(alst, lst_new(content));
+	if (errno == ENOMEM)
+		return ((void)error("", alst, content));
+	if (!lst_add_back(alst, lst_new(content)))
+		return ((void)error("", alst, content));
 	if (str[i])
 		split_into_lst(alst, str + i + 1, shell);
 }
 
-bool	is_ok(t_list *lst, char *str)
+t_list	*get_new_lst(t_list *lst, t_shell *shell, t_list *dir_list)
 {
-	return (true);
-}
+	t_list	*new_lst;
 
-t_list	*get_wild_lst(char *str, t_shell *shell, t_list *dir_list)
-{
-	t_list	*lst;
-	t_list	*wild_lst;
-
-	lst = NULL;
-	split_into_lst(&lst, str, shell);
-	wild_lst = NULL;
-	if (lst_size(lst) == 1)
-		return (lst_new(str_dup(lst->content)));
-	for (t_list *node = dir_list; node; node = node->next)
+	new_lst = NULL;
+	while (lst)
 	{
-		if (is_ok(lst, node->content))
-			lst_add_back(&wild_lst, lst_new(str_dup(node->content)));
+		lst_append_lst(&new_lst, get_match_lst(lst->content, shell, dir_list));
+		lst = lst->next;
 	}
-	return (wild_lst);
+	return (new_lst);
 }
 
 bool	substitute(t_cmd *cmd, t_shell *shell)
@@ -124,14 +97,8 @@ bool	substitute(t_cmd *cmd, t_shell *shell)
 	t_list	*dir_list;
 	t_list	*node;
 
-	new_args = NULL;
 	dir_list = get_dir_list();
-	node = cmd->args;
-	while (node)
-	{
-		lst_append(&new_args, get_wild_lst(node->content, shell, dir_list));
-		node = node->next;
-	}
+	new_args = get_new_lst(cmd->args, shell, dir_list);
 	lst_clear(&cmd->args, free);
 	cmd->args = new_args;
 	return (false);

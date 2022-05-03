@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wildcart.c                                         :+:      :+:    :+:   */
+/*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 23:46:25 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/02 23:47:01 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/03 07:09:52 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,27 @@ t_list	*get_dir_list(void)
 		lst_add_back(&dir_list, lst_new(str_dup(dir->d_name)));
 	closedir(d);
 	return (dir_list);
+}
+
+bool	is_ok(t_list *lst, char *str)
+{
+	return (true);
+}
+
+t_list	*get_match_lst(char *str, t_shell *shell, t_list *dir_list)
+{
+	t_list	*lst;
+	t_list	*wild_lst;
+
+	lst = NULL;
+	split_into_lst(&lst, str, shell);
+	wild_lst = NULL;
+	if (lst_size(lst) == 1)
+		return (lst_new(str_dup(lst->content)));
+	for (t_list *node = dir_list; node; node = node->next)
+	{
+		if (is_ok(lst, node->content))
+			lst_add_back(&wild_lst, lst_new(str_dup(node->content)));
+	}
+	return (wild_lst);
 }
