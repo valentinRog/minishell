@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:07:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/29 15:35:16 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/03 12:53:14 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,8 @@ void	lst_sort(t_list *lst, int (*cmp)(void *, void *));
 
 /*put*/
 void	put_str_fd(char *str, int fd);
+
+/*lst_str*/
+t_list	*new_lst_str(char *str);
 
 #endif

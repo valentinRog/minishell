@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:33:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/03 07:09:30 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/03 12:26:24 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	e_exec_error(char *str, t_shell *shell);
 
 /*substitute*/
 bool	substitute(t_cmd *cmd, t_shell *shell);
-void	split_into_lst(t_list **alst, char *str, t_shell *shell);
+void	split_wildcard(t_list **alst, char *str, t_shell *shell);
 
 /*wildcard*/
 t_list	*get_dir_list(void);
