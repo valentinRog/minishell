@@ -6,9 +6,9 @@ INCLUDES = includes
 
 OBJ = $(SRC:.c=.o)
 
-CFLAGS = -Wall -Wextra #-fsanitize=address
+CFLAGS = -Wall -Wextra -I/Users/$(USER)/.brew/opt/readline/include -fsanitize=address
 
-LIB = -lreadline
+LIB = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib
 
 CC = gcc
 
