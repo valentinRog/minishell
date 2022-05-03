@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 23:46:25 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/03 11:40:01 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/03 11:45:14 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 
 t_list	*get_dir_list(void)
 {
-	t_list	*dir_list;
-	DIR *d;
-	struct dirent *dir;
+	t_list			*dir_list;
+	DIR				*d;
+	struct dirent	*dir;
 
 	dir_list = NULL;
 	d = opendir(".");
-	while ((dir = readdir(d)))
+	dir = readdir(d);
+	while (dir)
+	{
 		lst_add_back(&dir_list, lst_new(str_dup(dir->d_name)));
+		dir = readdir(d);
+	}
 	closedir(d);
 	return (dir_list);
 }

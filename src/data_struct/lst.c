@@ -61,7 +61,7 @@ t_list	*lst_add_back(t_list **alst, t_list *new_node)
 	return (new_node);
 }
 
-t_list	*lst_append_lst(t_list **alst, t_list *new_lst)
+void	lst_append_lst(t_list **alst, t_list *new_lst)
 {
 	t_list	*next;
 
