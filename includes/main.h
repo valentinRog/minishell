@@ -6,7 +6,7 @@
 /*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:52:29 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/04 11:12:20 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/05/04 12:03:01 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,8 @@ void	init_sig(void);
 
 /*exit_code*/
 char	*exit_code_str(void);
+
+/*main*/
+char	*get_prompt(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:57:56 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/05/04 11:27:38 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/05/04 12:05:53 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	signal_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		write (STDERR_FILENO, "\n", 1);
+		write (STDERR_FILENO, get_prompt(), str_len(get_prompt()));
+		write (STDERR_FILENO, "  \n", 3);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();

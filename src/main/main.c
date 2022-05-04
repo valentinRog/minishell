@@ -6,7 +6,7 @@
 /*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/04 10:51:18 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/05/04 12:01:11 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	parse_and_launch(char *line, t_shell *shell)
 	}
 }
 
-static char	*get_prompt(void)
+char	*get_prompt(void)
 {
 	if (g_exit_code)
 		return (C_RED PROMPT C_END);
