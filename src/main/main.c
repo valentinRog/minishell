@@ -29,7 +29,6 @@ static int	error(char *msg, t_shell *shell)
 
 static void	parse_and_launch(char *line, t_shell *shell)
 {
-	g_exit_code = 0;
 	shell->lst = get_parsed_lst(line);
 	if (shell->lst)
 	{
