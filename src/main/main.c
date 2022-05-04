@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/04 10:32:14 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/04 10:37:24 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	main(int argc, char **argv, char **env)
 	t_shell	shell;
 
 	shell.lst = NULL;
-	init_sig();
 	init_env(shell.table, env);
 	if (errno == ENOMEM)
 		return (error("env", &shell));
@@ -73,6 +72,7 @@ int	main(int argc, char **argv, char **env)
 		return (error("arguments", &shell));
 	while (argc == 1)
 	{
+		init_sig();
 		line = readline(get_prompt());
 		if (!line)
 			line_is_null(&shell);
