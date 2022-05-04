@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/04 07:28:01 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/04 10:08:35 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,21 @@ static int	error(char *msg, t_shell *shell)
 	return (1);
 }
 
-void	parse_and_launch(char *line, t_shell *shell)
+static void	parse_and_launch(char *line, t_shell *shell)
 {
 	shell->lst = get_parsed_lst(line);
-	if (errno == ENOMEM)
-		return ((void) perror("parsing"));
-	launcher(shell->lst, 0, shell);
-	lst_clear(&shell->lst, del_cmd);
+	if (shell->lst)
+	{
+		launcher(shell->lst, 0, shell);
+		lst_clear(&shell->lst, del_cmd);
+	}
+}
+
+static char	*get_prompt(void)
+{
+	if (g_exit_code)
+		return (C_RED PROMPT C_END);
+	return (C_GREEN PROMPT C_END);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -51,7 +59,7 @@ int	main(int argc, char **argv, char **env)
 		return (error("arguments", &shell));
 	while (argc == 1)
 	{
-		line = readline(PROMPT);
+		line = readline(get_prompt());
 		if (!line)
 			return (error("readline", &shell));
 		add_history(line);
