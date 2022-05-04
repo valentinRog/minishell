@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/04 10:08:35 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/04 10:32:14 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int	error(char *msg, t_shell *shell)
 
 static void	parse_and_launch(char *line, t_shell *shell)
 {
+	g_exit_code = 0;
 	shell->lst = get_parsed_lst(line);
 	if (shell->lst)
 	{
@@ -44,12 +45,25 @@ static char	*get_prompt(void)
 	return (C_GREEN PROMPT C_END);
 }
 
+void	line_is_null(t_shell *shell)
+{
+	clear_shell(shell);
+	if (errno == ENOMEM)
+	{
+		perror("readline");
+		exit(EXIT_FAILURE);
+	}
+	put_str_fd(" --- exit minishell ---\n", STDIN_FILENO);
+	exit(EXIT_SUCCESS);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	char	*line;
 	t_shell	shell;
 
 	shell.lst = NULL;
+	init_sig();
 	init_env(shell.table, env);
 	if (errno == ENOMEM)
 		return (error("env", &shell));
@@ -61,7 +75,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		line = readline(get_prompt());
 		if (!line)
-			return (error("readline", &shell));
+			line_is_null(&shell);
 		add_history(line);
 		parse_and_launch(line, &shell);
 		free(line);
