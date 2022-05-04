@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 23:46:25 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/04 07:24:35 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/04 07:38:32 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,12 @@ bool	match(t_list *lst, char *word)
 	i = 0;
 	while (word[i])
 	{
-		if (!str_n_cmp(lst->content, word + i, str_len(lst->content)))
+		if (!lst->next && *(char *)lst->content)
+		{
+			if (!str_cmp(lst->content, word + i) && match(lst->next, word + i))
+				return (true);
+		}
+		else if (!str_n_cmp(lst->content, word + i, str_len(lst->content)))
 			if (match(lst->next, word + i))
 				return (true);
 		if (!lst->prev)
