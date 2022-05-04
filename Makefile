@@ -6,7 +6,7 @@ INCLUDES = includes
 
 OBJ = $(SRC:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror -I/Users/$(USER)/.brew/opt/readline/include
+CFLAGS = -Wall -Wextra -I/Users/$(USER)/.brew/opt/readline/include
 
 LIB = -lreadline -L/Users/$(USER)/.brew/opt/readline/lib
 
@@ -31,5 +31,8 @@ fclean: clean
 	@$(RM) $(NAME)
 
 re: fclean all
+
+run: $(NAME)
+	./$(NAME)
 
 .PHONY: $(NAME) all clean fclean re run rerun

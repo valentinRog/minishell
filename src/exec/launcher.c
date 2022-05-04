@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 05:12:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/27 13:54:14 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/04 18:40:02 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	launcher(t_list *lst, int z, t_shell *shell)
 				lst && lst->next
 				&& ((t_cmd *)lst->next->content)->z_index > z
 				)
-				lst = lst->next;
+					lst = lst->next;
 		}
 		else
 			pipex(lst, NULL, shell);
