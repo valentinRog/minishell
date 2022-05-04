@@ -6,7 +6,7 @@
 /*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:57:56 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/05/04 10:51:40 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/05/04 11:27:38 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,16 @@ void	signal_handler(int sig)
 	}
 }
 
+void	ctrl_c(int sig)
+{
+	if (sig == 666)
+	{
+		write (1, "lol", 3);
+	}
+}
+
 void	init_sig(void)
 {
-	(void) signal(SIGQUIT, SIG_IGN);
-	(void) signal(SIGINT, signal_handler);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, signal_handler);
 }
