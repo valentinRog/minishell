@@ -32,9 +32,4 @@ fclean: clean
 
 re: fclean all
 
-run: $(NAME)
-	@./$(NAME)
-
-rerun: re run
-
 .PHONY: $(NAME) all clean fclean re run rerun
