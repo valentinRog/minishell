@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/01 13:08:09 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/04 10:01:02 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ static void	error(t_list **alst, char *arg, char *token)
 	z_index(z_RESET);
 	str_tok(NULL, NULL, NULL);
 	if (errno == ENOMEM)
-		perror("");
+		perror("parsing");
 	else if (token)
 	{
-		printf("syntax error near token `%s`\n", token);
+		put_str_fd("syntax error near token `", STDERR_FILENO);
+		put_str_fd(token, STDERR_FILENO);
+		put_str_fd("`\n", STDERR_FILENO);
 		g_exit_code = 258;
 	}
 }
@@ -84,6 +86,8 @@ static void	parse_into_lst(t_list **alst, char *line, t_tok *tok)
 	if (!*alst)
 		add_new_cmd(alst);
 	cmd = (t_cmd *)((lst_last(*alst))->content);
+	if (!cmd)
+		return (error(NULL, NULL, NULL));
 	arg = str_tok(&con, line, tok);
 	if (arg)
 	{

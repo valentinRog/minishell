@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:57:56 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/05/04 10:07:29 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/05/04 10:51:40 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,6 @@ void	signal_handler(int sig)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
-	}
-	else if (sig == 4)
-	{
-		write(STDERR_FILENO, " --- exit minishell ---\n", 24);
-		exit (0);
 	}
 }
 
