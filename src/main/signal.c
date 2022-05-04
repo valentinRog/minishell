@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:57:56 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/05/04 12:05:53 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/05/04 12:07:42 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ void	signal_handler(int sig)
 
 void	ctrl_c(int sig)
 {
-	if (sig == 666)
-	{
-		write (1, "lol", 3);
-	}
+	(void) sig;
 }
 
 void	init_sig(void)

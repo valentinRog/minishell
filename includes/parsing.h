@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 10:48:35 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/30 16:31:01 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/04 12:08:12 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,5 @@ void		del_cmd(void *args);
 /*parenthesis*/
 int			z_index(enum e_z z);
 bool		parenthesis(t_cmd *cmd, char *arg, char *con);
-
-/*testing*/
-void		print_lst(t_list *lst);
 
 #endif
