@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:52:29 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 19:04:58 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/05 21:38:16 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,5 @@ void	ctrl_c(int sig);
 void	line_is_null(t_shell *shell);
 void	init_sig(void);
 int		change_term(bool echo_ctl_chr);
-
-/*exit_code*/
-char	*exit_code_str(void);
 
 #endif

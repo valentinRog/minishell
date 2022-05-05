@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 14:32:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 20:21:29 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/05 22:13:31 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,26 @@ static size_t	replace_var(t_dy_str *dy_str, char *str, t_shell *shell)
 	size_t	i;
 	t_list	*node;
 	char	*val;
+	char	exit_code_str[15];
 
 	i = 0;
 	while (str[i] && !str_chr(QUOTES SPACES "$", str[i]))
 		i++;
 	key = str_n_dup(str, i);
-	val = "";
+	val = NULL;
 	if (!str_cmp(key, "?"))
-		val = exit_code_str();
-	node = table_find(shell->table, key);
+	{
+		itoa(g_exit_code, exit_code_str, 15);
+		dy_str_append_str(dy_str, exit_code_str);
+	}
+	else
+	{
+		node = table_find(shell->table, key);
+		if (node)
+			val = ((t_var *)node->content)->data;
+		dy_str_append_str(dy_str, val);
+	}
 	free(key);
-	if (node)
-		val = ((t_var *)node->content)->data;
-	dy_str_append_str(dy_str, val);
 	return (i);
 }
 
