@@ -6,7 +6,7 @@
 /*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:57:56 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/05/05 09:45:35 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/05/05 09:52:38 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,19 @@ void	init_sig(void)
 {
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, signal_handler);
-	termios_change(false);
+	change_term();
 }
 
-int	termios_change(bool echo_ctl_chr)
+int	change_term(void)
 {
-	struct termios	terminos_p;
+	struct termios	term;
 	int				status;
 
-	status = tcgetattr(STDOUT_FILENO, &terminos_p);
+	status = tcgetattr(STDOUT_FILENO, &term);
 	if (status == -1)
 		return (1);
-	if (echo_ctl_chr)
-		terminos_p.c_lflag |= ECHOCTL;
-	else
-		terminos_p.c_lflag &= ~(ECHOCTL);
-	status = tcsetattr(STDOUT_FILENO, TCSANOW, &terminos_p);
+	term.c_lflag &= ~(ECHOCTL);
+	status = tcsetattr(STDOUT_FILENO, TCSANOW, &term);
 	if (status == -1)
 		return (1);
 	return (0);

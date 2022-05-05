@@ -6,7 +6,7 @@
 /*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 09:47:26 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/05/05 09:47:51 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ static char	*get_input(void)
 		input = readline(get_prompt());
 	else
 		input = get_next_line(STDIN_FILENO);
-	if (input == NULL)
-		return (NULL);
 	return (input);
 }
 
