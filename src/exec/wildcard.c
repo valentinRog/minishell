@@ -6,21 +6,11 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 23:46:25 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 14:00:16 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:21:35 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	*error(char *msg, t_list **alst, char *str)
-{
-	if (msg)
-		perror(msg);
-	lst_clear(alst, free);
-	if (str)
-		free(str);
-	return (NULL);
-}
 
 t_list	*get_dir_list(void)
 {
@@ -35,17 +25,14 @@ t_list	*get_dir_list(void)
 	while (dir)
 	{
 		d_name = str_dup(dir->d_name);
-		if (!d_name)
-			return (error("", &dir_list, NULL));
-		if (!lst_add_back(&dir_list, lst_new(d_name)))
-			return (error("", &dir_list, d_name));
+		lst_add_back(&dir_list, lst_new(d_name));
 		dir = readdir(d);
 	}
 	closedir(d);
 	return (dir_list);
 }
 
-bool	match(t_list *lst, char *word)
+static bool	match(t_list *lst, char *word)
 {
 	size_t	i;
 
@@ -69,7 +56,7 @@ bool	match(t_list *lst, char *word)
 	return (false);
 }
 
-t_list	*better_split(char *str)
+static t_list	*split_wildcard(char *str)
 {
 	t_list	*lst;
 	char	*ptr;
@@ -80,7 +67,7 @@ t_list	*better_split(char *str)
 		ptr++;
 	lst->content = str_n_dup(str, ptr - str);
 	if (*ptr)
-		lst_add_back(&lst, better_split(ptr + 1));
+		lst_add_back(&lst, split_wildcard(ptr + 1));
 	return (lst);
 }
 
@@ -88,10 +75,15 @@ t_list	*get_match_lst(char *str, t_shell *shell, t_list *dir_list)
 {
 	t_list	*lst;
 	t_list	*wild_lst;
+	t_list	*node;
 
-	lst = better_split(str);
-	for (t_list *node = lst; node; node = node->next)
+	lst = split_wildcard(str);
+	node = lst;
+	while (node)
+	{
 		replace_vars((char **)&node->content, shell);
+		node = node->next;
+	}
 	wild_lst = NULL;
 	if (lst_size(lst) == 1)
 		lst_add_back(&wild_lst, new_lst_str(lst->content));

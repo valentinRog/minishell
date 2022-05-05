@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 14:32:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 14:42:14 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/05 14:43:35 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ static size_t	replace_var(t_dy_str *dy_str, char *str, t_shell *shell)
 	if (!str_cmp(key, "?"))
 		val = exit_code_str();
 	node = table_find(shell->table, key);
-	if (key)
-		free(key);
+	free(key);
 	if (node)
 		val = ((t_var *)node->content)->data;
 	dy_str_append_str(dy_str, val);
