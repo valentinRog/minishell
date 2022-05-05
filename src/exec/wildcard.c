@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 23:46:25 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 19:00:05 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/05 20:20:23 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static t_list	*split_wildcard(char *str)
 {
 	t_list	*lst;
 	char	*ptr;
-	t_list	*node;
 
 	lst = lst_new(NULL);
 	ptr = str;

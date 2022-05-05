@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 14:32:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 18:14:13 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/05 20:21:29 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	replace_vars(char **dst, t_shell *shell)
 	char		quote;
 	t_dy_str	dy_str;
 
+	if (!dst || !*dst)
+		return ;
 	i = 0;
 	quote = '\0';
 	dy_str = dy_str_new();
@@ -75,13 +77,21 @@ t_list	*get_new_args(t_list *lst, t_shell *shell, t_list *dir_list)
 
 bool	substitute(t_cmd *cmd, t_shell *shell)
 {
-	t_list	*new_lst;
+	t_list	*new_args;
 	t_list	*dir_list;
+	t_list	*node;
 
 	dir_list = get_dir_list();
-	new_lst = get_new_args(cmd->args, shell, dir_list);
+	new_args = get_new_args(cmd->args, shell, dir_list);
 	lst_clear(&cmd->args, free);
-	cmd->args = new_lst;
+	cmd->args = new_args;
+	replace_vars((char **)&cmd->infile, shell);
+	node = cmd->outfiles;
+	while (node)
+	{
+		replace_vars((char **)&node->content, shell);
+		node = node->next;
+	}
 	lst_clear(&dir_list, free);
 	return ((bool)(errno == ENOMEM));
 }
