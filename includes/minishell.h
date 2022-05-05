@@ -6,7 +6,7 @@
 /*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 14:40:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/03 15:38:44 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/05/05 09:29:26 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # include <dirent.h>
 
 # include <signal.h>
+# include <termios.h>
 
 # include "data_struct.h"
 # include "utils.h"
