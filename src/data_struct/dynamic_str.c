@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:02:11 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 14:29:19 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/05 14:41:22 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,13 @@ void	dy_str_append_c(t_dy_str *dy_str, char c)
 		dy_str_grow(dy_str);
 	dy_str->str[str_len(dy_str->str) + 1] = '\0';
 	dy_str->str[str_len(dy_str->str)] = c;
+}
+
+void	dy_str_append_str(t_dy_str *dy_str, char *str)
+{
+	while (str && *str)
+	{
+		dy_str_append_c(dy_str, *str);
+		str++;
+	}
 }

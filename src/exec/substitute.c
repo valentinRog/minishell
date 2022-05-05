@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 14:32:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 14:39:23 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/05 14:42:14 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,7 @@ static size_t	replace_var(t_dy_str *dy_str, char *str, t_shell *shell)
 		free(key);
 	if (node)
 		val = ((t_var *)node->content)->data;
-	while (*val)
-	{
-		dy_str_append_c(dy_str, *val);
-		val++;
-	}
+	dy_str_append_str(dy_str, val);
 	return (i);
 }
 

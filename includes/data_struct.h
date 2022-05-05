@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:06:15 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 14:16:34 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/05 14:41:31 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ t_dy_str	dy_str_new(void);
 void		dy_str_destroy(t_dy_str *dy_str);
 void		dy_str_grow(t_dy_str *dy_str);
 void		dy_str_append_c(t_dy_str *dy_str, char c);
+void		dy_str_append_str(t_dy_str *dy_str, char *str);
 
 #endif
