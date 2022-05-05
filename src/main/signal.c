@@ -6,7 +6,7 @@
 /*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:57:56 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/05/05 10:35:56 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/05/05 10:42:45 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ctrl_c(int sig)
 void	line_is_null(t_shell *shell)
 {
 	clear_shell(shell);
-	termios_change(true);
+	change_term(true);
 	if (errno == ENOMEM)
 	{
 		perror("readline");
@@ -45,10 +45,10 @@ void	init_sig(void)
 {
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, signal_handler);
-	termios_change(false);
+	change_term(false);
 }
 
-int	termios_change(bool echo_ctl_chr)
+int	change_term(bool echo_ctl_chr)
 {
 	struct termios	terminos_p;
 	int				status;

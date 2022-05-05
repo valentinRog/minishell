@@ -6,7 +6,7 @@
 /*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 10:37:27 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/05/05 10:37:34 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/05/05 10:41:53 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,6 @@ static char	*get_input(void)
 		input = readline(get_prompt());
 	else
 		input = get_next_line(STDIN_FILENO);
-	if (input == NULL)
-		return (NULL);
-	else if (isatty(STDIN_FILENO) && input && input[0])
-		add_history(input);
 	return (input);
 }
 
