@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 23:46:25 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/04 22:59:17 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/05 14:00:16 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,74 +73,16 @@ t_list	*better_split(char *str)
 {
 	t_list	*lst;
 	char	*ptr;
-	char	*content;
 
-	lst = NULL;
+	lst = lst_new(NULL);
 	ptr = str;
 	while (*ptr && (*ptr != '*' || in_quote(str, QUOTES, ptr - str)))
 		ptr++;
-	content = str_n_dup(str, ptr - str);
-	lst = lst_new(content);
+	lst->content = str_n_dup(str, ptr - str);
 	if (*ptr)
 		lst_add_back(&lst, better_split(ptr + 1));
 	return (lst);
 }
-
-/*size_t	replace_var(char **dst, char *str, t_shell *shell)
-{
-	char	*key;
-	size_t	i;
-	t_list	*node;
-	char	*val;
-
-	i = 0;
-	key = str_dup1();
-	while (str[i] && !str_chr("\'\" \t", str[i]))
-	{
-		str_n_insert(&key, str + i, str_len(key), 1);
-		i++;
-	}
-	val = "";
-	if (!str_cmp(key, "?"))
-		val = exit_code_str();
-	node = table_find(shell->table, key);
-	if (key)
-		free(key);
-	if (node)
-		val = ((t_var *)node->content)->data;
-	str_n_insert(dst, val, str_len(*dst), str_len(val));
-	while (str[i] && !str_chr("\'\" \t", str[i]))
-		i++;
-	return (i);
-}
-
-void	replace_all(char **dst, t_shell *shell)
-{
-	size_t	i;
-	char	quote;
-
-	i = 0;
-	quote = '\0';
-	while ((*dst)[i])
-	{
-		if (!quote && ((*dst)[i] == '\"' || (*dst)[i] == '\''))
-		{
-			quote = (*dst)[i];
-			str_n_remove(dst, i, 1);
-		}
-		else if (quote == (*dst)[i])
-		{
-			quote = '\0';
-			str_n_remove(dst, i, 1);
-		}
-		else if ((*dst)[i] == '$' && quote != '\'')
-			i += replace_var(&content, (*dst) + i + 1, shell);
-		else
-			str_n_insert(&content, (*dst) + i, str_len(content), 1);
-		i++;
-	}
-	*dst = content;
-}*/
 
 t_list	*get_match_lst(char *str, t_shell *shell, t_list *dir_list)
 {
@@ -148,10 +90,8 @@ t_list	*get_match_lst(char *str, t_shell *shell, t_list *dir_list)
 	t_list	*wild_lst;
 
 	lst = better_split(str);
-	/*for (t_list *node = lst; node; node = node->next)
-		replace_all(&node->content, shell);
 	for (t_list *node = lst; node; node = node->next)
-		printf("%s\n", node->content);*/
+		replace_vars((char **)&node->content, shell);
 	wild_lst = NULL;
 	if (lst_size(lst) == 1)
 		lst_add_back(&wild_lst, new_lst_str(lst->content));

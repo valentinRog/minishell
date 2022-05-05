@@ -6,11 +6,69 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 14:32:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/04 22:25:06 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/05 14:36:18 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static size_t	replace_var(t_dy_str *dy_str, char *str, t_shell *shell)
+{
+	char	*key;
+	size_t	i;
+	t_list	*node;
+	char	*val;
+
+	i = 0;
+	key = str_dup1();
+	while (str[i] && !str_chr("\'\" \t", str[i]))
+	{
+		str_n_insert(&key, str + i, str_len(key), 1);
+		i++;
+	}
+	val = "";
+	if (!str_cmp(key, "?"))
+		val = exit_code_str();
+	node = table_find(shell->table, key);
+	if (key)
+		free(key);
+	if (node)
+		val = ((t_var *)node->content)->data;
+	while (*val)
+	{
+		dy_str_append_c(dy_str, *val);
+		val++;
+	}
+	while (str[i] && !str_chr("\'\" \t", str[i]))
+		i++;
+	return (i);
+}
+
+void	replace_vars(char **dst, t_shell *shell)
+{
+	size_t		i;
+	char		quote;
+	t_dy_str	dy_str;
+
+	i = 0;
+	quote = '\0';
+	dy_str = dy_str_new();
+	while ((*dst)[i])
+	{
+		if (!quote && ((*dst)[i] == '\"' || (*dst)[i] == '\''))
+			quote = (*dst)[i];
+		else if (quote == (*dst)[i])
+			quote = '\0';
+		else if ((*dst)[i] == '$' && quote != '\'')
+			i += replace_var(&dy_str, (*dst) + i + 1, shell);
+		else
+			dy_str_append_c(&dy_str, (*dst)[i]);
+		i++;
+	}
+	free(*dst);
+	*dst = str_dup(dy_str.str);
+	dy_str_destroy(&dy_str);
+}
 
 t_list	*get_new_args(t_list *lst, t_shell *shell, t_list *dir_list)
 {

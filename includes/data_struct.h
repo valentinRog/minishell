@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:06:15 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/03 11:49:59 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/05 14:16:34 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ typedef struct s_var
 	char	*key;
 	void	*data;
 }	t_var;
+
+typedef struct s_dy_str
+{
+	char	*str;
+	size_t	alloc;
+}	t_dy_str;
 
 /*lst*/
 size_t		lst_size(t_list *lst);
@@ -54,5 +60,11 @@ void		table_print(t_list *table[TABLE_SIZE]);
 t_list		*table_add(t_list *table[TABLE_SIZE], t_var *var);
 void		table_remove(t_list *table[TABLE_SIZE], char *key);
 void		table_clear(t_list *table[TABLE_SIZE], void (*del)(void*));
+
+/*dynamic_str*/
+t_dy_str	dy_str_new(void);
+void		dy_str_destroy(t_dy_str *dy_str);
+void		dy_str_grow(t_dy_str *dy_str);
+void		dy_str_append_c(t_dy_str *dy_str, char c);
 
 #endif
