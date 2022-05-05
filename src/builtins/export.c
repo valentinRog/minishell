@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 15:49:40 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/28 14:30:55 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/05 20:28:37 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	bi_export(char **cmd, t_shell *shell)
 	t_var	*new_var;
 	int		i;
 
-	if (str_n_cmp(cmd[0], "export", str_len(cmd[0])) != 0)
+	if (str_cmp(cmd[0], "export"))
 		return (true);
 	i = 1;
 	while (cmd[i])

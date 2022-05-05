@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:23:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 10:37:48 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/05/05 20:32:02 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	pipex(t_list *lst, int i_pipe[2], t_shell *shell)
 		if (pipe(o_pipe) == -1)
 			return ((void)b_exec_error("pipe", shell, i_pipe, NULL));
 	if (is_tok((char *)cmd->args->content, "cd:export:unset:exit", ':'))
-		exec_builtin(cmd, shell);
+		g_exit_code = exec_builtin(cmd, shell);
 	else
 	{
 		pid = fork();
@@ -74,5 +74,6 @@ void	pipex(t_list *lst, int i_pipe[2], t_shell *shell)
 	close_pipe(i_pipe);
 	if (cmd->con == con_PIPE)
 		pipex(lst->next, o_pipe, shell);
-	wait_status();
+	if (!is_tok((char *)cmd->args->content, "cd:export:unset:exit", ':'))
+		wait_status();
 }
