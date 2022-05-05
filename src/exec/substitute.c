@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 14:32:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 14:43:35 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:14:13 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static size_t	replace_var(t_dy_str *dy_str, char *str, t_shell *shell)
 	char	*val;
 
 	i = 0;
-	while (str[i] && !str_chr("\'\" \t", str[i]))
+	while (str[i] && !str_chr(QUOTES SPACES "$", str[i]))
 		i++;
 	key = str_n_dup(str, i);
 	val = "";
@@ -45,7 +45,7 @@ void	replace_vars(char **dst, t_shell *shell)
 	dy_str = dy_str_new();
 	while ((*dst)[i])
 	{
-		if (!quote && ((*dst)[i] == '\"' || (*dst)[i] == '\''))
+		if (!quote && str_chr(QUOTES, (*dst)[i]))
 			quote = (*dst)[i];
 		else if (quote == (*dst)[i])
 			quote = '\0';

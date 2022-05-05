@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 23:46:25 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 15:21:35 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:11:37 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static t_list	*split_wildcard(char *str)
 t_list	*get_match_lst(char *str, t_shell *shell, t_list *dir_list)
 {
 	t_list	*lst;
-	t_list	*wild_lst;
+	t_list	*match_lst;
 	t_list	*node;
 
 	lst = split_wildcard(str);
@@ -84,18 +84,18 @@ t_list	*get_match_lst(char *str, t_shell *shell, t_list *dir_list)
 		replace_vars((char **)&node->content, shell);
 		node = node->next;
 	}
-	wild_lst = NULL;
+	match_lst = NULL;
 	if (lst_size(lst) == 1)
-		lst_add_back(&wild_lst, new_lst_str(lst->content));
+		lst_add_back(&match_lst, new_lst_str(lst->content));
 	else
 	{
 		while (dir_list)
 		{
 			if (match(lst, dir_list->content))
-				lst_add_back(&wild_lst, new_lst_str(dir_list->content));
+				lst_add_back(&match_lst, new_lst_str(dir_list->content));
 			dir_list = dir_list->next;
 		}
 	}
 	lst_clear(&lst, free);
-	return (wild_lst);
+	return (match_lst);
 }
