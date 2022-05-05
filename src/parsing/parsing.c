@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/04 10:01:02 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:05:56 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ static t_cmd	*add_new_cmd(t_list **alst)
 static void	error(t_list **alst, char *arg, char *token)
 {
 	lst_clear(alst, del_cmd);
-	if (arg)
-		free(arg);
+	free(arg);
 	z_index(z_RESET);
 	str_tok(NULL, NULL, NULL);
 	if (errno == ENOMEM)

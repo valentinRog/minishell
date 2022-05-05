@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 10:43:41 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/30 16:30:12 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:05:36 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ static bool	error(char *arg)
 {
 	if (errno == ENOMEM)
 		perror("");
-	if (arg)
-		free(arg);
+	free(arg);
 	return (true);
 }
 
@@ -44,10 +43,8 @@ bool	redirection(t_cmd *cmd, char *arg, char *con)
 		return (error(arg_cpy));
 	if (!str_cmp("<<", con) || !str_cmp("<", con))
 	{
-		if (cmd->infile)
-			free(cmd->infile);
-		if (cmd->heredoc)
-			free(cmd->heredoc);
+		free(cmd->infile);
+		free(cmd->heredoc);
 		if (!str_cmp("<<", con))
 			cmd->heredoc = arg_cpy;
 		else
