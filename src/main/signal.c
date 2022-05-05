@@ -6,7 +6,7 @@
 /*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:57:56 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/05/05 10:23:57 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/05/05 10:33:09 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ctrl_c(int sig)
 void	line_is_null(t_shell *shell)
 {
 	clear_shell(shell);
+	termios_change(true);
 	if (errno == ENOMEM)
 	{
 		perror("readline");
