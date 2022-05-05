@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 14:32:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 14:36:18 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/05 14:39:23 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,9 @@ static size_t	replace_var(t_dy_str *dy_str, char *str, t_shell *shell)
 	char	*val;
 
 	i = 0;
-	key = str_dup1();
 	while (str[i] && !str_chr("\'\" \t", str[i]))
-	{
-		str_n_insert(&key, str + i, str_len(key), 1);
 		i++;
-	}
+	key = str_n_dup(str, i);
 	val = "";
 	if (!str_cmp(key, "?"))
 		val = exit_code_str();
@@ -39,8 +36,6 @@ static size_t	replace_var(t_dy_str *dy_str, char *str, t_shell *shell)
 		dy_str_append_c(dy_str, *val);
 		val++;
 	}
-	while (str[i] && !str_chr("\'\" \t", str[i]))
-		i++;
 	return (i);
 }
 
