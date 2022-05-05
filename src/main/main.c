@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 14:29:10 by vrogiste         ###   ########.fr       */
+/*   Created: 2022/05/05 10:37:27 by bvernimm          #+#    #+#             */
+/*   Updated: 2022/05/05 17:17:40 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,22 @@ static void	parse_and_launch(char *line, t_shell *shell)
 	}
 }
 
-char	*get_prompt(void)
+static char	*get_prompt(void)
 {
 	if (g_exit_code)
 		return (C_RED PROMPT C_END);
 	return (C_GREEN PROMPT C_END);
 }
 
-void	line_is_null(t_shell *shell)
+static char	*get_input(void)
 {
-	clear_shell(shell);
-	if (errno == ENOMEM)
-	{
-		perror("readline");
-		exit(EXIT_FAILURE);
-	}
-	put_str_fd(" --- exit minishell ---\n", STDIN_FILENO);
-	exit(EXIT_SUCCESS);
+	char	*input;
+
+	if (isatty(STDIN_FILENO))
+		input = readline(get_prompt());
+	else
+		input = get_next_line(STDIN_FILENO);
+	return (input);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -72,7 +71,7 @@ int	main(int argc, char **argv, char **env)
 	while (argc == 1)
 	{
 		init_sig();
-		line = readline(get_prompt());
+		line = get_input();
 		if (!line)
 			line_is_null(&shell);
 		add_history(line);
