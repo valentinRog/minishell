@@ -6,7 +6,7 @@
 /*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:52:29 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 10:43:44 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/05/05 10:44:48 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	ctrl_c(int sig);
 void	line_is_null(t_shell *shell);
 void	init_sig(void);
 int		change_term(bool echo_ctl_chr);
-void	line_is_null(t_shell *shell);
 
 /*exit_code*/
 char	*exit_code_str(void);
