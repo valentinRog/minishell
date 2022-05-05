@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 14:42:54 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 10:36:03 by bvernimm         ###   ########.fr       */
+/*   Created: 2022/05/05 10:37:27 by bvernimm          #+#    #+#             */
+/*   Updated: 2022/05/05 10:37:34 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int	error(char *msg, t_shell *shell)
 
 static void	parse_and_launch(char *line, t_shell *shell)
 {
-	g_exit_code = 0;
 	shell->lst = get_parsed_lst(line);
 	if (shell->lst)
 	{
