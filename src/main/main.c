@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 10:37:27 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/05/06 09:35:51 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/06 10:38:04 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,39 @@ static void	parse_and_launch(char *line, t_shell *shell)
 	}
 }
 
-static char	*get_prompt(void)
+static char	*get_prompt(char prompt[PROMPT_MAX])
 {
+	char	*cwd;
+	char	*ptr;
+
 	if (g_exit_code)
-		return (C_RED PROMPT C_END);
-	return (C_GREEN PROMPT C_END);
+		str_n_cpy(prompt, C_RED "✖ " C_END, str_len(C_RED "✖ " C_END));
+	else
+		str_n_cpy(prompt, C_GREEN "➜ " C_END, str_len(C_GREEN "➜ " C_END));
+	cwd = getcwd(NULL, 0);
+	str_n_cpy(prompt + strlen(prompt), C_CYAN, strlen(C_CYAN));
+	ptr = cwd + str_len(cwd) - 1;
+	if (ptr)
+	{
+		while (*(ptr - 1) != '/')
+			ptr--;
+		if (str_len(ptr) <= PROMPT_MAX - str_len(prompt) - str_len(C_END " "))
+			str_n_cpy(prompt + str_len(prompt), ptr, str_len(ptr));
+		free(cwd);
+	}
+	else
+		perror("getcwd");
+	str_n_cpy(prompt + str_len(prompt), C_END " ", str_len(C_END " "));
+	return (prompt);
 }
 
 static char	*get_input(void)
 {
 	char	*input;
+	char	prompt[PROMPT_MAX];
 
 	if (isatty(STDIN_FILENO))
-		input = readline(get_prompt());
+		input = readline(get_prompt(prompt));
 	else
 		input = get_next_line(STDIN_FILENO);
 	return (input);

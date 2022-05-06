@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:52:29 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 21:38:16 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/06 10:30:26 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 # include "minishell.h"
 
-# define PROMPT "minishell>"
+# define PROMPT_MAX 50
 
-# define C_GREEN "\033[92m"
-# define C_RED "\033[91m"
+# define C_GREEN "\e[1;92m"
+# define C_RED "\e[1;91m"
+# define C_CYAN "\e[1;96m"
 # define C_END "\033[0m"
 
 int	g_exit_code;

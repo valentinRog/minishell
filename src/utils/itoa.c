@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 20:50:43 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/06 09:41:03 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/06 09:42:51 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	itoa(int nb, char buff[], size_t buffer_size)
 			n *= -1;
 			i++;
 		}
-		buff[i--] = '\0';
+		buff[i] = '\0';
+		i--;
 		while (n || !buff[i + 1])
 		{
 			buff[i] = n % 10 + '0';
