@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 10:06:15 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 14:41:31 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/07 10:20:07 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_dy_str
 {
 	char	*str;
 	size_t	alloc;
+	size_t	len;
 }	t_dy_str;
 
 /*lst*/
