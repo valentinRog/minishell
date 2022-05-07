@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:57:56 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/05/05 10:45:13 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/05/07 11:10:26 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	line_is_null(t_shell *shell)
 	change_term(true);
 	if (errno == ENOMEM)
 	{
-		perror("readline");
+		perror("line");
 		exit(EXIT_FAILURE);
 	}
-	put_str_fd(" --- exit minishell ---\n", STDIN_FILENO);
+	put_str_fd("exit\n", STDIN_FILENO);
 	exit(EXIT_SUCCESS);
 }
 

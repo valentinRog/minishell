@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 11:37:31 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/04/28 14:55:42 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/07 11:28:56 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*get_path(char **cmds, t_shell *shell)
 		node = table_find(shell->table, "USER");
 		if (!node)
 		{
-			put_str_fd(EMPTY_USER, STDERR_FILENO);
+			put_str_fd(NO_USER, STDERR_FILENO);
 			return (NULL);
 		}
 		path = str_dup("/Users/");

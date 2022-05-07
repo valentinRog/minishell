@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   exec_bin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:45:34 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/04 10:57:20 by bvernimm         ###   ########.fr       */
+/*   Updated: 2022/05/07 11:26:22 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ static char	**get_paths(t_shell *shell)
 
 	node = table_find(shell->table, "PATH");
 	if (!node)
-	{
-		put_str_fd(EMPTY_PATH, STDERR_FILENO);
 		return (NULL);
-	}
 	paths = split(((t_var *)node->content)->data, ':');
 	return (paths);
 }
@@ -37,12 +34,14 @@ static void	*error(t_list **alst, char **paths, char **env, char *cmd)
 	return (NULL);
 }
 
-t_list	*get_full_cmds(char **cmds, char **paths)
+static t_list	*get_full_cmds(char **cmds, char **paths)
 {
 	t_list	*lst;
 	char	*cmd;
 
 	lst = NULL;
+	if (!cmds || !*cmds)
+		return (NULL);
 	if (**cmds == '/' || !str_n_cmp(*cmds, "./", 2))
 	{
 		cmd = str_dup(*cmds);
@@ -50,7 +49,7 @@ t_list	*get_full_cmds(char **cmds, char **paths)
 			if (!lst_add_back(&lst, lst_new(cmd)))
 				return (error(&lst, NULL, NULL, cmd));
 	}
-	while (**cmds != '/' && str_n_cmp(*cmds, "./", 2) && *paths)
+	while (**cmds != '/' && str_n_cmp(*cmds, "./", 2) && paths && *paths)
 	{
 		cmd = str_dup(*cmds);
 		str_n_insert(&cmd, "/", 0, 1);
@@ -64,57 +63,41 @@ t_list	*get_full_cmds(char **cmds, char **paths)
 	return (lst);
 }
 
-void	exec_bin(char **cmds, t_shell *shell)
+static void	try_execve(t_list *lst, char **cmds, char **env)
 {
-	char		**paths;
-	t_list		*lst;
-	char		**env;
-	t_list		*node;
+	t_list	*node;
 
-	paths = get_paths(shell);
-	lst = get_full_cmds(cmds, paths);
-	env = get_full_env(shell->table);
-	if (!paths || !lst || !env)
-	{
-		error(&lst, paths, env, NULL);
-		e_exec_error("exec_bin", shell);
-	}
 	node = lst;
 	while (node)
 	{
 		execve(node->content, cmds, env);
 		node = node->next;
 	}
-	b_exec_error(*cmds, shell, NULL, NULL);
-	error(&lst, paths, env, NULL);
-	if (errno == EACCES)
-		exit(126);
-	exit(127);
 }
 
-bool	exec_builtin(t_cmd *cmd, t_shell *shell)
+void	exec_bin(char **cmds, t_shell *shell)
 {
-	char	**cmds;
-	bool	err;
+	char		**paths;
+	t_list		*lst;
+	char		**env;
 
-	err = false;
-	if (!str_cmp((char *)cmd->args->content, "exit"))
-		bi_exit(shell);
-	if (!str_cmp((char *)cmd->args->content, "pwd") && bi_pwd())
-		return (bi_pwd());
-	else if (!str_cmp((char *)cmd->args->content, "env"))
-		return (bi_env(shell));
-	cmds = lst_to_str_arr(cmd->args);
-	if (!cmds)
-		return (b_exec_error("exec_builtin", NULL, NULL, NULL));
-	if (!str_cmp((char *)cmd->args->content, "echo"))
-		err = bi_echo(cmds);
-	else if (!str_cmp((char *)cmd->args->content, "cd"))
-		err = bi_cd(cmds, shell);
-	else if (!str_cmp((char *)cmd->args->content, "export"))
-		err = bi_export(cmds, shell);
-	else if (!str_cmp((char *)cmd->args->content, "unset"))
-		err = bi_unset(cmds, shell);
-	str_arr_free(cmds);
-	return (err);
+	paths = get_paths(shell);
+	lst = get_full_cmds(cmds, paths);
+	env = get_full_env(shell->table);
+	if (errno == ENOMEM)
+	{
+		error(&lst, paths, env, NULL);
+		e_exec_error("exec_bin", shell);
+	}
+	try_execve(lst, cmds, env);
+	b_exec_error(NULL, shell, NULL, NULL);
+	error(&lst, paths, env, NULL);
+	if (errno == EACCES)
+	{
+		perror(*cmds);
+		exit(126);
+	}
+	put_str_fd(*cmds, STDERR_FILENO);
+	put_str_fd(CMD_NOT_FOUND, STDERR_FILENO);
+	exit(127);
 }

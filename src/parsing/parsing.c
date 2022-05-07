@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 08:35:37 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 20:16:01 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/07 11:07:04 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	error(t_list **alst, char *arg, char *token)
 	z_index(z_RESET);
 	str_tok(NULL, NULL, NULL);
 	if (errno == ENOMEM)
-		perror("parsing");
+		g_exit_code = 1;
 	else if (token)
 	{
 		put_str_fd("syntax error near token `", STDERR_FILENO);

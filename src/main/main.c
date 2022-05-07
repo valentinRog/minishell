@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 10:37:27 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/05/06 10:38:04 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/07 11:08:33 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static void	parse_and_launch(char *line, t_shell *shell)
 		launcher(shell->lst, 0, shell);
 		lst_clear(&shell->lst, del_cmd);
 	}
+	else if (errno == ENOMEM)
+		perror("parsing");
 }
 
 static char	*get_prompt(char prompt[PROMPT_MAX])

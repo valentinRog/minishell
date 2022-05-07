@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:33:26 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 22:13:24 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/07 11:30:26 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # define PIPE_READ 0
 # define PIPE_WRITE 1
 
-# define EMPTY_PATH "PATH not found\n"
-# define EMPTY_USER "USER not found\n"
+# define NO_USER "USER : variable not found\n"
+# define CMD_NOT_FOUND " : command not found\n"
 
 /*launcher*/
 void	launcher(t_list *lst, int z, t_shell *shell);
@@ -28,8 +28,10 @@ void	launcher(t_list *lst, int z, t_shell *shell);
 void	close_pipe(int fds[2]);
 void	pipex(t_list *lst, int i_pipe[2], t_shell *shell);
 
-/*exec*/
+/*exec_bin*/
 void	exec_bin(char **cmds, t_shell *shell);
+
+/*exec_builtin*/
 bool	exec_builtin(t_cmd *cmd, t_shell *shell);
 
 /*dup_std*/
