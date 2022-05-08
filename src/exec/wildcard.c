@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 23:46:25 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 20:20:23 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/08 10:24:55 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static t_list	*split_wildcard(char *str)
 
 	lst = lst_new(NULL);
 	ptr = str;
-	while (*ptr && *ptr != '*')
+	while (*ptr && (*ptr != '*' || in_quote(str, ptr, ptr - str)))
 		ptr++;
 	lst->content = str_n_dup(str, ptr - str);
 	if (*ptr == '*')
