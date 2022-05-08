@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
+/*   By: bvernimm <bvernimm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:23:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/08 09:05:12 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/08 10:03:29 by bvernimm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	pipex(t_list *lst, int i_pipe[2], t_shell *shell)
 
 	cmd = (t_cmd *)lst->content;
 	signal(SIGINT, ctrl_c);
+	signal(SIGQUIT, ctrl_c);
 	if (cmd->con == con_PIPE)
 		if (pipe(o_pipe) == -1)
 			return ((void)b_exec_error("pipe", shell, i_pipe, NULL));
