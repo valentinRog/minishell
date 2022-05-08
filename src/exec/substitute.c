@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 14:32:56 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 22:13:31 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/08 09:03:13 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,5 @@ bool	substitute(t_cmd *cmd, t_shell *shell)
 		node = node->next;
 	}
 	lst_clear(&dir_list, free);
-	return ((bool)(errno == ENOMEM));
+	return ((bool)(errno == ENOMEM || !new_args));
 }

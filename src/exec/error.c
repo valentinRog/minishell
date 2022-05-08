@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 15:41:28 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/04/28 14:32:10 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/08 09:05:50 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	b_exec_error(char *str, t_shell *shell, int i_pipe[2], int o_pipe[2])
 {
-	if (str)
+	if (str && errno)
 		perror(str);
 	clear_shell(shell);
 	close_pipe(i_pipe);

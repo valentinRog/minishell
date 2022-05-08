@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:23:31 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/07 11:03:38 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/08 09:05:12 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,17 @@ static void	child(t_cmd *cmd, int i_pipe[2], int o_pipe[2], t_shell *shell)
 	char	**cmds;
 
 	if (substitute(cmd, shell))
-		e_exec_error("substitute", shell);
+	{
+		b_exec_error("substitute", shell, i_pipe, o_pipe);
+		exit(EXIT_FAILURE);
+	}
 	if (dup_stdin(cmd, i_pipe, shell) || dup_stdout(cmd, o_pipe))
 		e_exec_error(NULL, shell);
 	if (is_tok((char *)cmd->args->content, "env:echo:pwd", ':'))
 	{
 		if (exec_builtin(cmd, shell))
 			e_exec_error(cmd->args->content, shell);
+		clear_shell(shell);
 		exit(EXIT_SUCCESS);
 	}
 	cmds = lst_to_str_arr(cmd->args);
@@ -67,7 +71,7 @@ void	pipex(t_list *lst, int i_pipe[2], t_shell *shell)
 	{
 		pid = fork();
 		if (pid == -1)
-			return ((void)b_exec_error("fork", shell, i_pipe, o_pipe));
+			return ((void)b_exec_error("fork", NULL, i_pipe, o_pipe));
 		if (!pid)
 			child(cmd, i_pipe, o_pipe, shell);
 	}

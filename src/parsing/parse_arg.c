@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 10:43:41 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/05 18:05:36 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/08 08:25:59 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ bool	redirection(t_cmd *cmd, char *arg, char *con)
 		if (!str_cmp(">>", con))
 			cmd->append = true;
 	}
+	else
+		free(arg_cpy);
 	return (false);
 }
 
