@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 05:12:36 by vrogiste          #+#    #+#             */
-/*   Updated: 2022/05/04 18:40:02 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/08 22:35:26 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,10 @@ void	launcher(t_list *lst, int z, t_shell *shell)
 			pipex(lst, NULL, shell);
 		while (((t_cmd *)lst->content)->con == con_PIPE)
 			lst = lst->next;
-		if
-			(
-			!lst
-			|| (g_exit_code && ((t_cmd *)lst->content)->con == con_AND)
-			|| (!g_exit_code && ((t_cmd *)lst->content)->con == con_OR)
-			)
-				break ;
+		while (lst && g_exit_code && ((t_cmd *)lst->content)->con == con_AND)
+			lst = lst->next;
+		if (!lst || (!g_exit_code && ((t_cmd *)lst->content)->con == con_OR))
+			break ;
 		lst = lst->next;
 	}
 }
