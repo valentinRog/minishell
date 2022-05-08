@@ -6,7 +6,7 @@
 /*   By: vrogiste <vrogiste@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 10:37:27 by bvernimm          #+#    #+#             */
-/*   Updated: 2022/05/08 08:45:57 by vrogiste         ###   ########.fr       */
+/*   Updated: 2022/05/08 09:36:37 by vrogiste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	error(char *msg, t_shell *shell)
 		put_str_fd("\n", STDERR_FILENO);
 	}
 	clear_shell(shell);
-	clear_history();
+	rl_clear_history();
 	return (1);
 }
 
@@ -98,7 +98,7 @@ int	main(int argc, char **argv, char **env)
 		parse_and_launch(line, &shell);
 		free(line);
 	}
-	clear_history();
+	rl_clear_history();
 	clear_shell(&shell);
 	return (0);
 }
